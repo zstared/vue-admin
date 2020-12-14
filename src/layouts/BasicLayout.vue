@@ -1,94 +1,74 @@
 <template>
   <div>
-    <el-scrollbar class="app-siderbar">
-      <div class="logo-wrapper">
-        <router-link to="/">
-          <span class="logo">
-            <img :src="logoPng" />
-          </span>
-          <span class="title"></span>
-        </router-link>
-        <el-tabs tab-position="left">
-          <el-tab-pane label="首页">用户管理</el-tab-pane>
-          <el-tab-pane label="OA">定时任务补偿</el-tab-pane>
-          <el-tab-pane label="系统">配置管理</el-tab-pane>
-          <el-tab-pane label="运维">角色管理</el-tab-pane>
-        </el-tabs>
+    <column-sidebar />
+    <div class="app-main">
+      <div class="app-header-wrapper">
+        <el-row class="app-header">
+          <el-col :span="12" :xs="4" class="header-left">
+            <i class="el-icon-s-fold toggle-menu"></i>
+            <div class="nav-wrapper">
+              <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item :to="{ path: '/' }"
+                  >首页</el-breadcrumb-item
+                >
+                <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+              </el-breadcrumb>
+            </div>
+          </el-col>
+          <el-col :span="12" :xs="20" class="header-right"> </el-col>
+        </el-row>
+        <div class="app-tab">
+			<el-tabs closable @tab-remove="removeTab">
+				<el-tab-pane title="菜单"></el-tab-pane>
+			</el-tabs>
+		</div>
       </div>
-    </el-scrollbar>
+      <div class="app-content"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import logoPng from "../assets/logo.png";
+import ColumnSidebar from "./ColumnSidebar";
 export default {
   name: "BasicLayout",
+  components: {
+    ColumnSidebar, //分栏侧边栏
+  },
   data() {
-    return {
-      logoPng,
-    };
+    return {};
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.app-siderbar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 266px;
-  height: 100vh;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
-  .el-scrollbar__wrap {
-    overflow-x: hidden;
-  }
-
-  .el-tabs {
-    position: fixed;
-  }
-
-  .logo-wrapper {
-    position: relative;
-    height: 60px;
-    overflow: hidden;
-    line-height: 60px;
-    background: transparent;
-    height: 65px;
-    line-height: 65px;
-    text-align: center;
-    .logo {
-      position: fixed;
-      top: 0;
-      display: block;
-      width: 65px;
-      height: 65px;
-      margin: 0;
-      background: linear-gradient(90deg, #282c34, #000);
-      img {
-        display: inline-block;
-        width: 32px;
-        height: 32px;
-        color: #fff;
-        vertical-align: middle;
+.app-main {
+  width: calc(100% - 268px);
+  margin-left: 268px;
+  position: relative;
+  background:#fff;
+}
+.app-header-wrapper {
+   box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  .app-header {
+    height: 48px;
+    width: 100%;
+	padding: 0 16px;
+    .header-left {
+      display: flex;
+      align-items: center;
+      .toggle-menu {
+        color:#3e3e3e;
+		cursor: pointer;
+		&:hover{
+			color:#333;
+		}
       }
-      .title {
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-left: 65px;
-        color: #515a6e !important;
-        background: #fff !important;
-        display: inline-block;
-        overflow: hidden;
-        font-size: 18px;
-        line-height: 55px;
-        color: #fff;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        vertical-align: middle;
+      .nav-wrapper {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        margin-left: 16px;
       }
     }
   }

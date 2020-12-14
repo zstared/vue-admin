@@ -1,5 +1,5 @@
 @import "./normalize.scss";
-//@import "./variables.scss";
+@import "./element.scss";
 
 @mixin scrollbar {
   max-height: 88vh;
@@ -58,15 +58,13 @@ a {
   cursor: pointer;
 }
 
-// * {
-//   transition: $app-transition;
-// }
 svg {
   transition: none;
   * {
     transition: none;
   }
 }
+
 html {
   body {
     position: relative;
@@ -81,10 +79,10 @@ html {
     -webkit-font-smoothing: antialiased;
   }
 
-  #app{
-	  width:100%;
-	  height:100%;
-	  position: relative;
+  #app {
+    width: 100%;
+    height: 100%;
+    position: relative;
   }
 
   #nprogress {
