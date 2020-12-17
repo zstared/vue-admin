@@ -23,7 +23,9 @@ export default {
     AppHeader,
   },
   created() {
-    window.onresize(() => {});
+    window.addEventListener('resize',()=>{
+        console.log(window.innerWidth)
+    });
   },
   computed: {
     ...mapState({
@@ -39,6 +41,7 @@ export default {
   margin-left: 268px;
   position: relative;
   z-index: $app-z-index;
+  background:#f6f8f9;
 
   transition: $app-transition;
   &.is-collapse {
@@ -48,6 +51,12 @@ export default {
   .app-content {
     padding: $app-content-padding;
     height: $app-content-height;
+  }
+}
+@media screen and (max-width: 992px) {
+  .app-main {
+    width: 100%;
+    margin-left: 0;
   }
 }
 </style>
