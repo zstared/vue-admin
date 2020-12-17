@@ -1,3 +1,43 @@
 .el-scrollbar__wrap {
   overflow-x: hidden;
 }
+
+.app-tab-card {
+  .el-tabs--card {
+	width:100%;
+    .el-tabs__header {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .el-tabs__nav {
+      border: none;
+    }
+
+    .el-tabs__nav-next,
+    .el-tabs__nav-prev {
+      line-height: $app-tab-item-height;
+      font-size: 18px;
+      &:hover {
+        color: $app-color;
+      }
+    }
+
+    .el-tabs__item {
+      box-sizing: border-box;
+      height:$app-tab-item-height;
+      margin-right: 5px;
+      line-height: $app-tab-item-height;
+      border: 1px solid $app-border-color;
+      border-radius: 2.5px;
+      transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+      &:first-child {
+        border-left: 1px solid $app-border-color;
+      }
+      &.is-active {
+        color: $app-color;
+        background: rgba(24, 144, 255, 0.1);
+        border: 1px solid $app-color;
+      }
+    }
+  }
+}

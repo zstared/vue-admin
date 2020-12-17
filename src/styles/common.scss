@@ -53,7 +53,7 @@ img {
 }
 
 a {
-  color: $app-color-blue;
+  color: $app-color;
   text-decoration: none;
   cursor: pointer;
 }
@@ -74,7 +74,7 @@ html {
     overflow: hidden;
     font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
     font-size: $app-font-size-default;
-    color: #515a6e;
+    color: $app-font-color;
     background: #f6f8f9;
     -webkit-font-smoothing: antialiased;
   }
@@ -90,11 +90,18 @@ html {
     z-index: $app-z-index;
 
     .bar {
-      background: $app-color-blue !important;
+      background: $app-color !important;
     }
 
     .peg {
-      box-shadow: 0 0 10px $app-color-blue, 0 0 5px $app-color-blue !important;
+      box-shadow: 0 0 10px $app-color, 0 0 5px $app-color !important;
     }
+  }
+
+  [class*="ri"] {
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: -3.5px;
   }
 }

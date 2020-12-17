@@ -2,13 +2,13 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import BasicLayout from "../layouts/BasicLayout";
+import AppLayout from "../layouts/AppLayout";
 
 export const routes = [
   { path: "/login", component: () => import("@/views/login") },
   {
     path: "/",
-    component: BasicLayout,
+    component: AppLayout,
     redirect: "index",
     children: [
       {

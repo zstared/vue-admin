@@ -8,13 +8,12 @@
         <template v-for="i in 20">
           <div :key="i" class="menu-module-item">
             <i class="el-icon-user-solid module-icon"></i>
-            <span class="module-title">模块{{i}}</span>
+            <span class="module-title">模块{{ i }}</span>
           </div>
         </template>
       </el-scrollbar>
     </div>
-    <el-scrollbar class="app-siderbar-second">
-      <div style="height:500px"></div>
+    <el-scrollbar :class="['app-siderbar-second',{'is-collapse':sideCollapse}]">
       <el-menu default-active="2" class="second-menu">
         <el-submenu index="1">
           <template slot="title">
@@ -47,18 +46,25 @@
           <span slot="title">导航四</span>
         </el-menu-item>
       </el-menu>
+      <div style="height:1500px"></div>
     </el-scrollbar>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import logoPng from "../assets/logo.png";
 export default {
-  name: "ColumnSidebar",
+  name: "AppColumnSidebar",
   data() {
     return {
       logoPng,
     };
+  },
+  computed: {
+    ...mapState({
+      sideCollapse: (state) => state.app.sideCollapse,
+    }),
   },
 };
 </script>
@@ -112,12 +118,16 @@ export default {
     }
   }
   .app-siderbar-second {
+    transition:$app-transition;
     width: 200px;
     height: 100vh;
     margin-left: 68px;
     background: #fff;
     .second-menu {
       border-right: none;
+    }
+    &.is-collapse{
+       width:0;
     }
   }
 }
