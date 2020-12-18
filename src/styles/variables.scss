@@ -55,14 +55,14 @@ $app-content-height: calc(
   100vh - #{$app-nav-bar-height} - #{$app-tabs-bar-height} - #{$app-content-padding} -
     #{$app-content-padding}
 );
-// //纵向布局时左侧导航未折叠时的宽度
-// $app-left-menu-width: 256px;
-// //纵向布局时左侧导航未折叠时右侧内容的宽度
-// $app-right-content-width: calc(100% - #{$app-left-menu-width});
-// //纵向布局时左侧导航已折叠时的宽度
-// $app-left-menu-width-min: 65px;
-// //纵向布局时左侧导航已折叠时右侧内容的宽度
-// $app-right-content-width-min: calc(100% - #{$app-left-menu-width-min});
+$app-logo-height:68px;
+$app-sidebar-width: 268px;
+$app-sidebar-module-width: 68px;
+$app-sidebar-module-height: 68px;
+$app-sidebar-menu-width: calc(#{$app-sidebar-width} - #{$app-sidebar-module-width});
+$app-main: calc(100% - #{$app-sidebar-width});
+$app-main-min: calc(100% - #{$app-sidebar-menu-width});
+
 // 默认动画
 $app-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s,
   background 0s, color 0s;

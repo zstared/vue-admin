@@ -2,11 +2,8 @@
   overflow-x: hidden;
 }
 
-.el-drawer__container {
+.el-drawer__wrapper * {
   outline: none !important;
-  .el-drawer {
-    outline: none !important;
-  }
 }
 
 .app-tab-card {

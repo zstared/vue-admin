@@ -1,6 +1,7 @@
 
 const app = {
   state: {
+	layoutType:2, //1-分栏;2-纵向;3-横向;4-综合;
     sideCollapse: false, //侧边栏是否折叠状态
     tabs: [], //导航栏页签
     cachedViews: [], //缓存的页面
@@ -8,9 +9,9 @@ const app = {
 
   mutations: {
     //展开折叠侧边栏
-    toggleSideCollapse: (state) => {
-      state.sideCollapse = !state.sideCollapse;
-    },
+    toggleSideCollapse: (state,flag) => {
+      state.sideCollapse = flag===undefined?!state.sideCollapse:flag;
+	},
     //添加页签
     addTab: (state, tab) => {
       if (state.tabs.some((t) => t.path === tab.path)) return;

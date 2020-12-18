@@ -1,16 +1,18 @@
 <template>
   <div>
-    <app-column-sidebar class="hidden-sm-and-down" />
+    <app-column-sidebar v-if="layoutType===1" class="hidden-sm-and-down" />
+    <app-menu :sideCollapse="sideCollapse" v-else />
     <el-drawer
+      append-to-body
       size="268px"
       direction="ltr"
       :visible.sync="sideVisible"
       :with-header="false"
+      @close="toggleCollapse(false)"
     >
-      <app-menu></app-menu>
+      <app-menu ></app-menu>
     </el-drawer>
     <div
-      :append-to-body="true"
       :class="['app-main', { 'is-collapse': sideCollapse }]"
     >
       <app-header
@@ -29,12 +31,14 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import AppColumnSidebar from "./AppColumnSidebar";
+// import AppSidebar from './AppSidebar'
 import AppHeader from "./AppHeader";
 import AppMenu from "./AppMenu";
 export default {
   name: "AppLayout",
   components: {
     AppColumnSidebar, //分栏侧边栏
+    //AppSidebar,//侧边栏
     AppHeader,
     AppMenu,
   },
@@ -52,7 +56,8 @@ export default {
   },
   computed: {
     ...mapState({
-      sideCollapse: (state) => state.app.sideCollapse,
+      sideCollapse: state => state.app.sideCollapse,
+      layoutType:state=>state.app.layoutType
     }),
   },
   methods: {
@@ -60,7 +65,7 @@ export default {
     getDeviceWidth() {
       const width = window.innerWidth;
       if (width < 768) {
-        //this.toggleSideCollapse();
+        this.toggleSideCollapse(true)
         return "xs";
       } else if (width >= 768 && width < 992) {
         return "sm";
@@ -85,16 +90,16 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
-  width: calc(100% - 268px);
-  margin-left: 268px;
+  width: calc(100% - $app-sidebar-width);
+  margin-left: $app-sidebar-width;
   position: relative;
   z-index: $app-z-index;
   background: #f6f8f9;
 
   transition: $app-transition;
   &.is-collapse {
-    width: calc(100% - 68px);
-    margin-left: 68px;
+    width: calc(100% - $app-sidebar-module-width);
+    margin-left: $app-sidebar-module-width;
   }
   .app-content {
     padding: $app-content-padding;

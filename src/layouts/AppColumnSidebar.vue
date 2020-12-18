@@ -72,11 +72,11 @@ export default {
 <style lang="scss" scoped>
 .app-siderbar {
   position: fixed;
-  width: 268px;
+  width: $app-sidebar-width;
   display: flex;
   .app-siderbar-first {
     position: fixed;
-    width: 68px;
+    width: $app-sidebar-module-width;
     height: 100vh;
     top: 0;
     left: 0;
@@ -91,12 +91,12 @@ export default {
       }
     }
     .menu-module {
-      height: calc(100vh - 68px);
+      height: calc(100vh - $app-logo-height);
       display: flex;
       flex-direction: column;
       .menu-module-item {
-        width: 68px;
-        height: 68px;
+        width: $app-sidebar-module-width;
+        height: $app-sidebar-module-height;
         display: flex;
         cursor: pointer;
         flex-direction: column;
@@ -119,9 +119,9 @@ export default {
   }
   .app-siderbar-second {
     transition:$app-transition;
-    width: 200px;
+    width: $app-sidebar-menu-width;
     height: 100vh;
-    margin-left: 68px;
+    margin-left: $app-sidebar-module-width;
     background: #fff;
     .second-menu {
       border-right: none;

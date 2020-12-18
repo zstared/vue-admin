@@ -70,7 +70,8 @@ html {
     position: relative;
     box-sizing: border-box;
     height: 100vh;
-    padding: 0;
+    padding: 0 !important;
+    margin:0;
     overflow: hidden;
     font-family: "Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Heiti SC,WenQuanYi Micro Hei,Arial,sans-serif";
     font-size: $app-font-size-default;

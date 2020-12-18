@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-menu-wrapper">
     <div class="logo-wrapper">
       <img :src="logoPng" />
       <div class="title">后台管理系统后台管理系统fdfd</div>
@@ -10,6 +10,7 @@
         :background-color="variables['menu-background']"
         :text-color="variables['menu-color']"
         :active-text-color="variables['menu-color-active']"
+        :collapse="sideCollapse"
       >
         <el-submenu index="1">
           <template slot="title">
@@ -33,10 +34,7 @@
           <i class="el-icon-menu"></i>
           <span slot="title">导航二</span>
         </el-menu-item>
-        <el-menu-item
-          index="3"
-          disabled
-        >
+        <el-menu-item index="3" disabled>
           <i class="el-icon-document"></i>
           <span slot="title">导航三</span>
         </el-menu-item>
@@ -56,20 +54,29 @@ import logoPng from "../assets/logo.png";
 export default {
   name: "",
   data() {
-	console.log(variables)
     return { logoPng, variables };
+  },
+  props: {
+    sideCollapse: Boolean,
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.app-menu-wrapper {
+  width: $app-sidebar-width;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: $app-menu-background;
+}
 .logo-wrapper {
   padding: 0 6px;
-  height: 68px;
+  height: $app-logo-height;
   display: flex;
   align-items: center;
-  background:$app-menu-background;
-  color:$app-menu-color;
+  color: $app-menu-color;
   img {
     width: 34px;
     height: 34px;
@@ -77,14 +84,13 @@ export default {
   }
   .title {
     font-size: $app-font-size-bigger;
-    max-width: 222px;
+    max-width: calc($app-sidebar-width - 46px);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
   }
 }
 .app-menu {
-  height: calc(100vh - 68px);
-  background:$app-menu-background;
+  height: calc(100vh - $app-logo-height);
 }
 </style>
