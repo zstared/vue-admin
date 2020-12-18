@@ -2,7 +2,14 @@
   <div class="app-header-wrapper">
     <el-row class="app-header">
       <el-col :span="12" :xs="4" class="header-left">
-        <i @click="toggleCollapse" :class="[{'ri-menu-fold-line':!sideCollapse},{'ri-menu-unfold-line':sideCollapse},'toggle-menu']"></i>
+        <i
+          @click="toggleCollapse"
+          :class="[
+            { 'ri-menu-fold-line': !sideCollapse },
+            { 'ri-menu-unfold-line': sideCollapse },
+            'toggle-menu',
+          ]"
+        ></i>
         <div class="nav-wrapper">
           <el-breadcrumb separator=">" class="hidden-xs-only">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -19,7 +26,6 @@
           <i class="ri-global-line"></i>
           <i class="ri-t-shirt-line"></i>
         </div>
-
         <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
             <el-avatar :size="28" :src="ImgUserMale"></el-avatar>
@@ -51,20 +57,19 @@
 </template>
 
 <script>
-import { mapState,mapMutations } from 'vuex'
 import ImgUserMale from "@/assets/user_male.svg";
 export default {
   name: "AppHeader",
   data() {
     return { ImgUserMale, arrowAnimation: false };
   },
-  computed:{
-     ...mapState({
-       sideCollapse: state => state.app.sideCollapse,
-     })
+  props:{
+    sideCollapse:Boolean,
   },
   methods: {
-    ...mapMutations(['toggleCollapse']),
+    toggleCollapse(){
+        this.$emit("toggleCollapse")
+    },
     //指向图标动画
     toggleArrowAnimation(flag) {
       this.arrowAnimation = flag;

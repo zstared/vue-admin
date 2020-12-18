@@ -2,9 +2,16 @@
   overflow-x: hidden;
 }
 
+.el-drawer__container {
+  outline: none !important;
+  .el-drawer {
+    outline: none !important;
+  }
+}
+
 .app-tab-card {
   .el-tabs--card {
-	width:100%;
+    width: 100%;
     .el-tabs__header {
       border-bottom: none;
       margin-bottom: 0;
@@ -24,7 +31,7 @@
 
     .el-tabs__item {
       box-sizing: border-box;
-      height:$app-tab-item-height;
+      height: $app-tab-item-height;
       margin-right: 5px;
       line-height: $app-tab-item-height;
       border: 1px solid $app-border-color;
@@ -39,5 +46,15 @@
         border: 1px solid $app-color;
       }
     }
+  }
+}
+
+.app-menu {
+  .el-menu {
+    border: 0;
+  }
+  .el-menu-item.is-active,
+  .el-menu-item:hover {
+    background: $app-menu-background-active !important;
   }
 }
