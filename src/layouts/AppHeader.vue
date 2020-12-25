@@ -1,7 +1,7 @@
 <template>
   <div class="app-header-wrapper">
-    <el-row class="app-header">
-      <el-col :span="12" :xs="4" class="header-left">
+    <el-row :class="['app-header',{'is-layout-row':layoutType===3}]">
+      <el-col v-if="layoutType !== 3" :span="12" :xs="4" class="header-left">
         <i
           @click="toggleCollapse"
           :class="[
@@ -17,6 +17,10 @@
           </el-breadcrumb>
         </div>
       </el-col>
+      <el-col v-else :span="12" :xs="4" class="header-left">
+          <img :src="logoPng" />
+          <div class="title hidden-xs-only">后台管理系统后台管理系统fdfd</div>
+      </el-col>
       <el-col :span="12" :xs="20" class="header-right">
         <div class="app-options">
           <i class="ri-search-line"></i>
@@ -26,7 +30,7 @@
           <i class="ri-global-line"></i>
           <i class="ri-t-shirt-line"></i>
         </div>
-        <el-dropdown @visible-change="toggleArrowAnimation">
+        <el-dropdown @visible-change="toggleArrowAnimation" >
           <div class="user-avatar">
             <el-avatar :size="28" :src="ImgUserMale"></el-avatar>
             <span class="hidden-xs-only">系统管理员</span>
@@ -58,17 +62,19 @@
 
 <script>
 import ImgUserMale from "@/assets/user_male.svg";
+import logoPng from "../assets/logo.png";
 export default {
   name: "AppHeader",
   data() {
-    return { ImgUserMale, arrowAnimation: false };
+    return { ImgUserMale, arrowAnimation: false, logoPng };
   },
-  props:{
-    sideCollapse:Boolean,
+  props: {
+    sideCollapse: Boolean,
+    layoutType: Number,
   },
   methods: {
-    toggleCollapse(){
-        this.$emit("toggleCollapse")
+    toggleCollapse() {
+      this.$emit("toggleCollapse");
     },
     //指向图标动画
     toggleArrowAnimation(flag) {
@@ -85,11 +91,18 @@ export default {
   .app-header {
     height: $app-nav-bar-height;
     width: 100%;
-    padding: 0 16px;
+    padding: 0  $app-padding;
     background: #fff;
+
+    &.is-layout-row{
+      background:$app-color;
+      color:#fff !important;
+    }
+
     .header-left {
       display: flex;
       align-items: center;
+         height: $app-nav-bar-height;
       .toggle-menu {
         cursor: pointer;
         font-size: 16px;
@@ -102,6 +115,19 @@ export default {
         display: flex;
         align-items: center;
         margin-left: 16px;
+      }
+
+      img {
+        width: 34px;
+        height: 34px;
+        margin-right: 6px;
+      }
+      .title {
+        font-size: $app-font-size-bigger;
+        //max-width: calc(#{$app-sidebar-width} - 46px);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
     .header-right {

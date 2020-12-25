@@ -1,5 +1,5 @@
 <template>
-  <div class="app-menu-wrapper">
+  <div :class="['app-menu-wrapper',{'is-collapse':sideCollapse}]">
     <div class="logo-wrapper">
       <img :src="logoPng" />
       <div class="title">后台管理系统后台管理系统fdfd</div>
@@ -11,6 +11,7 @@
         :text-color="variables['menu-color']"
         :active-text-color="variables['menu-color-active']"
         :collapse="sideCollapse"
+		:collapse-transition="false"
       >
         <el-submenu index="1">
           <template slot="title">
@@ -18,7 +19,6 @@
             <span>导航一</span>
           </template>
           <el-menu-item-group>
-            <template slot="title">分组一</template>
             <el-menu-item index="1-1">选项1</el-menu-item>
             <el-menu-item index="1-2">选项2</el-menu-item>
           </el-menu-item-group>
@@ -34,7 +34,7 @@
           <i class="el-icon-menu"></i>
           <span slot="title">导航二</span>
         </el-menu-item>
-        <el-menu-item index="3" disabled>
+        <el-menu-item index="3">
           <i class="el-icon-document"></i>
           <span slot="title">导航三</span>
         </el-menu-item>
@@ -70,13 +70,21 @@ export default {
   left: 0;
   bottom: 0;
   background: $app-menu-background;
-}
+  &.is-collapse{
+	  width:$app-sidebar-module-width;
+	  .title{
+		  display:none;
+	  }
+  }
+  //transition:$app-transition;
 .logo-wrapper {
   padding: 0 6px;
   height: $app-logo-height;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: $app-menu-color;
+  overflow: hidden;
   img {
     width: 34px;
     height: 34px;
@@ -84,13 +92,20 @@ export default {
   }
   .title {
     font-size: $app-font-size-bigger;
-    max-width: calc($app-sidebar-width - 46px);
+    max-width: calc(#{$app-sidebar-width} - 46px);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
   }
 }
 .app-menu {
-  height: calc(100vh - $app-logo-height);
+  height: calc(100vh - #{$app-logo-height});
+  /* .el-menu:not(.el-menu--collapse){
+	 width:$app-sidebar-width;
+  } */
+  .el-menu--collapse{
+	  width:$app-sidebar-module-width;
+  }
+}
 }
 </style>

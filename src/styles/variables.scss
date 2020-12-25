@@ -41,7 +41,7 @@ $app-border-color: #dcdfe6;
 // //纵向布局时logo的高度
 // $app-logo-height: 75px;
 //顶部nav-bar的高度
-$app-nav-bar-height: 40px;
+$app-nav-bar-height: 50px;
 //顶部多标签页tabs-bar的高度
 $app-tabs-bar-height: 46px;
 //顶部多标签页tabs-bar中每一个item的高度
@@ -49,11 +49,11 @@ $app-tab-item-height: 34px;
 // //菜单li标签的高度
 // $app-menu-item-height: 50px;
 //默认paddiing
-$app-content-padding: 10px;
+$app-padding: 10px;
 //app-content的高度
 $app-content-height: calc(
-  100vh - #{$app-nav-bar-height} - #{$app-tabs-bar-height} - #{$app-content-padding} -
-    #{$app-content-padding}
+  100vh - #{$app-nav-bar-height} - #{$app-tabs-bar-height} - #{$app-padding} -
+    #{$app-padding}
 );
 $app-logo-height:68px;
 $app-sidebar-width: 268px;

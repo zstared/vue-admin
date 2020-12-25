@@ -1,7 +1,7 @@
 
 const app = {
   state: {
-	layoutType:2, //1-分栏;2-纵向;3-横向;4-综合;
+	layoutType:3, //1-分栏;2-纵向;3-横向;4-综合;
     sideCollapse: false, //侧边栏是否折叠状态
     tabs: [], //导航栏页签
     cachedViews: [], //缓存的页面

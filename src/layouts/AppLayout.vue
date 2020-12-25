@@ -1,23 +1,24 @@
 <template>
   <div>
     <app-column-sidebar v-if="layoutType===1" class="hidden-sm-and-down" />
-    <app-menu :sideCollapse="sideCollapse" v-else />
+    <app-menu  v-else-if="layoutType===2" :sideCollapse="sideCollapse" />
     <el-drawer
       append-to-body
       size="268px"
       direction="ltr"
-      :visible.sync="sideVisible"
+      :visible="sideVisible"
       :with-header="false"
       @close="toggleCollapse(false)"
     >
       <app-menu ></app-menu>
     </el-drawer>
     <div
-      :class="['app-main', { 'is-collapse': sideCollapse }]"
+      :class="['app-main', { 'is-collapse': sideCollapse },{'is-layout-row':layoutType===3}]"
     >
       <app-header
         @toggleCollapse="toggleCollapse"
         :sideCollapse="sideCollapse"
+        :layoutType="layoutType"
       />
       <div :class="['app-content', { 'is-collapse': sideCollapse }]">
         <el-scrollbar style="height:100%;background:#fff">
@@ -90,20 +91,27 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
-  width: calc(100% - $app-sidebar-width);
+  width: calc(100% - #{$app-sidebar-width});
   margin-left: $app-sidebar-width;
   position: relative;
   z-index: $app-z-index;
   background: #f6f8f9;
 
-  transition: $app-transition;
+  //transition: $app-transition;
   &.is-collapse {
-    width: calc(100% - $app-sidebar-module-width);
+    width: calc(100% - #{$app-sidebar-module-width});
     margin-left: $app-sidebar-module-width;
   }
+
+  &.is-layout-row{
+    width:100%;
+    margin-left:0;
+  }
+
   .app-content {
-    padding: $app-content-padding;
+    padding: $app-padding;
     height: $app-content-height;
+    transition: $app-transition;
   }
 }
 @media screen and (max-width: 992px) {

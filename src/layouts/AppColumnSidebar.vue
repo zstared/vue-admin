@@ -13,7 +13,10 @@
         </template>
       </el-scrollbar>
     </div>
-    <el-scrollbar :class="['app-siderbar-second',{'is-collapse':sideCollapse}]">
+    <el-scrollbar
+      :class="['app-siderbar-second', { 'is-collapse': sideCollapse }]"
+    >
+      <div class="title">后台管理系统后台管理系统fdfd</div>
       <el-menu default-active="2" class="second-menu">
         <el-submenu index="1">
           <template slot="title">
@@ -91,7 +94,7 @@ export default {
       }
     }
     .menu-module {
-      height: calc(100vh - $app-logo-height);
+      height: calc(100vh - #{$app-logo-height});
       display: flex;
       flex-direction: column;
       .menu-module-item {
@@ -118,16 +121,26 @@ export default {
     }
   }
   .app-siderbar-second {
-    transition:$app-transition;
+    //transition:$app-transition;
     width: $app-sidebar-menu-width;
     height: 100vh;
     margin-left: $app-sidebar-module-width;
     background: #fff;
+    .title {
+      font-size: $app-font-size-bigger;
+      max-width: calc($app-sidebar-width - 46px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      height: $app-logo-height;
+      line-height: $app-logo-height;
+      padding:0 10px;
+    }
     .second-menu {
       border-right: none;
     }
-    &.is-collapse{
-       width:0;
+    &.is-collapse {
+      width: 0;
     }
   }
 }
