@@ -1,6 +1,6 @@
 <template>
   <div class="app-header-wrapper">
-    <el-row :class="['app-header',{'is-layout-row':layoutType===3}]">
+    <el-row :class="['app-header', { 'is-layout-row': layoutType === 3 }]">
       <el-col v-if="layoutType !== 3" :span="12" :xs="4" class="header-left">
         <i
           @click="toggleCollapse"
@@ -10,18 +10,29 @@
             'toggle-menu',
           ]"
         ></i>
-        <div class="nav-wrapper">
+        <div v-if="layoutType !== 4" class="nav-wrapper">
           <el-breadcrumb separator=">" class="hidden-xs-only">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>活动管理</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
+        <el-tabs v-else>
+          <el-tab-pane label="模块一" name="first"></el-tab-pane>
+          <el-tab-pane label="模块二" name="second"></el-tab-pane>
+          <el-tab-pane label="模块三" name="third"></el-tab-pane>
+          <el-tab-pane label="模块四" name="fourth"></el-tab-pane>
+        </el-tabs>
       </el-col>
-      <el-col v-else :span="12" :xs="4" class="header-left">
-          <img :src="logoPng" />
-          <div class="title hidden-xs-only">后台管理系统后台管理系统fdfd</div>
+      <el-col v-else :span="6" :xs="4" class="header-left">
+        <img :src="logoPng" />
+        <div class="title hidden-xs-only">后台管理系统后台管理系统fdfd</div>
       </el-col>
-      <el-col :span="12" :xs="20" class="header-right">
+      <el-col :span="layoutType !== 3 ? 12 : 18" :xs="20" class="header-right">
+        <app-menu
+          v-if="layoutType === 3"
+          :sideCollapse="sideCollapse"
+          mode="horizontal"
+        />
         <div class="app-options">
           <i class="ri-search-line"></i>
           <i class="ri-notification-line"></i>
@@ -30,7 +41,7 @@
           <i class="ri-global-line"></i>
           <i class="ri-t-shirt-line"></i>
         </div>
-        <el-dropdown @visible-change="toggleArrowAnimation" >
+        <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
             <el-avatar :size="28" :src="ImgUserMale"></el-avatar>
             <span class="hidden-xs-only">系统管理员</span>
@@ -50,21 +61,21 @@
         </el-dropdown>
       </el-col>
     </el-row>
-    <div class="app-tab app-tab-card">
-      <el-tabs closable type="card" @tab-remove="removeTab">
-        <template v-for="i in 30">
-          <el-tab-pane :label="'菜单' + i" :key="i"></el-tab-pane>
-        </template>
-      </el-tabs>
-    </div>
+    <app-tab v-if="layoutType != 5" />
   </div>
 </template>
 
 <script>
 import ImgUserMale from "@/assets/user_male.svg";
 import logoPng from "../assets/logo.png";
+import AppMenu from "./AppMenu";
+import AppTab from "./AppTab";
 export default {
   name: "AppHeader",
+  components: {
+    AppMenu,
+    AppTab,
+  },
   data() {
     return { ImgUserMale, arrowAnimation: false, logoPng };
   },
@@ -89,32 +100,36 @@ export default {
 .app-header-wrapper {
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   .app-header {
-    height: $app-nav-bar-height;
+    height: $app-header-height;
     width: 100%;
-    padding: 0  $app-padding;
+    padding: 0 $app-padding;
     background: #fff;
 
-    &.is-layout-row{
-      background:$app-color;
-      color:#fff !important;
+    &.is-layout-row {
+      background: $app-header-background;
+      color: #fff !important;
+
+      .el-dropdown {
+        color: #fff;
+      }
     }
 
     .header-left {
       display: flex;
       align-items: center;
-         height: $app-nav-bar-height;
+      height: $app-header-height;
       .toggle-menu {
         cursor: pointer;
         font-size: 16px;
+        margin-right: 16px;
         &:hover {
           color: $app-color;
         }
       }
       .nav-wrapper {
-        height: $app-nav-bar-height;
+        height: $app-header-height;
         display: flex;
         align-items: center;
-        margin-left: 16px;
       }
 
       img {
@@ -134,7 +149,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      height: $app-nav-bar-height;
+      height: $app-header-height;
       .app-options {
         [class*="ri"] {
           margin-left: 15px;
@@ -162,17 +177,6 @@ export default {
         }
       }
     }
-  }
-  .app-tab {
-    padding: 0 10px;
-    height: $app-tabs-bar-height;
-    //line-height:$app-tabs-bar-height;
-    //display: flex;
-    //align-items:center;
-    border-top: 1px solid #eee;
-    display: flex;
-    align-items: center;
-    background: #fff;
   }
 }
 </style>

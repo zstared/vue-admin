@@ -1,14 +1,16 @@
 @charset "utf-8";
 //框架默认主题色
 $app-color: #1890ff;
-// //默认层级
+//层级
 $app-z-index: 999;
-//横向布局纵向布局时菜单背景色
-$app-menu-background: rgb(40, 44, 52);
+//头部背景色
+$app-header-background: #292c34;
+//菜单背景色
+$app-menu-background: #292c34;
 //菜单文字颜色
-$app-menu-color: hsla(0, 0%, 100%, 0.95);
+$app-menu-color: #fff;
 //菜单选中文字颜色
-$app-menu-color-active: hsla(0, 0%, 100%, 0.95);
+$app-menu-color-active: #fff;
 //菜单选中背景色
 $app-menu-background-active: $app-color;
 //标题颜色
@@ -41,7 +43,7 @@ $app-border-color: #dcdfe6;
 // //纵向布局时logo的高度
 // $app-logo-height: 75px;
 //顶部nav-bar的高度
-$app-nav-bar-height: 50px;
+$app-header-height: 50px;
 //顶部多标签页tabs-bar的高度
 $app-tabs-bar-height: 46px;
 //顶部多标签页tabs-bar中每一个item的高度
@@ -52,14 +54,15 @@ $app-tab-item-height: 34px;
 $app-padding: 10px;
 //app-content的高度
 $app-content-height: calc(
-  100vh - #{$app-nav-bar-height} - #{$app-tabs-bar-height} - #{$app-padding} -
-    #{$app-padding}
+  100vh - #{$app-header-height} - #{$app-tabs-bar-height} - #{$app-padding} - #{$app-padding}
 );
-$app-logo-height:68px;
+$app-logo-height: 68px;
 $app-sidebar-width: 268px;
 $app-sidebar-module-width: 68px;
 $app-sidebar-module-height: 68px;
-$app-sidebar-menu-width: calc(#{$app-sidebar-width} - #{$app-sidebar-module-width});
+$app-sidebar-menu-width: calc(
+  #{$app-sidebar-width} - #{$app-sidebar-module-width}
+);
 $app-main: calc(100% - #{$app-sidebar-width});
 $app-main-min: calc(100% - #{$app-sidebar-menu-width});
 

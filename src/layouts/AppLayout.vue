@@ -1,7 +1,10 @@
 <template>
   <div>
-    <app-column-sidebar v-if="layoutType===1" class="hidden-sm-and-down" />
-    <app-menu  v-else-if="layoutType===2" :sideCollapse="sideCollapse" />
+    <app-column-sidebar v-if="layoutType === 1" class="hidden-sm-and-down" />
+    <app-sidebar
+      v-else-if="layoutType === 2 || layoutType == 4"
+      :sideCollapse="sideCollapse"
+    />
     <el-drawer
       append-to-body
       size="268px"
@@ -10,10 +13,15 @@
       :with-header="false"
       @close="toggleCollapse(false)"
     >
-      <app-menu ></app-menu>
+      <app-sidebar />
     </el-drawer>
     <div
-      :class="['app-main', { 'is-collapse': sideCollapse },{'is-layout-row':layoutType===3}]"
+      v-if="layoutType != 5"
+      :class="[
+        'app-main',
+        { 'is-collapse': sideCollapse },
+        { 'is-layout-row': layoutType === 3 },
+      ]"
     >
       <app-header
         @toggleCollapse="toggleCollapse"
@@ -26,22 +34,39 @@
         </el-scrollbar>
       </div>
     </div>
+    <div>
+      <app-header
+        @toggleCollapse="toggleCollapse"
+        :sideCollapse="sideCollapse"
+        :layoutType="layoutType"
+      />
+      <app-sidebar :layoutType="layoutType" :sideCollapse="sideCollapse" />
+      <div class="app-main">
+        <div :class="['app-content', { 'is-collapse': sideCollapse }]">
+          <el-scrollbar style="height:100%;background:#fff">
+            <div v-for="i in 20" :key="i" style="height:300px">
+              第{{ i }}部分
+            </div>
+          </el-scrollbar>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
 import AppColumnSidebar from "./AppColumnSidebar";
-// import AppSidebar from './AppSidebar'
+import AppSidebar from "./AppSidebar";
 import AppHeader from "./AppHeader";
-import AppMenu from "./AppMenu";
+//import AppMenu from "./AppMenu";
 export default {
   name: "AppLayout",
   components: {
     AppColumnSidebar, //分栏侧边栏
-    //AppSidebar,//侧边栏
+    AppSidebar, //侧边栏
     AppHeader,
-    AppMenu,
+    //AppMenu,
   },
   data() {
     return {
@@ -57,8 +82,8 @@ export default {
   },
   computed: {
     ...mapState({
-      sideCollapse: state => state.app.sideCollapse,
-      layoutType:state=>state.app.layoutType
+      sideCollapse: (state) => state.app.sideCollapse,
+      layoutType: (state) => state.app.layoutType,
     }),
   },
   methods: {
@@ -66,7 +91,7 @@ export default {
     getDeviceWidth() {
       const width = window.innerWidth;
       if (width < 768) {
-        this.toggleSideCollapse(true)
+        this.toggleSideCollapse(true);
         return "xs";
       } else if (width >= 768 && width < 992) {
         return "sm";
@@ -103,9 +128,9 @@ export default {
     margin-left: $app-sidebar-module-width;
   }
 
-  &.is-layout-row{
-    width:100%;
-    margin-left:0;
+  &.is-layout-row {
+    width: 100%;
+    margin-left: 0;
   }
 
   .app-content {
