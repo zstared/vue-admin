@@ -1,7 +1,17 @@
 <template>
   <div class="app-header-wrapper">
-    <el-row :class="['app-header', { 'is-layout-row': layoutType === 3||layoutType==5}]">
-      <el-col v-if="layoutType !== 3&&layoutType!==5" :span="12" :xs="4" class="header-left">
+    <el-row
+      :class="[
+        'app-header',
+        { 'is-layout-row': layoutType === 3 || layoutType == 5 },
+      ]"
+    >
+      <el-col
+        v-if="layoutType !== 3 && layoutType !== 5"
+        :span="12"
+        :xs="4"
+        class="header-left"
+      >
         <i
           @click="toggleCollapse"
           :class="[
@@ -16,7 +26,7 @@
             <el-breadcrumb-item>活动管理</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        <el-tabs v-if="layoutType==4">
+        <el-tabs v-if="layoutType == 4">
           <el-tab-pane label="模块一" name="first"></el-tab-pane>
           <el-tab-pane label="模块二" name="second"></el-tab-pane>
           <el-tab-pane label="模块三" name="third"></el-tab-pane>
@@ -27,7 +37,11 @@
         <img :src="logoPng" />
         <div class="title hidden-xs-only">后台管理系统后台管理系统fdfd</div>
       </el-col>
-      <el-col :span="layoutType !== 3&&layoutType!==5 ? 12 : 18" :xs="20" class="header-right">
+      <el-col
+        :span="layoutType !== 3 && layoutType !== 5 ? 12 : 18"
+        :xs="20"
+        class="header-right"
+      >
         <app-menu
           v-if="layoutType === 3"
           :sideCollapse="sideCollapse"
@@ -61,7 +75,7 @@
         </el-dropdown>
       </el-col>
     </el-row>
-    <app-tab v-if="layoutType != 5" />
+    <app-tab v-if="layoutType != 5" :tabType="tabType" />
   </div>
 </template>
 
@@ -82,6 +96,7 @@ export default {
   props: {
     sideCollapse: Boolean,
     layoutType: Number,
+    tabType: Number,
   },
   methods: {
     toggleCollapse() {
@@ -91,7 +106,6 @@ export default {
     toggleArrowAnimation(flag) {
       this.arrowAnimation = flag;
     },
-    removeTab() {},
   },
 };
 </script>

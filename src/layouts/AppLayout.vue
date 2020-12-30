@@ -10,7 +10,7 @@
         { 'is-collapse': sideCollapse },
         { 'is-layout-row': layoutType === 3 },
       ]">
-        <app-header @toggleCollapse="toggleCollapse" :sideCollapse="sideCollapse" :layoutType="layoutType" />
+        <app-header @toggleCollapse="toggleCollapse" :sideCollapse="sideCollapse" :layoutType="layoutType" :tabType="tabType"  />
         <div :class="['app-content', { 'is-collapse': sideCollapse }]">
             <el-scrollbar style="height:100%;background:#fff">
                 <div v-for="i in 20" :key="i" style="height:300px">第{{ i }}部分</div>
@@ -21,7 +21,7 @@
         <app-header @toggleCollapse="toggleCollapse" :sideCollapse="sideCollapse" :layoutType="layoutType" />
         <app-sidebar :layoutType="layoutType" :sideCollapse="sideCollapse" />
         <div :class="['app-main', { 'is-collapse': sideCollapse }]">
-            <app-tab @toggleCollapse="toggleCollapse" :layoutType="layoutType" :sideCollapse="sideCollapse" />
+            <app-tab @toggleCollapse="toggleCollapse" :layoutType="layoutType" :sideCollapse="sideCollapse" :tabType="tabType" />
             <div :class="['app-content', { 'is-collapse': sideCollapse }]">
                 <el-scrollbar style="height:100%;background:#fff">
                     <div v-for="i in 20" :key="i" style="height:300px">
@@ -65,6 +65,7 @@ export default {
         ...mapState({
             sideCollapse: (state) => state.app.sideCollapse,
             layoutType: (state) => state.app.layoutType,
+            tabType:state=>state.app.tabType
         }),
     },
     methods: {

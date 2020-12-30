@@ -2,7 +2,7 @@
   <div
     :class="[
       'app-tab-wrapper',
-      { 'is-layout-normal': layoutType === 5 ? true : false },
+      { 'is-layout-normal': layoutType === 5},
     ]"
   >
     <i
@@ -14,7 +14,7 @@
         'toggle-menu',
       ]"
     ></i>
-    <div class="app-tab app-tab-card">
+    <div :class="['app-tab',{'app-tab-card':tabType===1},,{'app-tab-mellow':tabType===2}]">
       <el-tabs closable type="card">
         <template v-for="i in 30">
           <el-tab-pane :label="'菜单' + i" :key="i"></el-tab-pane>
@@ -33,6 +33,7 @@ export default {
   props: {
     sideCollapse: Boolean,
     layoutType: Number,
+    tabType:Number,
   },
   methods: {
     toggleCollapse() {
@@ -64,12 +65,12 @@ export default {
   }
   .app-tab {
     height: $app-tabs-bar-height;
-    //line-height:$app-tabs-bar-height;
-    //display: flex;
-    //align-items:center;
     display: flex;
     align-items: center;
     background: #fff;
+    &.app-tab-mellow{
+      align-items:flex-end;
+    }
   }
 }
 </style>
