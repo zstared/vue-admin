@@ -48,12 +48,12 @@
           mode="horizontal"
         />
         <div class="app-options">
-          <i class="ri-search-line"></i>
-          <i class="ri-notification-line"></i>
-          <i class="ri-fullscreen-line"></i>
-          <i class="ri-github-fill"></i>
-          <i class="ri-global-line"></i>
-          <i class="ri-t-shirt-line"></i>
+          <i class="app-option ri-search-line"></i>
+          <i class="app-option ri-notification-line"></i>
+          <i class="app-option ri-fullscreen-line"></i>
+          <i class="app-option ri-github-fill"></i>
+          <i class="app-option ri-global-line"></i>
+          <i class="app-option ri-t-shirt-line" @click="toggleThemeVisible"></i>
         </div>
         <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
@@ -84,6 +84,7 @@ import ImgUserMale from "@/assets/user_male.svg";
 import logoPng from "../assets/logo.png";
 import AppMenu from "./AppMenu";
 import AppTab from "./AppTab";
+import {mapMutations} from 'vuex'
 export default {
   name: "AppHeader",
   components: {
@@ -106,6 +107,7 @@ export default {
     toggleArrowAnimation(flag) {
       this.arrowAnimation = flag;
     },
+    ...mapMutations(['toggleThemeVisible'])
   },
 };
 </script>
@@ -120,7 +122,7 @@ export default {
     background: #fff;
 
     &.is-layout-row {
-      background: $app-header-background;
+      background: $app-header-bgcolor;
       color: #fff !important;
 
       .el-dropdown {
@@ -165,7 +167,8 @@ export default {
       justify-content: flex-end;
       height: $app-header-height;
       .app-options {
-        [class*="ri"] {
+        margin-right: 15px;
+        .app-option {
           margin-left: 15px;
           font-size: 18px;
           cursor: pointer;
@@ -173,7 +176,6 @@ export default {
             color: $app-color;
           }
         }
-        margin-right: 15px;
       }
 
       .user-avatar {

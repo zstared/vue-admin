@@ -39,7 +39,7 @@
       }
       &.is-active {
         color: $app-color;
-        background: rgba(24, 144, 255, 0.1);
+        background: $app-tab-item-bgcolor-active;
         border: 1px solid $app-color;
       }
     }
@@ -49,21 +49,24 @@
       .el-tabs__item {
         box-sizing: border-box;
         height: $app-tab-item-height;
-        margin-right: 5px;
+        margin-right: -15px;
         line-height: $app-tab-item-height;
         border: none;
         border-radius: 0;
         transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
         padding:0 30px;
-        &:first-child {
-          border-left: 1px solid $app-border-color;
+        &:hover {
+          background: $app-tab-item-bgcolor-hover;
+          mask: url("../assets/tab-mask.png");
+          mask-size: 100% 100%;
+          padding:0 30px;
         }
         &.is-active {
-          color: $app-color;
-          background: rgba(24, 144, 255, 0.1);
-          //border: 1px solid $app-color;
-          mask:url('../assets/tab-mask.png');
+          color: $app-tab-item-color-active;
+          background: $app-tab-item-bgcolor-active;
+          mask: url("../assets/tab-mask.png");
           mask-size: 100% 100%;
+          padding:0 30px;
         }
       }
     }
@@ -76,7 +79,7 @@
   }
   .el-menu-item.is-active,
   .el-menu-item:hover {
-    background: $app-menu-background-active !important;
+    background: $app-menu-bgcolor-active !important;
   }
 }
 

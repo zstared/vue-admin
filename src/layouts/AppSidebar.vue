@@ -1,6 +1,12 @@
 <template>
-  <div :class="['app-sidebar-wrapper', { 'is-collapse': sideCollapse },{'is-layout-normal':layoutType===5?true:false}]">
-    <div v-if="layoutType!=5" class="logo-wrapper">
+  <div
+    :class="[
+      'app-sidebar-wrapper',
+      { 'is-collapse': sideCollapse },
+      { 'is-layout-normal': layoutType === 5 ? true : false },
+    ]"
+  >
+    <div v-if="layoutType != 5" class="logo-wrapper">
       <img :src="logoPng" />
       <div class="title">后台管理系统后台管理系统fdfd</div>
     </div>
@@ -24,7 +30,7 @@ export default {
   },
   props: {
     sideCollapse: Boolean,
-       layoutType: Number,
+    layoutType: Number,
   },
 };
 </script>
@@ -36,15 +42,15 @@ export default {
   top: 0;
   left: 0;
   bottom: 0;
-  background: $app-menu-background;
+  background: $app-menu-bgcolor;
   &.is-collapse {
     width: $app-sidebar-module-width;
     .title {
       display: none;
     }
   }
-  &.is-layout-normal{
-    top:$app-header-height;
+  &.is-layout-normal {
+    top: $app-header-height;
   }
   //transition:$app-transition;
   .logo-wrapper {

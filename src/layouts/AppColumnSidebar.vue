@@ -128,7 +128,7 @@ export default {
     background: #fff;
     .title {
       font-size: $app-font-size-bigger;
-      max-width: calc($app-sidebar-width - 46px);
+      max-width: calc(#{$app-sidebar-width} - 46px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
