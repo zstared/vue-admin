@@ -1,12 +1,7 @@
 <template>
-  <div
-    :class="[
-      'app-tab-wrapper',
-      { 'is-layout-normal': layoutType === 5},
-    ]"
-  >
+  <div :class="['app-tab-wrapper', { 'is-layout-normal': themeLayout === 5 }]">
     <i
-      v-if="layoutType == 5"
+      v-if="themeLayout == 5"
       @click="toggleCollapse"
       :class="[
         { 'ri-menu-fold-line': !sideCollapse },
@@ -14,7 +9,14 @@
         'toggle-menu',
       ]"
     ></i>
-    <div :class="['app-tab',{'app-tab-card':tabType===1},,{'app-tab-mellow':tabType===2}]">
+    <div
+      :class="[
+        'app-tab',
+        { 'app-tab-card': tabPage === 1 },
+        ,
+        { 'app-tab-mellow': tabPage === 2 },
+      ]"
+    >
       <el-tabs closable type="card">
         <template v-for="i in 30">
           <el-tab-pane :label="'菜单' + i" :key="i"></el-tab-pane>
@@ -32,8 +34,8 @@ export default {
   },
   props: {
     sideCollapse: Boolean,
-    layoutType: Number,
-    tabType:Number,
+    themeLayout: Number,
+    tabPage: Number,
   },
   methods: {
     toggleCollapse() {
@@ -68,8 +70,8 @@ export default {
     display: flex;
     align-items: center;
     background: #fff;
-    &.app-tab-mellow{
-      align-items:flex-end;
+    &.app-tab-mellow {
+      align-items: flex-end;
     }
   }
 }

@@ -3,10 +3,10 @@
     :class="[
       'app-sidebar-wrapper',
       { 'is-collapse': sideCollapse },
-      { 'is-layout-normal': layoutType === 5 ? true : false },
+      { 'is-layout-normal': themeLayout === 5 ? true : false },
     ]"
   >
-    <div v-if="layoutType != 5" class="logo-wrapper">
+    <div v-if="themeLayout != 5" class="logo-wrapper">
       <img :src="logoPng" />
       <div class="title">后台管理系统后台管理系统fdfd</div>
     </div>
@@ -30,7 +30,7 @@ export default {
   },
   props: {
     sideCollapse: Boolean,
-    layoutType: Number,
+    themeLayout: Number,
   },
 };
 </script>

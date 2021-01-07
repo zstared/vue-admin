@@ -3,11 +3,11 @@
     <el-row
       :class="[
         'app-header',
-        { 'is-layout-row': layoutType === 3 || layoutType == 5 },
+        { 'is-layout-row': themeLayout === 3 || themeLayout == 5 },
       ]"
     >
       <el-col
-        v-if="layoutType !== 3 && layoutType !== 5"
+        v-if="themeLayout !== 3 && themeLayout !== 5"
         :span="12"
         :xs="4"
         class="header-left"
@@ -20,13 +20,13 @@
             'toggle-menu',
           ]"
         ></i>
-        <div v-if="layoutType !== 4" class="nav-wrapper">
+        <div v-if="themeLayout !== 4" class="nav-wrapper">
           <el-breadcrumb separator=">" class="hidden-xs-only">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>活动管理</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        <el-tabs v-if="layoutType == 4">
+        <el-tabs v-if="themeLayout == 4">
           <el-tab-pane label="模块一" name="first"></el-tab-pane>
           <el-tab-pane label="模块二" name="second"></el-tab-pane>
           <el-tab-pane label="模块三" name="third"></el-tab-pane>
@@ -38,12 +38,12 @@
         <div class="title hidden-xs-only">后台管理系统后台管理系统fdfd</div>
       </el-col>
       <el-col
-        :span="layoutType !== 3 && layoutType !== 5 ? 12 : 18"
+        :span="themeLayout !== 3 && themeLayout !== 5 ? 12 : 18"
         :xs="20"
         class="header-right"
       >
         <app-menu
-          v-if="layoutType === 3"
+          v-if="themeLayout === 3"
           :sideCollapse="sideCollapse"
           mode="horizontal"
         />
@@ -75,7 +75,7 @@
         </el-dropdown>
       </el-col>
     </el-row>
-    <app-tab v-if="layoutType != 5" :tabType="tabType" />
+    <app-tab v-if="themeLayout != 5" :tabPage="tabPage" />
   </div>
 </template>
 
@@ -84,7 +84,7 @@ import ImgUserMale from "@/assets/user_male.svg";
 import logoPng from "../assets/logo.png";
 import AppMenu from "./AppMenu";
 import AppTab from "./AppTab";
-import {mapMutations} from 'vuex'
+import { mapMutations } from "vuex";
 export default {
   name: "AppHeader",
   components: {
@@ -96,8 +96,8 @@ export default {
   },
   props: {
     sideCollapse: Boolean,
-    layoutType: Number,
-    tabType: Number,
+    themeLayout: Number,
+    tabPage: Number,
   },
   methods: {
     toggleCollapse() {
@@ -107,7 +107,7 @@ export default {
     toggleArrowAnimation(flag) {
       this.arrowAnimation = flag;
     },
-    ...mapMutations(['toggleThemeVisible'])
+    ...mapMutations(["toggleThemeVisible"]),
   },
 };
 </script>

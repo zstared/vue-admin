@@ -71,7 +71,7 @@ html {
     box-sizing: border-box;
     height: 100vh;
     padding: 0 !important;
-    margin:0;
+    margin: 0;
     overflow: hidden;
     font-family: "Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Heiti SC,WenQuanYi Micro Hei,Arial,sans-serif";
     font-size: $app-font-size-default;
@@ -99,10 +99,10 @@ html {
     }
   }
 
-  // [class*="ri"] {
-  //   display: inline-block;
-  //   font-size: 16px;
-  //   text-align: center;
-  //   vertical-align: -3.5px;
-  // }
+  [class*="ri-"] {
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: -3.5px;
+  }
 }

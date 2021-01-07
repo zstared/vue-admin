@@ -1,8 +1,8 @@
 <template>
   <div>
-    <app-column-sidebar v-if="layoutType === 1" class="hidden-sm-and-down" />
+    <app-column-sidebar v-if="themeLayout === 1" class="hidden-sm-and-down" />
     <app-sidebar
-      v-else-if="layoutType === 2 || layoutType == 4"
+      v-else-if="themeLayout === 2 || themeLayout == 4"
       :sideCollapse="sideCollapse"
     />
     <el-drawer
@@ -16,18 +16,18 @@
       <app-sidebar />
     </el-drawer>
     <div
-      v-if="layoutType != 5"
+      v-if="themeLayout != 5"
       :class="[
         'app-main',
         { 'is-collapse': sideCollapse },
-        { 'is-layout-row': layoutType === 3 },
+        { 'is-layout-row': themeLayout === 3 },
       ]"
     >
       <app-header
         @toggleCollapse="toggleCollapse"
         :sideCollapse="sideCollapse"
-        :layoutType="layoutType"
-        :tabType="tabType"
+        :themeLayout="themeLayout"
+        :tabPage="tabPage"
       />
       <div :class="['app-content', { 'is-collapse': sideCollapse }]">
         <el-scrollbar style="height:100%;background:#fff">
@@ -39,15 +39,15 @@
       <app-header
         @toggleCollapse="toggleCollapse"
         :sideCollapse="sideCollapse"
-        :layoutType="layoutType"
+        :themeLayout="themeLayout"
       />
-      <app-sidebar :layoutType="layoutType" :sideCollapse="sideCollapse" />
+      <app-sidebar :themeLayout="themeLayout" :sideCollapse="sideCollapse" />
       <div :class="['app-main', { 'is-collapse': sideCollapse }]">
         <app-tab
           @toggleCollapse="toggleCollapse"
-          :layoutType="layoutType"
+          :themeLayout="themeLayout"
           :sideCollapse="sideCollapse"
-          :tabType="tabType"
+          :tabPage="tabPage"
         />
         <div :class="['app-content', { 'is-collapse': sideCollapse }]">
           <el-scrollbar style="height:100%;background:#fff">
@@ -58,7 +58,7 @@
         </div>
       </div>
     </div>
-     <app-theme />
+    <app-theme />
   </div>
 </template>
 
@@ -68,7 +68,7 @@ import AppColumnSidebar from "./AppColumnSidebar";
 import AppSidebar from "./AppSidebar";
 import AppHeader from "./AppHeader";
 import AppTab from "./AppTab";
-import AppTheme from './AppTheme'
+import AppTheme from "./AppTheme";
 export default {
   name: "AppLayout",
   components: {
@@ -93,8 +93,8 @@ export default {
   computed: {
     ...mapState({
       sideCollapse: (state) => state.app.sideCollapse,
-      layoutType: (state) => state.app.layoutType,
-      tabType: (state) => state.app.tabType,
+      themeLayout: (state) => state.app.theme.layout,
+      tabPage: (state) => state.app.theme.tab,
     }),
   },
   methods: {
@@ -121,14 +121,14 @@ export default {
 
     //适应 xs sm
     autoSmallScreen() {
-      this.toggleSideCollapse(true);//默认隐藏侧边栏
-      this.autoLayoutType();//自适应小屏布局
+      this.toggleSideCollapse(true); //默认隐藏侧边栏
+      this.autoThemeLayout(); //自适应小屏布局
     },
 
     //适应 md lg xl
     autoBigScreen() {
-      this.autoLayoutType(true);//恢复之前布局
-      this.sideVisible = false;//
+      this.autoThemeLayout(true); //恢复之前布局
+      this.sideVisible = false; //
     },
 
     //隐藏侧边栏 是否滑出
@@ -138,7 +138,7 @@ export default {
         this.sideVisible = !this.sideVisible;
       }
     },
-    ...mapMutations(["toggleSideCollapse", "autoLayoutType"]),
+    ...mapMutations(["toggleSideCollapse", "autoThemeLayout"]),
   },
 };
 </script>

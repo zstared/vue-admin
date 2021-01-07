@@ -5,6 +5,9 @@
 .el-drawer__wrapper * {
   outline: none !important;
 }
+.el-drawer__header{
+  margin-bottom:0;
+}
 
 .app-tab {
   .el-tabs--card {

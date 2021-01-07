@@ -3,8 +3,7 @@
  * @description cli配置
  */
 
-const path = require('path')
-
+const path = require("path");
 
 module.exports = {
   productionSourceMap: false,
@@ -18,16 +17,16 @@ module.exports = {
 
         /*sass-loader 9.0写法，感谢github用户 shaonialife*/
         additionalData(content, loaderContext) {
-          const { resourcePath, rootContext } = loaderContext
-          const relativePath = path.relative(rootContext, resourcePath)
+          const { resourcePath, rootContext } = loaderContext;
+          const relativePath = path.relative(rootContext, resourcePath);
           if (
-            relativePath.replace(/\\/g, '/') !== 'src/styles/variables.scss'
+            relativePath.replace(/\\/g, "/") !== "src/styles/variables.scss"
           ) {
-            return '@import "~@/styles/variables.scss";' + content
+            return '@import "~@/styles/variables.scss";' + content;
           }
-          return content
+          return content;
         },
       },
     },
   },
-}
+};
