@@ -31,6 +31,13 @@
       />
       <div :class="['app-content', { 'is-collapse': sideCollapse }]">
         <el-scrollbar style="height:100%;background:#fff">
+          <el-switch
+            :value="true"
+            active-text="按月付费"
+            inactive-text="按年付费"
+          >
+          </el-switch>
+          <p class="app-color">fdsfdsfdsfsd魂牵梦萦ffdaffasdffdaff震奔震荡地，魂牵梦萦 震荡震荡载</p>
           <div v-for="i in 20" :key="i" style="height:300px">第{{ i }}部分</div>
         </el-scrollbar>
       </div>

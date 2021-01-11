@@ -7,6 +7,7 @@
         { 'ri-menu-fold-line': !sideCollapse },
         { 'ri-menu-unfold-line': sideCollapse },
         'toggle-menu',
+        'app-color-hover'
       ]"
     ></i>
     <div
@@ -54,9 +55,6 @@ export default {
     cursor: pointer;
     font-size: 16px;
     margin-right: 16px;
-    &:hover {
-      color: $app-color;
-    }
   }
   &.is-layout-normal {
     display: flex;

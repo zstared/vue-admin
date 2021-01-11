@@ -18,6 +18,7 @@
             { 'ri-menu-fold-line': !sideCollapse },
             { 'ri-menu-unfold-line': sideCollapse },
             'toggle-menu',
+            'app-color-hover'
           ]"
         ></i>
         <div v-if="themeLayout !== 4" class="nav-wrapper">
@@ -48,12 +49,12 @@
           mode="horizontal"
         />
         <div class="app-options">
-          <i class="app-option ri-search-line"></i>
-          <i class="app-option ri-notification-line"></i>
-          <i class="app-option ri-fullscreen-line"></i>
-          <i class="app-option ri-github-fill"></i>
-          <i class="app-option ri-global-line"></i>
-          <i class="app-option ri-t-shirt-line" @click="toggleThemeVisible"></i>
+          <i class="app-option app-color-hover ri-search-line"></i>
+          <i class="app-option app-color-hover ri-notification-line"></i>
+          <i class="app-option app-color-hover ri-fullscreen-line"></i>
+          <i class="app-option app-color-hover ri-github-fill"></i>
+          <i class="app-option app-color-hover ri-global-line"></i>
+          <i class="app-option app-color-hover ri-t-shirt-line" @click="toggleThemeVisible"></i>
         </div>
         <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
@@ -138,9 +139,6 @@ export default {
         cursor: pointer;
         font-size: 16px;
         margin-right: 16px;
-        &:hover {
-          color: $app-color;
-        }
       }
       .nav-wrapper {
         height: $app-header-height;
@@ -172,9 +170,6 @@ export default {
           margin-left: 15px;
           font-size: 18px;
           cursor: pointer;
-          &:hover {
-            color: $app-color;
-          }
         }
       }
 

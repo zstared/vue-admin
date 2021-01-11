@@ -1,4 +1,23 @@
-<!DOCTYPE html><html lang="en" data-theme="default"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>vue-admin</title><link href="/js/chunk-2d0e19c3.966a55b7.js" rel="prefetch"><link href="/js/chunk-2d0f1194.67489725.js" rel="prefetch"><link href="/css/app.2dfefa4c.css" rel="preload" as="style"><link href="/css/chunk-vendors.f1e71a21.css" rel="preload" as="style"><link href="/js/app.ab71edb2.js" rel="preload" as="script"><link href="/js/chunk-vendors.4d879e06.js" rel="preload" as="script"><link href="/css/chunk-vendors.f1e71a21.css" rel="stylesheet"><link href="/css/app.2dfefa4c.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but vue-admin doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="/js/chunk-vendors.4d879e06.js"></script><script src="/js/app.ab71edb2.js"></script></body><script>const theme=localStorage.getItem('theme')
-      if(theme){
-        window.document.documentElement.setAttribute("data-theme", theme);
-      }</script></html>
+<!DOCTYPE html><html lang="en" data-theme="blue"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>vue-admin</title><link id="ui_theme" rel="stylesheet" href="/theme/blue/index.css"><link href="/js/chunk-2d0e19c3.966a55b7.js" rel="prefetch"><link href="/js/chunk-2d0f1194.67489725.js" rel="prefetch"><link href="/css/app.bd1c7582.css" rel="preload" as="style"><link href="/css/chunk-vendors.056d0fcf.css" rel="preload" as="style"><link href="/js/app.af67383c.js" rel="preload" as="script"><link href="/js/chunk-vendors.1b7292d2.js" rel="preload" as="script"><link href="/css/chunk-vendors.056d0fcf.css" rel="stylesheet"><link href="/css/app.bd1c7582.css" rel="stylesheet"></head><body><div id="app"></div><script>try {
+            const siteTheme = localStorage.getItem('site-theme')
+            if (siteTheme) {
+                const theme = JSON.parse(siteTheme);
+                if (theme && theme.color) {
+                    window.document.documentElement.setAttribute("data-theme", theme.color);
+
+                    document.getElementById('ui_theme').setAttribute('id','ui_theme_before')
+                    const head = document.head || document.getElementsByTagName('head')[0];
+                    const link=document.createElement('link');
+                    link.rel="stylesheet";
+                    link.type = 'text/css';
+                    link.id="ui_theme"
+                    link.href="/theme/"+theme.color+"/index.css";
+                    head.appendChild(link);
+
+                    setTimeout(()=>{
+                        const link_before= document.getElementById('ui_theme_before');
+                        head.removeChild(link_before);
+                    },500)
+                }
+            }
+        } catch (_) {}</script><script src="/js/chunk-vendors.1b7292d2.js"></script><script src="/js/app.af67383c.js"></script></body></html>

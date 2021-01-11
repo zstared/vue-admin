@@ -1,5 +1,24 @@
 @import "./normalize.scss";
 @import "./element.scss";
+@import "./theme.scss";
+
+//应用主色
+.app-color {
+  @include font_color("app_color");
+}
+.app-color-hover {
+  &:hover {
+    @include font_color("app_color");
+  }
+}
+.app-bg-color {
+  @include background_color("app_color");
+}
+.app-bg-color-hover {
+  &:hover {
+    @include background_color("app_color");
+  }
+}
 
 @mixin scrollbar {
   max-height: 88vh;

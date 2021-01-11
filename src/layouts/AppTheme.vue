@@ -75,26 +75,13 @@
         </div>
         <el-divider content-position="left">主题色</el-divider>
         <div class="theme-color-wrapper">
-          <div class="theme-color blue" @click="setThemeColor('blue')"></div>
-          <div class="theme-color red" @click="setThemeColor('red')"></div>
-          <div
-            class="theme-color orange"
-            @click="setThemeColor('orange')"
-          ></div>
-          <div
-            class="theme-color yellow"
-            @click="setThemeColor('yellow')"
-          ></div>
-          <div class="theme-color cyan" @click="setThemeColor('cyan')"></div>
-          <div class="theme-color green" @click="setThemeColor('green')"></div>
-          <div
-            class="theme-color purple"
-            @click="setThemeColor('purple')"
-          ></div>
+          <el-tooltip v-for="color of colors" :key="color.name" :content="color.label" placement="top">
+            <div class="theme-color" :style="`background:${color.value}`" @click="setThemeColor(color.name)">
+              <i v-if="themeColor === color.name" class="ri-check-line"></i>
+            </div>
+          </el-tooltip>
         </div>
       </div>
-
-      <div class="theme-test"></div>
     </el-drawer>
   </span>
 </template>
@@ -103,6 +90,19 @@
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "",
+  data() {
+    return {
+      colors: [
+        { name: "red", label: "红色", value: "#F5222D" },
+        { name: "orange", label: "橙色", value: "#FA541C" },
+        { name: "yellow", label: "黄色", value: "#FAAD14" },
+        { name: "green", label: "绿色", value: "#52C41A" },
+        { name: "cyan", label: "青色", value: "#13c2c2" },
+        { name: "blue", label: "蓝色", value: "#1890FF" },
+        { name: "purple", label: "紫色", value: "#722ED1" },
+      ],
+    };
+  },
   computed: {
     ...mapState({
       themeLayout: (state) => state.app.theme.layout,
@@ -120,21 +120,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/theme-handle.scss";
 .title {
   display: flex;
   align-items: center;
   i {
     margin-right: 5px;
     font-size: 18px;
-  }
-}
-.app-option {
-  margin-left: 15px;
-  font-size: 18px;
-  cursor: pointer;
-  &:hover {
-    color: $app-color;
   }
 }
 .theme-wrapper {
@@ -240,35 +231,14 @@ export default {
   padding-bottom: 20px;
   .theme-color {
     cursor: pointer;
-    padding: 10px;
+    width: 20px;
+    height: 20px;
     margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: $app-box-shadow;
-    &.blue {
-      background-color: #1890ff;
-    }
-    &.red {
-      background-color: #f5222d;
-    }
-    &.orange {
-      background-color: #fa541c;
-    }
-    &.yellow {
-      background-color: #faad14;
-    }
-    &.cyan {
-      background-color: #13c2c2;
-    }
-    &.green {
-      background-color: #52c41a;
-    }
-    &.purple {
-      background-color: #722ed1;
-    }
+    color: #fff;
   }
-}
-.theme-test {
-  width: 100px;
-  height: 100px;
-  @include background_color("app_color");
 }
 </style>

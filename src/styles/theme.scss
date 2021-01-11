@@ -1,0 +1,93 @@
+// color: '#F5222D',//薄暮
+// color: '#FA541C',//火山
+// color: '#FAAD14',//日暮
+// color: '#13C2C2',//明青
+// color: '#52C41A',//极光绿
+// color: '#1890FF',//拂晓蓝（默认）
+// color: '#2F54EB',//极客蓝
+// color: '#722ED1',//酱紫
+
+$themes: (
+  blue: //默认 蓝色
+    (
+      app_color: #1890FF,
+    ),
+  red: (
+    // 红色
+      app_color: #F5222D,
+  ),
+  orange: (
+    // 橙色 
+      app_color: #FA541C,
+  ),
+  yellow: (
+    // 黄色 
+      app_color: #FAAD14,
+  ),
+  cyan: (
+    // 青色
+      app_color: #13c2c2,
+  ),
+  green: (
+    // 绿色
+      app_color: #52C41A,
+  ),
+  purple: (
+    // 紫色
+      app_color: #722ED1,
+  ),
+);
+
+
+//遍历主题map
+@mixin themeify {
+  @each $themename, $theme-map in $themes {
+    //!global 把局部变量强升为全局变量
+    $theme-map: $theme-map !global;
+    //判断html的data-theme的属性值  #{}是sass的插值表达式
+    //& sass嵌套里的父容器标识   @content是混合器插槽，像vue的slot
+    [data-theme="#{'' + $themename}"] & {
+      @content;
+    }
+  }
+}
+
+//声明一个根据Key获取颜色的function
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+//背景颜色
+@mixin background_color($color) {
+  @include themeify {
+    background-color: themed($color) !important;
+  }
+}
+
+//淡背景色
+@mixin background_color_light($color) {
+  @include themeify {
+    background-color: lighten(themed($color), 40%) !important;
+  }
+}
+
+//字体颜色
+@mixin font_color($color) {
+  @include themeify {
+    color: themed($color) !important;
+  }
+}
+
+//边框颜色
+@mixin border_color($color) {
+  @include themeify {
+    border-color: themed($color) !important;
+  }
+}
+
+//实线边框 自定义大小
+@mixin border_solid($color, $width) {
+  @include themeify {
+    border: $width solid themed($color) !important;
+  }
+}

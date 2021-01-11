@@ -1,23 +1,4 @@
-//获取主题设置
-const siteTheme = localStorage.getItem("site-theme");
-let theme = null;
-if (siteTheme) {
-  try {
-    theme = JSON.parse(siteTheme);
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-//缓存主题设置
-const saveTheme=(theme)=>{
-  localStorage.setItem("site-theme",JSON.stringify(theme));
-}
-
-//切换主题色
-const changeThemeColor=(color)=>{
-  window.document.documentElement.setAttribute("data-theme", color);
-}
+ import {theme,saveTheme,changeThemeColor} from '../../utils/theme'
 
 const app = {
   state: {
@@ -45,7 +26,7 @@ const app = {
     //切换布局
     setThemeLayout: (state, type, preType) => {
       (state.theme.layout = type), (state.theme.preLayout = preType);
-      saveTheme(state.theme)
+      saveTheme(state.theme);
     },
     //自适应切换布局
     autoThemeLayout: (state, isClear = false) => {
@@ -63,14 +44,15 @@ const app = {
     },
     //切换主题色
     setThemeColor: (state, color) => {
+      const oldThemeColor = state.theme.color;
       state.theme.color = color;
-      changeThemeColor(color)
-      saveTheme(state.theme)
+      changeThemeColor(color, oldThemeColor);
+      saveTheme(state.theme);
     },
     //切换页签
     setThemeTab: (state, tab) => {
       state.theme.tab = tab;
-      saveTheme(state.theme)
+      saveTheme(state.theme);
     },
     //添加页签
     addTab: (state, tab) => {

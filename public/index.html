@@ -7,23 +7,35 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= VUE_APP_TITLE %></title>
+    <link id="ui_theme" rel="stylesheet" href="<%= BASE_URL %>theme/blue/index.css">
 </head>
 
 <body>
-    <noscript>
-        <strong>We're sorry but <%= VUE_APP_TITLE %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
     <div id="app"></div>
-</body>
-<script>
-    const siteTheme = localStorage.getItem('site-theme')
-    if (siteTheme) {
+    <script>
         try {
-            const theme = JSON.parse(siteTheme);
-            if (theme && theme.color) window.document.documentElement.setAttribute("data-theme", theme.color);
-        } catch (_) {}
+            const siteTheme = localStorage.getItem('site-theme')
+            if (siteTheme) {
+                const theme = JSON.parse(siteTheme);
+                if (theme && theme.color) {
+                    window.document.documentElement.setAttribute("data-theme", theme.color);
 
-    }
-</script>
+                    document.getElementById('ui_theme').setAttribute('id','ui_theme_before')
+                    const head = document.head || document.getElementsByTagName('head')[0];
+                    const link=document.createElement('link');
+                    link.rel="stylesheet";
+                    link.type = 'text/css';
+                    link.id="ui_theme"
+                    link.href="<%= BASE_URL %>theme/"+theme.color+"/index.css";
+                    head.appendChild(link);
+                    setTimeout(()=>{
+                        const link_before= document.getElementById('ui_theme_before');
+                        head.removeChild(link_before);
+                    },500)
+                }
+            }
+        } catch (_) {}
+    </script>
+</body>
 
 </html>

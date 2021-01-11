@@ -1,3 +1,5 @@
+@import "./theme.scss";
+
 .el-scrollbar__wrap {
   overflow-x: hidden;
 }
@@ -5,8 +7,8 @@
 .el-drawer__wrapper * {
   outline: none !important;
 }
-.el-drawer__header{
-  margin-bottom:0;
+.el-drawer__header {
+  margin-bottom: 0;
 }
 
 .app-tab {
@@ -25,7 +27,7 @@
       line-height: $app-tab-item-height;
       font-size: 18px;
       &:hover {
-        color: $app-color;
+        @include font_color("app_color");
       }
     }
 
@@ -41,9 +43,12 @@
         border-left: 1px solid $app-border-color;
       }
       &.is-active {
-        color: $app-color;
-        background: $app-tab-item-bgcolor-active;
-        border: 1px solid $app-color;
+        @include font_color("app_color");
+        @include background_color_light("app_color");
+        @include border_solid("app_color", 1px);
+      }
+      &:hover {
+        @include font_color("app_color");
       }
     }
   }
@@ -57,19 +62,19 @@
         border: none;
         border-radius: 0;
         transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
-        padding:0 30px;
+        padding: 0 30px;
         &:hover {
           background: $app-tab-item-bgcolor-hover;
           mask: url("../assets/tab-mask.png");
           mask-size: 100% 100%;
-          padding:0 30px;
+          padding: 0 30px;
         }
         &.is-active {
           color: $app-tab-item-color-active;
           background: $app-tab-item-bgcolor-active;
           mask: url("../assets/tab-mask.png");
           mask-size: 100% 100%;
-          padding:0 30px;
+          padding: 0 30px;
         }
       }
     }
@@ -82,7 +87,8 @@
   }
   .el-menu-item.is-active,
   .el-menu-item:hover {
-    background: $app-menu-bgcolor-active !important;
+    //background: $app-menu-bgcolor-active !important;
+    @include background_color("app_color");
   }
 }
 
@@ -103,7 +109,7 @@
 
   .el-menu-item.is-active {
     border-bottom: none;
-    background-color: $app-color !important;
+    @include background_color('app_color')
   }
 
   .el-submenu.is-active .el-submenu__title {
@@ -113,7 +119,7 @@
 
 .el-menu--horizontal {
   .el-menu-item.is-active {
-    background-color: $app-color !important;
+    @include background_color('app_color')
   }
   .el-submenu,
   .el-submenu__title,
@@ -134,10 +140,10 @@
   }
 
   .el-tabs__item.is-active {
-    color: $app-color;
+    @include font_color('app_color')
   }
 
   .el-tabs__active-bar {
-    background-color: $app-color !important;
+    @include background_color('app_color')
   }
 }
