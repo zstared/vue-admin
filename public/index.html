@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="blue">
+<html lang="en" data-theme="blue" data-bg="default">
 
 <head>
     <meta charset="utf-8">
@@ -19,6 +19,7 @@
                 const theme = JSON.parse(siteTheme);
                 if (theme && theme.color) {
                     window.document.documentElement.setAttribute("data-theme", theme.color);
+                    if(theme.bgColor)window.document.documentElement.setAttribute("data-theme", theme.bgColor);
 
                     document.getElementById('ui_theme').setAttribute('id','ui_theme_before')
                     const head = document.head || document.getElementsByTagName('head')[0];

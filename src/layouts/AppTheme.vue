@@ -5,6 +5,7 @@
       direction="rtl"
       :visible="themeVisible"
       @close="toggleThemeVisible"
+      size="300"
     >
       <div slot="title">
         <i class="ri-settings-3-line" style="margin-right:6px"></i>主题配置
@@ -16,6 +17,7 @@
             :class="['layout layout-1', { active: themeLayout == 1 }]"
             @click="() => setThemeLayout(1)"
           >
+            <i v-if="themeLayout == 1" class="ri-check-line app-color"></i>
             <div class="left">
               <div class="left-module"></div>
               <div class="left-menu"></div>
@@ -31,6 +33,7 @@
             :class="['layout layout-2', { active: themeLayout == 2 }]"
             @click="() => setThemeLayout(2)"
           >
+            <i v-if="themeLayout == 2" class="ri-check-line app-color"></i>
             <div class="left left-col"></div>
             <div class="right">
               <div class="right-top">
@@ -43,6 +46,7 @@
             :class="['layout layout-3', { active: themeLayout == 3 }]"
             @click="() => setThemeLayout(3)"
           >
+            <i v-if="themeLayout == 3" class="ri-check-line app-color"></i>
             <div class="top">
               <div class="top-header"></div>
               <div class="top-tab"></div>
@@ -54,6 +58,7 @@
             :class="['layout layout-4', { active: themeLayout == 4 }]"
             @click="() => setThemeLayout(4)"
           >
+            <i v-if="themeLayout == 4" class="ri-check-line app-color"></i>
             <div class="left left-col"></div>
             <div class="right">
               <div class="right-top">
@@ -65,6 +70,7 @@
             :class="['layout layout-5', { active: themeLayout == 5 }]"
             @click="() => setThemeLayout(5)"
           >
+            <i v-if="themeLayout == 5" class="ri-check-line app-color"></i>
             <div class="left left-col"></div>
             <div class="right">
               <div class="right-top">
@@ -75,12 +81,48 @@
         </div>
         <el-divider content-position="left">主题色</el-divider>
         <div class="theme-color-wrapper">
-          <el-tooltip v-for="color of colors" :key="color.name" :content="color.label" placement="top">
-            <div class="theme-color" :style="`background:${color.value}`" @click="setThemeColor(color.name)">
+          <el-tooltip
+            v-for="color of colors"
+            :key="color.name"
+            :content="color.label"
+            placement="top"
+          >
+            <div
+              class="theme-color"
+              :style="`background:${color.value}`"
+              @click="setThemeColor(color.name)"
+            >
               <i v-if="themeColor === color.name" class="ri-check-line"></i>
             </div>
           </el-tooltip>
         </div>
+        <el-divider content-position="left">底色</el-divider>
+        <div class="theme-color-wrapper">
+          <el-tooltip
+            v-for="color of colors"
+            :key="color.name"
+            :content="color.label"
+            placement="top"
+          >
+            <div
+              class="theme-color"
+              :style="`background:${color.value}`"
+              @click="setThemeColor(color.name)"
+            >
+              <i v-if="themeColor === color.name" class="ri-check-line"></i>
+            </div>
+          </el-tooltip>
+        </div>
+        <el-divider content-position="left">其它设置</el-divider>
+        <el-row class="theme-item" :gutter="10">
+          <el-col :span="12">页签风格</el-col>
+          <el-col :span="12">
+            <el-select :value="themeTab" @change="setThemeTab">
+              <el-option :value="1" label="卡片"></el-option>
+              <el-option :value="2" label="圆滑"></el-option>
+            </el-select>
+          </el-col>
+        </el-row>
       </div>
     </el-drawer>
   </span>
@@ -108,13 +150,19 @@ export default {
       themeLayout: (state) => state.app.theme.layout,
       themeColor: (state) => state.app.theme.color,
       themeVisible: (state) => state.app.themeVisible,
+      themeTab: (state) => state.app.theme.tab,
     }),
   },
   methods: {
     toggleVisible() {
       this.themeVisible = !this.themeVisible;
     },
-    ...mapMutations(["setThemeLayout", "toggleThemeVisible", "setThemeColor"]),
+    ...mapMutations([
+      "setThemeLayout",
+      "toggleThemeVisible",
+      "setThemeColor",
+      "setThemeTab",
+    ]),
   },
 };
 </script>
@@ -145,6 +193,13 @@ export default {
       cursor: pointer;
       margin-right: 10px;
       box-shadow: $app-box-shadow;
+      position: relative;
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
       &.layout-3 {
         align-items: flex-start;
         justify-content: center;
@@ -240,5 +295,9 @@ export default {
     box-shadow: $app-box-shadow;
     color: #fff;
   }
+}
+.theme-item{
+   display:flex;
+   align-items:center;
 }
 </style>

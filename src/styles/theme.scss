@@ -10,19 +10,19 @@
 $themes: (
   blue: //默认 蓝色
     (
-      app_color: #1890FF,
+      app_color: #1890ff,
     ),
   red: (
     // 红色
-      app_color: #F5222D,
+      app_color: #f5222d,
   ),
   orange: (
-    // 橙色 
-      app_color: #FA541C,
+    // 橙色
+      app_color: #fa541c,
   ),
   yellow: (
-    // 黄色 
-      app_color: #FAAD14,
+    // 黄色
+      app_color: #faad14,
   ),
   cyan: (
     // 青色
@@ -30,14 +30,13 @@ $themes: (
   ),
   green: (
     // 绿色
-      app_color: #52C41A,
+      app_color: #52c41a,
   ),
   purple: (
     // 紫色
-      app_color: #722ED1,
+      app_color: #722ed1,
   ),
 );
-
 
 //遍历主题map
 @mixin themeify {

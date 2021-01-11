@@ -59,7 +59,7 @@
         height: $app-tab-item-height;
         margin-right: -15px;
         line-height: $app-tab-item-height;
-        border: none;
+        border: none !important;
         border-radius: 0;
         transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
         padding: 0 30px;
@@ -75,6 +75,7 @@
           mask: url("../assets/tab-mask.png");
           mask-size: 100% 100%;
           padding: 0 30px;
+          border: none !important;
         }
       }
     }
@@ -85,10 +86,8 @@
   .el-menu {
     border: 0;
   }
-  .el-menu-item.is-active,
-  .el-menu-item:hover {
-    //background: $app-menu-bgcolor-active !important;
-    @include background_color("app_color");
+  .el-menu-item:hover, .el-menu-item.is-active {
+     @include background_color("app_color");
   }
 }
 
