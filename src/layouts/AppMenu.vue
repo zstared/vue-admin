@@ -1,10 +1,8 @@
 <template>
   <el-menu
+    class="app-menu"
     :mode="mode"
     default-active="2"
-    :background-color="variables['menu-background']"
-    :text-color="variables['menu-color']"
-    :active-text-color="variables['menu-color-active']"
     :collapse="sideCollapse"
     :collapse-transition="false"
   >

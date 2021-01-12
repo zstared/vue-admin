@@ -66,7 +66,7 @@ $themes: (
 //淡背景色
 @mixin background_color_light($color) {
   @include themeify {
-    background-color: lighten(themed($color), 40%) !important;
+    background-color: mix(#fff,themed($color), 90%) !important;
   }
 }
 

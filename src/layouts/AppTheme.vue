@@ -96,20 +96,24 @@
             </div>
           </el-tooltip>
         </div>
-        <el-divider content-position="left">底色</el-divider>
-        <div class="theme-color-wrapper">
-          <el-tooltip
-            v-for="color of colors"
-            :key="color.name"
-            :content="color.label"
-            placement="top"
-          >
-            <div
-              class="theme-color"
-              :style="`background:${color.value}`"
-              @click="setThemeColor(color.name)"
-            >
-              <i v-if="themeColor === color.name" class="ri-check-line"></i>
+        <el-divider content-position="left">背景色</el-divider>
+        <div class="theme-bg-wrapper">
+          <el-tooltip content="默认" placement="top">
+            <div class="bg-color default" @click="setBgColor('default')">
+              <div class="left"></div>
+              <div class="right"></div>
+              <i
+                v-if="bgColor === 'default'"
+                class="ri-check-line  app-color"
+              ></i>
+            </div>
+          </el-tooltip>
+          <el-tooltip content="白色" placement="top">
+            <div class="bg-color white" @click="setBgColor('white')">
+              <i
+                v-if="bgColor === 'white'"
+                class="ri-check-line  app-color"
+              ></i>
             </div>
           </el-tooltip>
         </div>
@@ -149,6 +153,7 @@ export default {
     ...mapState({
       themeLayout: (state) => state.app.theme.layout,
       themeColor: (state) => state.app.theme.color,
+      bgColor: (state) => state.app.theme.bgColor,
       themeVisible: (state) => state.app.themeVisible,
       themeTab: (state) => state.app.theme.tab,
     }),
@@ -162,6 +167,7 @@ export default {
       "toggleThemeVisible",
       "setThemeColor",
       "setThemeTab",
+      "setBgColor",
     ]),
   },
 };
@@ -296,8 +302,43 @@ export default {
     color: #fff;
   }
 }
-.theme-item{
-   display:flex;
-   align-items:center;
+.theme-bg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 20px;
+  .bg-color {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-right: 16px;
+    box-shadow: $app-box-shadow;
+    color: #fff;
+    position: relative;
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.default {
+      display: flex;
+      .left {
+        flex: 1;
+        background: #292c34;
+      }
+      .right {
+        flex: 1;
+        background: white;
+      }
+    }
+    &.white {
+      background: #fff;
+    }
+  }
+}
+.theme-item {
+  display: flex;
+  align-items: center;
 }
 </style>

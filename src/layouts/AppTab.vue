@@ -1,5 +1,5 @@
 <template>
-  <div :class="['app-tab-wrapper', { 'is-layout-normal': themeLayout === 5 }]">
+  <div :class="['app-tab-wrapper', { 'is-layout-normal': themeLayout === 5 },{ 'is-layout-row': themeLayout === 3 }]">
     <i
       v-if="themeLayout == 5"
       @click="toggleCollapse"
@@ -59,9 +59,13 @@ export default {
   &.is-layout-normal {
     display: flex;
     align-items: center;
+    border-top:none;
     .app-tab {
       width: calc(100% - 32px);
     }
+  }
+  &.is-layout-row{
+    border-top:none;
   }
   .app-tab {
     height: $app-tabs-bar-height;

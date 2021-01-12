@@ -18,7 +18,7 @@
             { 'ri-menu-fold-line': !sideCollapse },
             { 'ri-menu-unfold-line': sideCollapse },
             'toggle-menu',
-            'app-color-hover'
+            'app-color-hover',
           ]"
         ></i>
         <div v-if="themeLayout !== 4" class="nav-wrapper">
@@ -54,7 +54,10 @@
           <i class="app-option app-color-hover ri-fullscreen-line"></i>
           <i class="app-option app-color-hover ri-github-fill"></i>
           <i class="app-option app-color-hover ri-global-line"></i>
-          <i class="app-option app-color-hover ri-t-shirt-line" @click="toggleThemeVisible"></i>
+          <i
+            class="app-option app-color-hover ri-t-shirt-line"
+            @click="toggleThemeVisible"
+          ></i>
         </div>
         <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
@@ -120,17 +123,6 @@ export default {
     height: $app-header-height;
     width: 100%;
     padding: 0 $app-padding;
-    background: #fff;
-
-    &.is-layout-row {
-      background: $app-header-bgcolor;
-      color: #fff !important;
-
-      .el-dropdown {
-        color: #fff;
-      }
-    }
-
     .header-left {
       display: flex;
       align-items: center;

@@ -24,3 +24,9 @@ export const changeThemeColor = (color, oldColor) => {
   const href = style.getAttribute("href");
   style.setAttribute("href", href.replace(oldColor, color));
 };
+
+//切换主题色
+export const changeBgColor = (color) => {
+  window.document.body.setAttribute("class", "theme-bg-"+color);
+};
+

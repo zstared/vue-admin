@@ -126,16 +126,130 @@ html {
   }
 }
 
-[data-bg="default"] {
-  .menu-bg-color {
-    background: #292c34;
-    color: #fff;
+@mixin menu_bg_white {
+  .el-menu,
+  .el-menu--popup {
+    .el-submenu,
+    .el-submenu__title,
+    .el-menu-item-group__title,
+    .el-menu-item {
+      background-color: $app-bg-color-light;
+      color: $app-font-color;
+    }
+    .el-submenu__title:hover,
+    .el-menu-item:hover {
+      @include background_color_light("app_color");
+      @include font_color("app_color");
+      i {
+        @include font_color("app_color");
+      }
+    }
+    .el-menu-item.is-active {
+      @include background_color_light("app_color");
+      @include font_color("app_color");
+      border-right-width: 3px;
+      border-right-style: solid;
+      @include border_color("app_color");
+    }
+
+    .el-submenu.is-active {
+      & > .el-submenu__title {
+        @include font_color("app_color");
+        i {
+          @include font_color("app_color");
+        }
+      }
+    }
+  }
+  .el-menu.el-menu--horizontal {
+    .el-menu-item.is-active {
+      border-right-width: 0;
+    }
   }
 }
 
-[data-bg="white"]  {
-  .menu-bg-color {
-    background: #fff;
+//混合背景 默认
+.theme-bg-default {
+  //侧边栏
+  .app-sidebar-wrapper {
+    background: $app-bg-color-dark;
+    color: $app-color-white-light;
+  }
+  //头部背景
+  .app-header {
+    background: $app-bg-color-light;
+    &.is-layout-row {
+    background: $app-bg-color-dark;
+    color: $app-color-white;
+    .el-dropdown {
+      color: #fff;
+    }
+  }
+  }
+
+  //标题
+  .logo-wrapper {
+    color: $app-color-white;
+  }
+
+  //菜单
+  .el-menu,
+  .el-menu[role="menu"],
+  .el-menu--popup {
+    .el-submenu,
+    .el-submenu__title,
+    .el-menu-item-group__title,
+    .el-menu-item {
+      background-color: $app-bg-color-dark;
+      color: $app-color-white-light;
+    }
+    .el-submenu__title:hover,
+    .el-menu-item:hover {
+      color: $app-color-white;
+      i {
+        color: $app-color-white;
+      }
+    }
+
+    .el-menu-item.is-active {
+      @include background_color("app_color");
+      color: $app-color-white;
+    }
+
+    .el-submenu.is-active {
+      & > .el-submenu__title {
+        color: $app-color-white;
+        i {
+          color: $app-color-white;
+        }
+      }
+    }
+  }
+  .second-menu {
+    @include menu_bg_white;
+  }
+}
+
+//白色背景
+.theme-bg-white {
+  .app-sidebar-wrapper {
+    background: $app-bg-color-light;
     color: $app-font-color;
   }
+  .app-header {
+    background: $app-bg-color-light;
+    &.is-layout-row {
+      background: $app-bg-color-light;
+      color: $app-font-color;
+      border-bottom: 1px solid #eee;
+      .el-dropdown {
+        color: $app-font-color;
+      }
+    }
+  }
+  .logo-wrapper {
+    @include font_color("app_color");
+  }
+  //菜单
+  @include menu_bg_white;
 }

@@ -10,7 +10,7 @@
       <img :src="logoPng" />
       <div class="title">后台管理系统后台管理系统fdfd</div>
     </div>
-    <el-scrollbar class="app-menu">
+    <el-scrollbar class="app-menu-wrapper">
       <app-menu :sideCollapse="sideCollapse" />
       <div style="height:1500px"></div>
     </el-scrollbar>
@@ -42,7 +42,7 @@ export default {
   top: 0;
   left: 0;
   bottom: 0;
-  background: $app-menu-bgcolor;
+  /* background: $app-menu-bgcolor; */
   &.is-collapse {
     width: $app-sidebar-module-width;
     .title {
@@ -59,7 +59,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $app-menu-color;
+    //color: $app-menu-color;
     overflow: hidden;
     img {
       width: 34px;
@@ -74,7 +74,7 @@ export default {
       white-space: nowrap;
     }
   }
-  .app-menu {
+  .app-menu-wrapper {
     height: calc(100vh - #{$app-logo-height});
     /* .el-menu:not(.el-menu--collapse){
 	 width:$app-sidebar-width;

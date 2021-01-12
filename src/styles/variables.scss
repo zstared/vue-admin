@@ -1,6 +1,16 @@
 @charset "utf-8";
 //框架默认主题色
 $app-color: #1890ff;
+//深色背景色
+$app-bg-color-dark:#031529;
+//浅色背景色
+$app-bg-color-light:#fff;
+//白色
+$app-color-white: #fff;
+//浅白
+$app-color-white-light: #b0b0b0;
+
+
 //头部背景色
 $app-header-bgcolor: #292c34;
 //菜单背景色
@@ -13,6 +23,7 @@ $app-menu-color-active: #fff;
 $app-menu-bgcolor-active: $app-color;
 //标题颜色
 $app-title-color: #fff;
+
 //字体大小配置
 $app-font-size-small: 12px;
 $app-font-size-default: 14px;
@@ -20,6 +31,9 @@ $app-font-size-big: 16px;
 $app-font-size-bigger: 18px;
 $app-font-size-max: 22px;
 $app-font-color: #606266;
+
+
+
 // $app-color-blue: $app-color;
 // $app-color-green: #13ce66;
 // $app-color-white: #fff;
@@ -32,7 +46,7 @@ $app-font-color: #606266;
 // $app-border-radius: 2px;
 $app-border-color: #dcdfe6;
 
-$app-box-shadow:0px 2px 5px 5px #efefef;
+$app-box-shadow: 0px 2px 5px 5px #efefef;
 
 //页头高度
 $app-header-height: 50px;
@@ -42,11 +56,11 @@ $app-tabs-bar-height: 46px;
 $app-tab-item-height: 34px;
 
 //当前激活页签背景色
-$app-tab-item-bgcolor-active:lighten($app-color,40%);
+$app-tab-item-bgcolor-active: lighten($app-color, 40%);
 //当前激活页签文字颜色
-$app-tab-item-color-active:$app-color;
+$app-tab-item-color-active: $app-color;
 //当前页签hover背景色
-$app-tab-item-bgcolor-hover:#e4e7ed;
+$app-tab-item-bgcolor-hover: #e4e7ed;
 
 //默认paddiing
 $app-padding: 10px;

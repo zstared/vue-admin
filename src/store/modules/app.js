@@ -1,4 +1,4 @@
- import {theme,saveTheme,changeThemeColor} from '../../utils/theme'
+ import {theme,saveTheme,changeThemeColor,changeBgColor} from '../../utils/theme'
 
 const app = {
   state: {
@@ -6,7 +6,7 @@ const app = {
       layout: theme && theme.layout ? theme.layout : 5, //整体布局 1-分栏;2-纵向;3-横向;4-综合;5-常规;
       preLayout: null, //自适应之前的布局
       color: theme && theme.color ? theme.color : "blue", //主题色 blue/red/orange/yellow/cyan/green/purple
-      bgColor:theme && theme.color ? theme.color : "default",//default/white/dark/theme
+      bgColor:theme && theme.bgColor ? theme.bgColor : "default",//default/white/dark/theme
       tab: theme && theme.tab ? theme.tab : 1, //页签 1-卡片;2-圆滑;
     },
     sideCollapse: false, //侧边栏是否折叠状态
@@ -48,6 +48,12 @@ const app = {
       const oldThemeColor = state.theme.color;
       state.theme.color = color;
       changeThemeColor(color, oldThemeColor);
+      saveTheme(state.theme);
+    },
+    //切换背景色
+    setBgColor: (state, color) => {
+      state.theme.bgColor = color;
+      changeBgColor(color);
       saveTheme(state.theme);
     },
     //切换页签
