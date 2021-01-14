@@ -29,15 +29,30 @@
         :themeLayout="themeLayout"
         :tabPage="tabPage"
       />
-      <div :class="['app-content', { 'is-collapse': sideCollapse }]">
-        <el-scrollbar style="height:100%;background:#fff">
+      <div :class="['app-content-wrapper', { 'is-collapse': sideCollapse }]">
+        <el-scrollbar style="height:100%" class="app-content">
           <el-switch
             :value="true"
             active-text="按月付费"
             inactive-text="按年付费"
           >
           </el-switch>
-          <p class="app-color">fdsfdsfdsfsd魂牵梦萦ffdaffasdffdaff震奔震荡地，魂牵梦萦 震荡震荡载</p>
+          <p class="app-color">
+            横笛闻声不见人 红旗直上天山雪 陈羽 · 从军行
+          </p>
+          <el-button type="text" @click="dialogVisible = true"
+            >点击打开 Dialog</el-button
+          >
+
+          <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :modal-append-to-body="false">
+            <span>这是一段信息</span>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="dialogVisible = false"
+                >确 定</el-button
+              >
+            </span>
+          </el-dialog>
           <div v-for="i in 20" :key="i" style="height:300px">第{{ i }}部分</div>
         </el-scrollbar>
       </div>
@@ -56,8 +71,8 @@
           :sideCollapse="sideCollapse"
           :tabPage="tabPage"
         />
-        <div :class="['app-content', { 'is-collapse': sideCollapse }]">
-          <el-scrollbar style="height:100%;background:#fff">
+        <div :class="['app-content-wrapper', { 'is-collapse': sideCollapse }]">
+          <el-scrollbar style="height:100%;" class="app-content">
             <div v-for="i in 20" :key="i" style="height:300px">
               第{{ i }}部分
             </div>
@@ -89,6 +104,7 @@ export default {
     return {
       media: "md", //xs:<768px sm:>=768px md>=992px lg>=1200px xl>=1920px
       sideVisible: false, //隐藏的侧边栏 是否滑出
+      dialogVisible: false,
     };
   },
   created() {
@@ -156,7 +172,6 @@ export default {
   margin-left: $app-sidebar-width;
   position: relative;
   z-index: $app-z-index;
-  background: #f6f8f9;
 
   //transition: $app-transition;
   &.is-collapse {
@@ -174,10 +189,16 @@ export default {
     align-items: center;
   }
 
-  .app-content {
+  .app-content-wrapper {
     padding: $app-padding;
     height: $app-content-height;
     transition: $app-transition;
+
+    /* .app-content {
+      &.is-layout-normmal {
+        margin: 10px;
+      }
+    } */
   }
 }
 

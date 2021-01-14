@@ -6,7 +6,7 @@
       </div>
       <el-scrollbar class="menu-module">
         <template v-for="i in 20">
-          <div :key="i" class="menu-module-item">
+          <div :key="i" class="menu-module-item" @click="menuModuleClick(i)" :class="{'active':moduleActive===i}">
             <i class="el-icon-user-solid module-icon"></i>
             <span class="module-title">模块{{ i }}</span>
           </div>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       logoPng,
+      moduleActive:1,
     };
   },
   computed: {
@@ -42,6 +43,11 @@ export default {
       sideCollapse: (state) => state.app.sideCollapse,
     }),
   },
+  methods:{
+     menuModuleClick(m){
+        this.moduleActive=m;
+     }
+  }
 };
 </script>
 
@@ -57,8 +63,6 @@ export default {
     top: 0;
     left: 0;
     bottom: 0;
-    background: #15171b;
-    color: #fff;
     .logo-img {
       img {
         width: 34px;
@@ -87,18 +91,13 @@ export default {
           text-overflow: ellipsis;
           overflow: hidden;
         }
-        &.active {
-          background: #3591ff;
-        }
       }
     }
   }
   .app-siderbar-second {
-    //transition:$app-transition;
     width: $app-sidebar-menu-width;
     height: 100vh;
     margin-left: $app-sidebar-module-width;
-    background: #fff;
     .title {
       font-size: $app-font-size-bigger;
       max-width: calc(#{$app-sidebar-width} - 46px);
@@ -109,9 +108,6 @@ export default {
       line-height: $app-logo-height;
       padding:0 10px;
     }
-    /* .second-menu {
-      border-right: none;
-    } */
     &.is-collapse {
       width: 0;
     }

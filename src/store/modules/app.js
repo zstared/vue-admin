@@ -47,13 +47,14 @@ const app = {
     setThemeColor: (state, color) => {
       const oldThemeColor = state.theme.color;
       state.theme.color = color;
-      changeThemeColor(color, oldThemeColor);
+      changeThemeColor(color, oldThemeColor,state.theme.bgColor);
       saveTheme(state.theme);
     },
     //切换背景色
-    setBgColor: (state, color) => {
-      state.theme.bgColor = color;
-      changeBgColor(color);
+    setBgColor: (state, bgColor) => {
+      const oldBgColor=state.theme.bgColor;
+      state.theme.bgColor = bgColor;
+      changeBgColor(bgColor,oldBgColor,state.theme.color);
       saveTheme(state.theme);
     },
     //切换页签

@@ -17,16 +17,31 @@ export const saveTheme = (theme) => {
 };
 
 //切换主题色
-export const changeThemeColor = (color, oldColor) => {
+export const changeThemeColor = (color, oldColor,bgColor) => {
   window.document.documentElement.setAttribute("data-theme", color);
-  
+
   const style = document.getElementById("ui_theme");
   const href = style.getAttribute("href");
-  style.setAttribute("href", href.replace(oldColor, color));
+  if(bgColor==="dark"){
+    style.setAttribute("href", href.replace(oldColor+"-dark",color+"-dark"));
+  }else{
+    style.setAttribute("href", href.replace(oldColor, color));
+  }
+  
 };
 
-//切换主题色
-export const changeBgColor = (color) => {
-  window.document.body.setAttribute("class", "theme-bg-"+color);
+//切换背景色
+export const changeBgColor = (bgColor,oldBgColor,color) => {
+  window.document.body.setAttribute("class", "theme-bg-"+bgColor);
+  if(oldBgColor==="dark"){
+    const style = document.getElementById("ui_theme");
+    const href = style.getAttribute("href");
+    style.setAttribute("href", href.replace(color+"-dark",bgColor=="dark"?color+"-dark":color));
+  }else{
+    const style = document.getElementById("ui_theme");
+    const href = style.getAttribute("href");
+    style.setAttribute("href", href.replace(color,bgColor=="dark"?color+"-dark":color));
+  }
+   
 };
 

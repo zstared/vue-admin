@@ -49,8 +49,6 @@ export default {
 <style lang="scss" scoped>
 .app-tab-wrapper {
   padding: 0 10px;
-  background: #fff;
-  border-top: 1px solid #eee;
   .toggle-menu {
     cursor: pointer;
     font-size: 16px;
@@ -71,7 +69,6 @@ export default {
     height: $app-tabs-bar-height;
     display: flex;
     align-items: center;
-    background: #fff;
     &.app-tab-mellow {
       align-items: flex-end;
     }

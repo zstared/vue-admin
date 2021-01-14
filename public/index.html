@@ -27,7 +27,7 @@
                     link.rel="stylesheet";
                     link.type = 'text/css';
                     link.id="ui_theme"
-                    link.href="<%= BASE_URL %>theme/"+theme.color+"/index.css";
+                    link.href="<%= BASE_URL %>theme/"+theme.color+(theme.bgColor==="dark"?"-dark":"")+"/index.css";
                     head.appendChild(link);
                     setTimeout(()=>{
                         const link_before= document.getElementById('ui_theme_before');

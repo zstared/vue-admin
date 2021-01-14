@@ -7,6 +7,9 @@
 // color: '#2F54EB',//极客蓝
 // color: '#722ED1',//酱紫
 
+//****************************************************************
+//********************主题色切换**********************
+//****************************************************************
 $themes: (
   blue: //默认 蓝色
     (
@@ -66,7 +69,21 @@ $themes: (
 //淡背景色
 @mixin background_color_light($color) {
   @include themeify {
-    background-color: mix(#fff,themed($color), 90%) !important;
+    background-color: mix(#fff, themed($color), 90%) !important;
+  }
+}
+
+//深背景色
+@mixin background_color_dark($color) {
+  @include themeify {
+    background-color: darken(themed($color), 24%) !important;
+  }
+}
+
+//深背景色 激活背景色
+@mixin background_color_dark_active($color) {
+  @include themeify {
+    background-color: darken(themed($color), 34%) !important;
   }
 }
 
@@ -90,3 +107,4 @@ $themes: (
     border: $width solid themed($color) !important;
   }
 }
+

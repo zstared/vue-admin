@@ -19,7 +19,7 @@
           >
             <i v-if="themeLayout == 1" class="ri-check-line app-color"></i>
             <div class="left">
-              <div class="left-module"></div>
+              <div class="left-module theme-bg-color"></div>
               <div class="left-menu"></div>
             </div>
             <div class="right">
@@ -34,7 +34,7 @@
             @click="() => setThemeLayout(2)"
           >
             <i v-if="themeLayout == 2" class="ri-check-line app-color"></i>
-            <div class="left left-col"></div>
+            <div class="left left-col theme-bg-color"></div>
             <div class="right">
               <div class="right-top">
                 <div class="top-header"></div>
@@ -48,7 +48,7 @@
           >
             <i v-if="themeLayout == 3" class="ri-check-line app-color"></i>
             <div class="top">
-              <div class="top-header"></div>
+              <div class="top-header theme-bg-color"></div>
               <div class="top-tab"></div>
             </div>
             <div class="bottom"></div>
@@ -59,7 +59,7 @@
             @click="() => setThemeLayout(4)"
           >
             <i v-if="themeLayout == 4" class="ri-check-line app-color"></i>
-            <div class="left left-col"></div>
+            <div class="left left-col theme-bg-color"></div>
             <div class="right">
               <div class="right-top">
                 <div class="top-header"></div>
@@ -71,11 +71,10 @@
             @click="() => setThemeLayout(5)"
           >
             <i v-if="themeLayout == 5" class="ri-check-line app-color"></i>
-            <div class="left left-col"></div>
-            <div class="right">
-              <div class="right-top">
-                <div class="top-header"></div>
-              </div>
+            <div class="top theme-bg-color"></div>
+            <div class="bottom">
+              <div class="left theme-bg-color"></div>
+              <div class="right"></div>
             </div>
           </div>
         </div>
@@ -98,7 +97,7 @@
         </div>
         <el-divider content-position="left">背景色</el-divider>
         <div class="theme-bg-wrapper">
-          <el-tooltip content="默认" placement="top">
+          <el-tooltip content="混色" placement="top">
             <div class="bg-color default" @click="setBgColor('default')">
               <div class="left"></div>
               <div class="right"></div>
@@ -108,10 +107,28 @@
               ></i>
             </div>
           </el-tooltip>
-          <el-tooltip content="白色" placement="top">
-            <div class="bg-color white" @click="setBgColor('white')">
+          <el-tooltip content="亮色" placement="top">
+            <div class="bg-color light" @click="setBgColor('light')">
               <i
-                v-if="bgColor === 'white'"
+                v-if="bgColor === 'light'"
+                class="ri-check-line  app-color"
+              ></i>
+            </div>
+          </el-tooltip>
+          <el-tooltip content="主题色" placement="top">
+            <div class="bg-color theme" @click="setBgColor('theme')">
+              <div class="left app-bg-color-dark"></div>
+              <div class="right"></div>
+              <i
+                v-if="bgColor === 'theme'"
+                class="ri-check-line  app-color"
+              ></i>
+            </div>
+          </el-tooltip>
+          <el-tooltip content="暗色" placement="top">
+            <div class="bg-color dark" @click="setBgColor('dark')">
+              <i
+                v-if="bgColor === 'dark'"
                 class="ri-check-line  app-color"
               ></i>
             </div>
@@ -191,14 +208,12 @@ export default {
     flex-wrap: wrap;
     padding-bottom: 20px;
     .layout {
-      border: 1px solid #ddd;
       width: 40px;
       height: 30px;
       display: flex;
       align-items: center;
       cursor: pointer;
       margin-right: 10px;
-      box-shadow: $app-box-shadow;
       position: relative;
       i {
         position: absolute;
@@ -214,8 +229,15 @@ export default {
       }
       &.layout-5 {
         align-items: flex-start;
-        .top-header {
-          background: $app-header-bgcolor;
+        justify-content: center;
+        flex-direction: column;
+        .bottom {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          .left {
+            height: 25px;
+          }
         }
       }
       .left {
@@ -227,17 +249,15 @@ export default {
         .left-module {
           width: 3px;
           height: 30px;
-          background: $app-header-bgcolor;
-          border: 1px solid $app-header-bgcolor;
+          border-right: 1px solid #eee;
         }
         .left-menu {
-          width: 7x;
+          width: 7px;
           height: 30px;
         }
       }
       .left-col {
-        background: $app-header-bgcolor;
-        border: 1px solid $app-header-bgcolor;
+        border-right: 1px solid #eee;
       }
       .right {
         width: 30px;
@@ -256,7 +276,7 @@ export default {
       .top {
         width: 40px;
         height: 5px;
-        border: 1px solid #ddd;
+        border-bottom: 1px solid #eee;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -264,8 +284,6 @@ export default {
         .top-header {
           height: 3px;
           width: 40px;
-          background: $app-header-bgcolor;
-          border: 1px solid $app-header-bgcolor;
         }
         .top-tab {
           height: 2px;
@@ -274,7 +292,7 @@ export default {
       .bottom {
         height: 25px;
         width: 40px;
-        border: 1px solid #ddd;
+        //border: 1px solid #ddd;
         border-top: none;
       }
     }
@@ -298,7 +316,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: $app-box-shadow;
     color: #fff;
   }
 }
@@ -312,7 +329,6 @@ export default {
     width: 20px;
     height: 20px;
     margin-right: 16px;
-    box-shadow: $app-box-shadow;
     color: #fff;
     position: relative;
     i {
@@ -325,15 +341,28 @@ export default {
       display: flex;
       .left {
         flex: 1;
-        background: #292c34;
+        background: $app-bg-color-dark;
       }
       .right {
         flex: 1;
         background: white;
       }
     }
-    &.white {
+    &.light {
       background: #fff;
+    }
+    &.theme {
+      display: flex;
+      .left {
+        flex: 1;
+      }
+      .right {
+        flex: 1;
+        background: white;
+      }
+    }
+    &.dark {
+      background: $app-bg-color-dark;
     }
   }
 }

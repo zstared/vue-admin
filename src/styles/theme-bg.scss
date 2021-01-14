@@ -1,0 +1,369 @@
+@import "./theme.scss";
+//****************************************************************
+//********************背景色相关样式**********************
+//****************************************************************
+
+.app-box-shadow {
+  box-shadow: $app-box-shadow;
+}
+
+.theme-wrapper {
+  .layout,
+  .theme-color,
+  .bg-color {
+    box-shadow: $app-box-shadow;
+  }
+}
+
+@mixin menu_bg_white {
+  .el-menu,
+  .el-menu--popup {
+    .el-submenu,
+    .el-submenu__title,
+    .el-menu-item-group__title,
+    .el-menu-item {
+      background-color: $app-bg-color-light !important;
+      color: $app-font-color;
+    }
+    .el-submenu__title:hover,
+    .el-menu-item:hover {
+      @include background_color_light("app_color");
+      @include font_color("app_color");
+      i {
+        @include font_color("app_color");
+      }
+    }
+    .el-menu-item.is-active {
+      @include background_color_light("app_color");
+      @include font_color("app_color");
+      border-right-width: 3px;
+      border-right-style: solid;
+      @include border_color("app_color");
+    }
+
+    .el-submenu.is-active {
+      & > .el-submenu__title {
+        @include font_color("app_color");
+        i {
+          @include font_color("app_color");
+        }
+      }
+    }
+  }
+  .el-menu.el-menu--horizontal {
+    .el-menu-item.is-active {
+      border-right-width: 0;
+    }
+  }
+}
+
+//混色背景 默认
+.theme-bg-default {
+  //背景色
+  .theme-bg-color {
+    background-color: $app-bg-color-dark;
+  }
+  //侧边栏
+  .app-sidebar-wrapper {
+    background: $app-bg-color-dark;
+    color: $app-color-white-light;
+  }
+  //侧边栏模块
+  .app-siderbar-first {
+    background: $app-bg-color-dark;
+    color: $app-color-white-light;
+    .menu-module-item:hover {
+      color: $app-color-white;
+      i {
+        color: $app-color-white;
+      }
+    }
+    .menu-module-item.active {
+      @include background_color("app_color");
+      color: $app-color-white;
+    }
+  }
+  //头部背景
+  .app-header {
+    background: $app-bg-color-light;
+    &.is-layout-row {
+      background: $app-bg-color-dark;
+      color: $app-color-white;
+      .el-dropdown {
+        color: #fff;
+      }
+    }
+  }
+
+  //标题
+  .logo-wrapper {
+    color: $app-color-white;
+  }
+
+  //菜单
+  .el-menu,
+  .el-menu--popup {
+    .el-submenu,
+    .el-submenu__title,
+    .el-menu-item-group__title,
+    .el-menu-item {
+      background-color: $app-bg-color-dark;
+      color: $app-color-white-light;
+    }
+    .el-submenu__title:hover,
+    .el-menu-item:hover {
+      color: $app-color-white;
+      i {
+        color: $app-color-white;
+      }
+    }
+
+    .el-menu-item.is-active {
+      @include background_color("app_color");
+      color: $app-color-white;
+    }
+
+    .el-submenu.is-active {
+      & > .el-submenu__title {
+        color: $app-color-white;
+        i {
+          color: $app-color-white;
+        }
+      }
+    }
+  }
+  .second-menu {
+    @include menu_bg_white;
+  }
+}
+
+//亮色背景
+.theme-bg-light {
+  //背景色
+  .theme-bg-color {
+    background-color: $app-bg-color-light;
+  }
+  //侧边栏
+  .app-sidebar-wrapper {
+    background: $app-bg-color-light;
+    color: $app-font-color;
+  }
+  //侧边栏模块
+  .app-siderbar-first {
+    .menu-module-item:hover {
+      @include background_color_light("app_color");
+      @include font_color("app_color");
+      i {
+        @include font_color("app_color");
+      }
+    }
+    .menu-module-item.active {
+      @include background_color_light("app_color");
+      @include font_color("app_color");
+    }
+  }
+  //头部
+  .app-header {
+    background: $app-bg-color-light;
+    &.is-layout-row {
+      background: $app-bg-color-light;
+      color: $app-font-color;
+      .el-dropdown {
+        color: $app-font-color;
+      }
+    }
+  }
+  //标题
+  .logo-wrapper {
+    @include font_color("app_color");
+  }
+  //菜单
+  @include menu_bg_white;
+}
+
+//主题色背景
+.theme-bg-theme {
+  //背景色
+  .theme-bg-color {
+    @include background_color_dark("app_color");
+  }
+  //侧边栏
+  .app-sidebar-wrapper {
+    @include background_color_dark("app_color");
+    color: $app-color-white-light;
+  }
+  //侧边栏模块
+  .app-siderbar-first {
+    @include background_color_dark("app_color");
+    color: $app-color-white-light;
+    .menu-module-item:hover {
+      color: $app-color-white;
+      i {
+        color: $app-color-white;
+      }
+    }
+    .menu-module-item.active {
+      @include background_color_dark_active("app_color");
+      color: $app-color-white;
+    }
+  }
+  //头部背景
+  .app-header {
+    background: $app-bg-color-light;
+    &.is-layout-row {
+      @include background_color_dark("app_color");
+      color: $app-color-white;
+      .el-dropdown {
+        color: #fff;
+      }
+    }
+  }
+
+  //标题
+  .logo-wrapper {
+    color: $app-color-white;
+  }
+
+  //菜单
+  .el-menu,
+  .el-menu--popup {
+    .el-submenu,
+    .el-submenu__title,
+    .el-menu-item-group__title,
+    .el-menu-item {
+      @include background_color_dark("app_color");
+      color: $app-color-white-light;
+    }
+    .el-submenu__title:hover,
+    .el-menu-item:hover {
+      color: $app-color-white;
+      i {
+        color: $app-color-white;
+      }
+    }
+
+    .el-menu-item.is-active {
+      @include background_color_dark_active("app_color");
+      color: $app-color-white;
+    }
+
+    .el-submenu.is-active {
+      & > .el-submenu__title {
+        color: $app-color-white;
+        i {
+          color: $app-color-white;
+        }
+      }
+    }
+  }
+  .second-menu {
+    @include menu_bg_white;
+  }
+}
+
+//暗色背景
+.theme-bg-dark {
+  background: #000;
+  color: #fff !important;
+  //背景色
+  .theme-bg-color {
+    background-color: $app-bg-color-dark;
+  }
+  //侧边栏
+  .app-sidebar-wrapper {
+    background: $app-bg-color-dark;
+    color: $app-color-white-light;
+  }
+  //侧边栏模块
+  .app-siderbar-first {
+    background: $app-bg-color-dark;
+    color: $app-color-white-light;
+    .menu-module-item:hover {
+      color: $app-color-white;
+      i {
+        color: $app-color-white;
+      }
+    }
+    .menu-module-item.active {
+      @include background_color("app_color");
+      color: $app-color-white;
+    }
+  }
+  //头部背景
+  .app-header {
+    background: $app-bg-color-dark;
+    color: $app-color-white;
+  }
+  .app-siderbar-second {
+    background: $app-bg-color-dark;
+  }
+  .app-main {
+    background: #000;
+  }
+  //内容区
+  .app-content {
+    background: $app-bg-color-dark;
+  }
+
+  //页面标签
+  .app-tab-wrapper {
+    background: $app-bg-color-dark;
+    border-top: 1px solid #000;
+    //border-color: $app-bg-color-dark;
+    .app-tab {
+	  background: $app-bg-color-dark;
+	  .el-tabs__item {
+		border: 1px solid $app-border-color-dark;
+	  }
+    }
+  }
+
+  //标题
+  .logo-wrapper {
+    color: $app-color-white;
+  }
+
+  //菜单
+  .el-menu,
+  .el-menu--popup {
+    .el-submenu,
+    .el-submenu__title,
+    .el-menu-item-group__title,
+    .el-menu-item {
+      background-color: $app-bg-color-dark;
+      color: $app-color-white-light;
+    }
+    .el-submenu__title:hover,
+    .el-menu-item:hover {
+      color: $app-color-white;
+      i {
+        color: $app-color-white;
+      }
+    }
+
+    .el-menu-item.is-active {
+      @include background_color("app_color");
+      color: $app-color-white;
+    }
+
+    .el-submenu.is-active {
+      & > .el-submenu__title {
+        color: $app-color-white;
+        i {
+          color: $app-color-white;
+        }
+      }
+    }
+  }
+  .app-box-shadow {
+    box-shadow: $app-box-shadow-dark;
+  }
+  .theme-wrapper {
+    .layout,
+    .theme-color,
+    .bg-color {
+	  box-shadow: $app-box-shadow-dark;
+	  border-color:#000 !important;
+    }
+  }
+}

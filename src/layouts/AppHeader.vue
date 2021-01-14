@@ -36,7 +36,7 @@
       </el-col>
       <el-col v-else :span="6" :xs="4" class="header-left">
         <img :src="logoPng" />
-        <div class="title hidden-xs-only">后台管理系统后台管理系统fdfd</div>
+        <div class="title hidden-xs-only">后台管理系统</div>
       </el-col>
       <el-col
         :span="themeLayout !== 3 && themeLayout !== 5 ? 12 : 18"

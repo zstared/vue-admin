@@ -39,12 +39,8 @@
 </template>
 
 <script>
-import variables from "@/styles/variables.scss";
 export default {
   name: "",
-  data() {
-    return { variables };
-  },
   props: {
     sideCollapse: Boolean,
     mode: {
