@@ -108,3 +108,9 @@ $themes: (
   }
 }
 
+//阴影
+@mixin box_shadow($color,$h-shadow,$v-shadow,$blur,$spread) {
+  @include themeify {
+    box-shadow: $h-shadow $v-shadow $blur $spread themed($color),
+  }
+}

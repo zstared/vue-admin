@@ -13,6 +13,15 @@
   .bg-color {
     box-shadow: $app-box-shadow;
   }
+  .layout {
+    .left-col,
+    .left-module,
+	.left,
+	.top,
+    .top-header {
+      border-color: $app-border-color-second;
+    }
+  }
 }
 
 @mixin menu_bg_white {
@@ -263,7 +272,7 @@
 
 //暗色背景
 .theme-bg-dark {
-  background: #000;
+  background: $app-page-bg-dark;
   color: #fff !important;
   //背景色
   .theme-bg-color {
@@ -298,7 +307,7 @@
     background: $app-bg-color-dark;
   }
   .app-main {
-    background: #000;
+    background:$app-page-bg-dark;
   }
   //内容区
   .app-content {
@@ -308,13 +317,17 @@
   //页面标签
   .app-tab-wrapper {
     background: $app-bg-color-dark;
-    border-top: 1px solid #000;
+    border-top: 1px solid $app-border-color-dark-second;
     //border-color: $app-bg-color-dark;
     .app-tab {
-	  background: $app-bg-color-dark;
-	  .el-tabs__item {
+      background: $app-bg-color-dark;
+      .el-tabs__item {
 		border: 1px solid $app-border-color-dark;
-	  }
+		&.is-active {
+			@include background_color_dark("app_color");
+			color:$app-color-white !important;
+		  }
+      }
     }
   }
 
@@ -362,8 +375,17 @@
     .layout,
     .theme-color,
     .bg-color {
-	  box-shadow: $app-box-shadow-dark;
-	  border-color:#000 !important;
-    }
+      box-shadow: $app-box-shadow-dark;
+      border-color: #000 !important;
+	}
+	.layout {
+		.left-col,
+		.left-module,
+		.left,
+		.top-header,
+		.top{
+		  border-color: $app-border-color-dark-second !important;
+		}
+	  }
   }
 }

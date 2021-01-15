@@ -97,7 +97,7 @@
         </div>
         <el-divider content-position="left">背景色</el-divider>
         <div class="theme-bg-wrapper">
-          <el-tooltip content="混色" placement="top">
+          <el-tooltip content="混合色" placement="top">
             <div class="bg-color default" @click="setBgColor('default')">
               <div class="left"></div>
               <div class="right"></div>
@@ -127,18 +127,21 @@
           </el-tooltip>
           <el-tooltip content="暗色" placement="top">
             <div class="bg-color dark" @click="setBgColor('dark')">
-              <i
-                v-if="bgColor === 'dark'"
-                class="ri-check-line  app-color"
-              ></i>
+              <i v-if="bgColor === 'dark'" class="ri-check-line  app-color"></i>
             </div>
           </el-tooltip>
         </div>
         <el-divider content-position="left">其它设置</el-divider>
         <el-row class="theme-item" :gutter="10">
+          <el-col :span="12">页签</el-col>
+          <el-col :span="12" class="right">
+            <el-switch :value="themeIsTab" @change="toggleThemeItem('isTab')" />
+          </el-col>
+        </el-row>
+        <el-row class="theme-item" :gutter="10">
           <el-col :span="12">页签风格</el-col>
-          <el-col :span="12">
-            <el-select :value="themeTab" @change="setThemeTab">
+          <el-col :span="12" class="right">
+            <el-select :disabled="!themeIsTab" :value="themeTab" @change="setThemeTab">
               <el-option :value="1" label="卡片"></el-option>
               <el-option :value="2" label="圆滑"></el-option>
             </el-select>
@@ -172,6 +175,7 @@ export default {
       themeColor: (state) => state.app.theme.color,
       bgColor: (state) => state.app.theme.bgColor,
       themeVisible: (state) => state.app.themeVisible,
+      themeIsTab: (state) => state.app.theme.isTab,
       themeTab: (state) => state.app.theme.tab,
     }),
   },
@@ -185,6 +189,7 @@ export default {
       "setThemeColor",
       "setThemeTab",
       "setBgColor",
+      "toggleThemeItem",
     ]),
   },
 };
@@ -243,13 +248,14 @@ export default {
       .left {
         width: 10px;
         height: 30px;
-        border-right: 1px solid #eee;
+        border-right-width: 1px;
         display: flex;
         align-items: center;
         .left-module {
           width: 3px;
           height: 30px;
-          border-right: 1px solid #eee;
+          border-right-width: 1px;
+          border-right-style: solid;
         }
         .left-menu {
           width: 7px;
@@ -257,7 +263,8 @@ export default {
         }
       }
       .left-col {
-        border-right: 1px solid #eee;
+        border-right-width: 1px;
+        border-right-style: solid;
       }
       .right {
         width: 30px;
@@ -266,17 +273,18 @@ export default {
         .right-top {
           height: 3px;
           width: 30px;
-          //border-bottom: 1px solid #eee;
           .top-header {
             height: 2px;
-            border-bottom: 1px solid #eee;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
           }
         }
       }
       .top {
         width: 40px;
         height: 5px;
-        border-bottom: 1px solid #eee;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -369,5 +377,9 @@ export default {
 .theme-item {
   display: flex;
   align-items: center;
+  padding: 10px 0;
+  .right{
+     text-align:right;
+  }
 }
 </style>

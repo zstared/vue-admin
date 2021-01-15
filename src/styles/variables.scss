@@ -2,11 +2,12 @@
 //框架默认主题色
 $app-color: #1890ff;
 //页面底色
-$app-body-bg:#f6f8f9;
+$app-page-bg: #f6f8f9;
+$app-page-bg-dark: #000;
 //深色背景色
-$app-bg-color-dark:#171514;
+$app-bg-color-dark: #171514;
 //浅色背景色
-$app-bg-color-light:#fff;
+$app-bg-color-light: #fff;
 //白色
 $app-color-white: #fff;
 //浅白
@@ -15,10 +16,10 @@ $app-color-white-light: #b0b0b0;
 $app-font-color: #606266;
 //边框颜色
 $app-border-color: #dcdfe6;
-$app-border-color-second:#eee;
+$app-border-color-second: #eee;
 //边框颜色 暗色
 $app-border-color-dark: #373737;
-$app-border-color-dark-second:#000;
+$app-border-color-dark-second: #000;
 //阴影
 $app-box-shadow: 0px 2px 5px 4px #efefef;
 //阴影 暗色
@@ -31,36 +32,38 @@ $app-font-size-big: 16px;
 $app-font-size-bigger: 18px;
 $app-font-size-max: 22px;
 
-
 //页头高度
 $app-header-height: 50px;
 //标签栏高度
-$app-tabs-bar-height: 46px;
-//标签页高度
+$app-tab-height: 46px;
+//标签项高度
 $app-tab-item-height: 34px;
 
 //默认paddiing
 $app-padding: 10px;
 
-
-//app-content的高度
-$app-content-height: calc(
-  100vh - #{$app-header-height} - #{$app-tabs-bar-height} - #{$app-padding} - #{$app-padding}
-);
+//logo高度
 $app-logo-height: 68px;
+//侧边栏宽度
 $app-sidebar-width: 268px;
+//侧边栏模块宽度
 $app-sidebar-module-width: 68px;
+//侧边栏模块高度
 $app-sidebar-module-height: 68px;
+//侧边栏菜单宽度 侧边栏宽度-侧边栏模块宽度
 $app-sidebar-menu-width: calc(
   #{$app-sidebar-width} - #{$app-sidebar-module-width}
 );
-$app-main: calc(100% - #{$app-sidebar-width});
-$app-main-min: calc(100% - #{$app-sidebar-menu-width});
 
-//层级
-$app-z-index: 999;
+//内容区
+$app-content-height: calc(
+  100vh - #{$app-header-height} - #{$app-tab-height} - #{$app-padding} - #{$app-padding}
+);
+//内容区 没有页面标签栏
+$app-content-height-notab: calc(
+  100vh - #{$app-header-height} - #{$app-padding} - #{$app-padding}
+);
 
 // 默认动画
 $app-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s,
   background 0s, color 0s;
-

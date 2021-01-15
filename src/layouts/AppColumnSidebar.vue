@@ -1,5 +1,5 @@
 <template>
-  <div class="app-siderbar">
+  <div class="app-siderbar-wrapper">
     <div class="app-siderbar-first">
       <div class="logo-img">
         <img :src="logoPng" />
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-siderbar {
+.app-siderbar-wrapper {
   position: fixed;
   width: $app-sidebar-width;
   display: flex;

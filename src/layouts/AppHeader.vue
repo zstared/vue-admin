@@ -51,8 +51,8 @@
         <div class="app-options">
           <i class="app-option app-color-hover ri-search-line"></i>
           <i class="app-option app-color-hover ri-notification-line"></i>
-          <i class="app-option app-color-hover ri-fullscreen-line"></i>
-          <i class="app-option app-color-hover ri-github-fill"></i>
+          <i class="app-option app-color-hover ri-fullscreen-line" @click="appOption('fullscreen')"></i>
+          <i class="app-option app-color-hover ri-github-fill" @click="appOption('github')"></i>
           <i class="app-option app-color-hover ri-global-line"></i>
           <i
             class="app-option app-color-hover ri-t-shirt-line"
@@ -79,16 +79,17 @@
         </el-dropdown>
       </el-col>
     </el-row>
-    <app-tab v-if="themeLayout != 5" :tabPage="tabPage" />
+    <app-tab v-if="themeLayout != 5 && themeIsTab" :themeTab="themeTab" />
   </div>
 </template>
 
 <script>
-import ImgUserMale from "@/assets/user_male.svg";
-import logoPng from "../assets/logo.png";
+import { mapMutations } from "vuex";
 import AppMenu from "./AppMenu";
 import AppTab from "./AppTab";
-import { mapMutations } from "vuex";
+import ImgUserMale from "@/assets/user_male.svg";
+import logoPng from "../assets/logo.png";
+import { fullScreen } from "../utils/web-api";
 export default {
   name: "AppHeader",
   components: {
@@ -101,7 +102,8 @@ export default {
   props: {
     sideCollapse: Boolean,
     themeLayout: Number,
-    tabPage: Number,
+    themeTab: Number,
+    themeIsTab: Boolean,
   },
   methods: {
     toggleCollapse() {
@@ -110,6 +112,19 @@ export default {
     //指向图标动画
     toggleArrowAnimation(flag) {
       this.arrowAnimation = flag;
+    },
+    //应用操作
+    appOption(type) {
+      switch (type) {
+        case "fullscreen":
+          fullScreen(document.documentElement);
+          break;
+        case "github":
+          window.open('https://github.com/zstared/vue-admin',"_blank")
+          break;
+        default:
+          break;
+      }
     },
     ...mapMutations(["toggleThemeVisible"]),
   },

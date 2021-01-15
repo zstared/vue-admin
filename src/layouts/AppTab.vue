@@ -13,9 +13,9 @@
     <div
       :class="[
         'app-tab',
-        { 'app-tab-card': tabPage === 1 },
+        { 'app-tab-card': themeTab === 1 },
         ,
-        { 'app-tab-mellow': tabPage === 2 },
+        { 'app-tab-mellow': themeTab === 2 },
       ]"
     >
       <el-tabs closable type="card">
@@ -36,7 +36,8 @@ export default {
   props: {
     sideCollapse: Boolean,
     themeLayout: Number,
-    tabPage: Number,
+    themeIsTab: Boolean,
+    themeTab: Number,
   },
   methods: {
     toggleCollapse() {
@@ -66,7 +67,7 @@ export default {
     border-top:none;
   }
   .app-tab {
-    height: $app-tabs-bar-height;
+    height: $app-tab-height;
     display: flex;
     align-items: center;
     &.app-tab-mellow {

@@ -27,9 +27,16 @@
         @toggleCollapse="toggleCollapse"
         :sideCollapse="sideCollapse"
         :themeLayout="themeLayout"
-        :tabPage="tabPage"
+        :themeTab="themeTab"
+        :themeIsTab="themeIsTab"
       />
-      <div :class="['app-content-wrapper', { 'is-collapse': sideCollapse }]">
+      <div
+        :class="[
+          'app-content-wrapper',
+          { 'is-collapse': sideCollapse },
+          { 'is-notab': !themeIsTab },
+        ]"
+      >
         <el-scrollbar style="height:100%" class="app-content">
           <el-switch
             :value="true"
@@ -43,8 +50,17 @@
           <el-button type="text" @click="dialogVisible = true"
             >点击打开 Dialog</el-button
           >
+          <el-select :value="1">
+            <el-option :value="1" label="卡片"></el-option>
+            <el-option :value="2" label="圆滑"></el-option>
+          </el-select>
 
-          <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :modal-append-to-body="false">
+          <el-dialog
+            title="提示"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :modal-append-to-body="false"
+          >
             <span>这是一段信息</span>
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogVisible = false">取 消</el-button>
@@ -66,12 +82,13 @@
       <app-sidebar :themeLayout="themeLayout" :sideCollapse="sideCollapse" />
       <div :class="['app-main', { 'is-collapse': sideCollapse }]">
         <app-tab
+          v-if="themeIsTab"
           @toggleCollapse="toggleCollapse"
           :themeLayout="themeLayout"
           :sideCollapse="sideCollapse"
-          :tabPage="tabPage"
+          :themeTab="themeTab"
         />
-        <div :class="['app-content-wrapper', { 'is-collapse': sideCollapse }]">
+        <div :class="['app-content-wrapper', { 'is-collapse': sideCollapse },{ 'is-notab': !themeIsTab },]">
           <el-scrollbar style="height:100%;" class="app-content">
             <div v-for="i in 20" :key="i" style="height:300px">
               第{{ i }}部分
@@ -117,7 +134,8 @@ export default {
     ...mapState({
       sideCollapse: (state) => state.app.sideCollapse,
       themeLayout: (state) => state.app.theme.layout,
-      tabPage: (state) => state.app.theme.tab,
+      themeIsTab: (state) => state.app.theme.isTab,
+      themeTab: (state) => state.app.theme.tab,
     }),
   },
   methods: {
@@ -171,9 +189,7 @@ export default {
   width: calc(100% - #{$app-sidebar-width});
   margin-left: $app-sidebar-width;
   position: relative;
-  z-index: $app-z-index;
 
-  //transition: $app-transition;
   &.is-collapse {
     width: calc(100% - #{$app-sidebar-module-width});
     margin-left: $app-sidebar-module-width;
@@ -193,12 +209,9 @@ export default {
     padding: $app-padding;
     height: $app-content-height;
     transition: $app-transition;
-
-    /* .app-content {
-      &.is-layout-normmal {
-        margin: 10px;
-      }
-    } */
+    &.is-notab {
+      height: $app-content-height-notab;
+    }
   }
 }
 

@@ -42,7 +42,6 @@ export default {
   top: 0;
   left: 0;
   bottom: 0;
-  /* background: $app-menu-bgcolor; */
   &.is-collapse {
     width: $app-sidebar-module-width;
     .title {
@@ -52,14 +51,12 @@ export default {
   &.is-layout-normal {
     top: $app-header-height;
   }
-  //transition:$app-transition;
   .logo-wrapper {
     padding: 0 6px;
     height: $app-logo-height;
     display: flex;
     align-items: center;
     justify-content: center;
-    //color: $app-menu-color;
     overflow: hidden;
     img {
       width: 34px;
@@ -76,11 +73,13 @@ export default {
   }
   .app-menu-wrapper {
     height: calc(100vh - #{$app-logo-height});
-    /* .el-menu:not(.el-menu--collapse){
-	 width:$app-sidebar-width;
-  } */
     .el-menu--collapse {
       width: $app-sidebar-module-width;
+    }
+  }
+  &.is-layout-normal{
+    .app-menu-wrapper{
+        height: calc(100vh - #{$app-header-height});
     }
   }
 }

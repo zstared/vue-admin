@@ -8,6 +8,7 @@ const app = {
       color: theme && theme.color ? theme.color : "blue", //主题色 blue/red/orange/yellow/cyan/green/purple
       bgColor:theme && theme.bgColor ? theme.bgColor : "default",//default/white/dark/theme
       tab: theme && theme.tab ? theme.tab : 1, //页签 1-卡片;2-圆滑;
+      isTab: theme? theme.isTab :true, //页签 1-启用;0-不启用
     },
     sideCollapse: false, //侧边栏是否折叠状态
     tabs: [], //导航栏页签
@@ -60,6 +61,12 @@ const app = {
     //切换页签
     setThemeTab: (state, tab) => {
       state.theme.tab = tab;
+      saveTheme(state.theme);
+    },
+    //切换主题项配置
+    toggleThemeItem: (state, type) => {
+      console.log(type, state.theme[type])
+      state.theme[type] =state.theme[type]?false:true;
       saveTheme(state.theme);
     },
     //添加页签

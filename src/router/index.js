@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-//import NProgress from "nprogress";
+import NProgress from "nprogress";
+NProgress.configure({ showSpinner: false });
 import "nprogress/nprogress.css";
 import AppLayout from "../layouts/AppLayout";
 
@@ -31,9 +32,9 @@ const router = new VueRouter({
 
 //导航前置守卫
 router.beforeEach(async (to, from, next) => {
-  //NProgress.start();
+  NProgress.start();
   next();
-  //NProgress.done();
+  NProgress.done();
 });
 
 export default router;

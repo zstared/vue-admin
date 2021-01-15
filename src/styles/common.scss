@@ -25,8 +25,12 @@
 //********************修改element ui组件样式**********************
 //****************************************************************
 
-.el-scrollbar__wrap {
-  overflow-x: hidden;
+.app-siderbar-wrapper,
+.app-menu-wrapper,
+.app-content {
+  .el-scrollbar__wrap {
+    overflow-x: hidden;
+  }
 }
 
 .el-drawer__wrapper * {
@@ -173,62 +177,57 @@
 //********************通用样式**********************
 //****************************************************************
 
-html {
-  body {
-    position: relative;
-    box-sizing: border-box;
-    height: 100vh;
-    padding: 0 !important;
-    margin: 0;
-    overflow: hidden;
-    font-family: "Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Heiti SC,WenQuanYi Micro Hei,Arial,sans-serif";
-    font-size: $app-font-size-default;
-    color: $app-font-color;
-    background: $app-body-bg;
-    -webkit-font-smoothing: antialiased;
-  }
+html,
+body {
+  position: relative;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 0 !important;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Heiti SC,WenQuanYi Micro Hei,Arial,sans-serif";
+  font-size: $app-font-size-default;
+  color: $app-font-color;
+  background: $app-page-bg;
+  -webkit-font-smoothing: antialiased;
+}
+[class*="ri-"] {
+  display: inline-block;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: -3.5px;
+}
 
-  #nprogress {
-    position: fixed;
-    z-index: $app-z-index;
+#app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.app-main {
+  background: $app-page-bg;
+}
+//内容区
+.app-content {
+  background: #fff;
+}
 
-    .bar {
-      background: $app-color !important;
-    }
+.app-siderbar-second {
+  background: #fff;
+}
 
-    .peg {
-      box-shadow: 0 0 10px $app-color, 0 0 5px $app-color !important;
-    }
-  }
+//页面标签
+.app-tab-wrapper {
+  background: #fff;
+  border-top: 1px solid $app-border-color-second;
+}
 
-  [class*="ri-"] {
-    display: inline-block;
-    font-size: 16px;
-    text-align: center;
-    vertical-align: -3.5px;
+//
+#nprogress {
+  .bar {
+    @include background_color("app_color");
   }
-
-  #app {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-  .app-main{
-     background:$app-body-bg;
-  }
-  //内容区
-  .app-content {
-    background: #fff;
-  }
-
-  .app-siderbar-second{
-    background: #fff;
-  }
-
-  //页面标签
-  .app-tab-wrapper{
-    background: #fff;
-    border-top: 1px solid #eee;
+  .peg {
+    @include box_shadow("app_color",0,0,10px,0);
   }
 }
 
