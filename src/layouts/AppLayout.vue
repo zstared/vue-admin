@@ -108,6 +108,7 @@ import AppSidebar from "./AppSidebar";
 import AppHeader from "./AppHeader";
 import AppTab from "./AppTab";
 import AppTheme from "./AppTheme";
+import {getCurrentUser} from '@/servers/core/user'
 export default {
   name: "AppLayout",
   components: {
@@ -124,11 +125,13 @@ export default {
       dialogVisible: false,
     };
   },
-  created() {
+  async created() {
     this.media = this.getDeviceWidth();
     window.addEventListener("resize", () => {
       this.media = this.getDeviceWidth();
     });
+    const res=await getCurrentUser();
+    console.log(res);
   },
   computed: {
     ...mapState({

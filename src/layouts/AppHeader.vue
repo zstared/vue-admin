@@ -89,7 +89,7 @@ import AppMenu from "./AppMenu";
 import AppTab from "./AppTab";
 import ImgUserMale from "@/assets/user_male.svg";
 import logoPng from "../assets/logo.png";
-import { fullScreen } from "../utils/web-api";
+import { fullScreen } from "../utils/web";
 export default {
   name: "AppHeader",
   components: {
