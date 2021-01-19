@@ -18,5 +18,3 @@ new Vue({
   router,
   store
 }).$mount("#app");
-
-import './mock/mock'

@@ -7,6 +7,11 @@ const path = require("path");
 
 module.exports = {
   productionSourceMap: false,
+  devServer: {
+     https:false,
+     hotOnly:false,
+     disableHostCheck:true,
+  },
   css: {
     requireModuleExtension: true,
     sourceMap: true,

@@ -38,38 +38,11 @@
         ]"
       >
         <el-scrollbar style="height:100%" class="app-content">
-          <el-switch
-            :value="true"
-            active-text="按月付费"
-            inactive-text="按年付费"
-          >
-          </el-switch>
-          <p class="app-color">
-            横笛闻声不见人 红旗直上天山雪 陈羽 · 从军行
-          </p>
-          <el-button type="text" @click="dialogVisible = true"
-            >点击打开 Dialog</el-button
-          >
-          <el-select :value="1">
-            <el-option :value="1" label="卡片"></el-option>
-            <el-option :value="2" label="圆滑"></el-option>
-          </el-select>
-
-          <el-dialog
-            title="提示"
-            :visible.sync="dialogVisible"
-            width="30%"
-            :modal-append-to-body="false"
-          >
-            <span>这是一段信息</span>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogVisible = false"
-                >确 定</el-button
-              >
-            </span>
-          </el-dialog>
-          <div v-for="i in 20" :key="i" style="height:300px">第{{ i }}部分</div>
+          <transition name="fade" mode="out-in">
+            <keep-alive :include="[]">
+              <router-view></router-view>
+            </keep-alive>
+          </transition>
         </el-scrollbar>
       </div>
     </div>
@@ -88,7 +61,13 @@
           :sideCollapse="sideCollapse"
           :themeTab="themeTab"
         />
-        <div :class="['app-content-wrapper', { 'is-collapse': sideCollapse },{ 'is-notab': !themeIsTab },]">
+        <div
+          :class="[
+            'app-content-wrapper',
+            { 'is-collapse': sideCollapse },
+            { 'is-notab': !themeIsTab },
+          ]"
+        >
           <el-scrollbar style="height:100%;" class="app-content">
             <div v-for="i in 20" :key="i" style="height:300px">
               第{{ i }}部分
@@ -108,7 +87,7 @@ import AppSidebar from "./AppSidebar";
 import AppHeader from "./AppHeader";
 import AppTab from "./AppTab";
 import AppTheme from "./AppTheme";
-import {getCurrentUser} from '@/servers/core/user'
+
 export default {
   name: "AppLayout",
   components: {
@@ -130,8 +109,7 @@ export default {
     window.addEventListener("resize", () => {
       this.media = this.getDeviceWidth();
     });
-    const res=await getCurrentUser();
-    console.log(res);
+    this.$store.dispatch("currentUser");
   },
   computed: {
     ...mapState({
@@ -139,6 +117,7 @@ export default {
       themeLayout: (state) => state.app.theme.layout,
       themeIsTab: (state) => state.app.theme.isTab,
       themeTab: (state) => state.app.theme.tab,
+      menus: (state) => state.app.menus,
     }),
   },
   methods: {

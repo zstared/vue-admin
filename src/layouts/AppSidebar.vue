@@ -11,7 +11,7 @@
       <div class="title">后台管理系统后台管理系统fdfd</div>
     </div>
     <el-scrollbar class="app-menu-wrapper">
-      <app-menu :sideCollapse="sideCollapse" />
+      <app-menu :sideCollapse="sideCollapse"  />
       <div style="height:1500px"></div>
     </el-scrollbar>
   </div>

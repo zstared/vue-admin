@@ -3,7 +3,7 @@ import { Message } from "element-ui";
 
 //创建axios实例
 const instance = axios.create({
-  baseURL: "",
+  baseURL: "http://localhost:9090",
   timeout: 60000,
   headers: {
     "Content-Type": "application/json; charset=utf-8",

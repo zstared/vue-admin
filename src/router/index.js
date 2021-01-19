@@ -10,16 +10,43 @@ export const routes = [
   {
     path: "/",
     component: AppLayout,
-    redirect: "index",
-    children: [
-      {
-        path: "index",
-        name: "index",
-        component: () => import("@/views/home"),
-        meta: {
-          title: "首页",
-        },
-      },
+    redirect: "work",
+    children: [{
+      path: "work",
+      name: "work",
+      component: () => import("@/views/home/work"),
+      meta: { title: "工作台" }
+    },
+    {
+      path: "monitor",
+      name: "monitor",
+      component: () => import("@/views/home/monitor"),
+      meta: { title: "监控页" }
+    },
+    {
+      path: "/system/user",
+      name: "user",
+      component: () => import("@/views/system/user"),
+      meta: { title: "用户管理" }
+    },
+    {
+      path: "/system/role",
+      name: "role",
+      component: () => import("@/views/system/role"),
+      meta: { title: "角色管理" },
+    },
+    {
+      path: "/system/menu",
+      name: "menu",
+      component: () => import("@/views/system/menu"),
+      meta: { title: "菜单管理" },
+    },
+    {
+      path: "/system/resource",
+      name: "resource",
+      component: () => import("@/views/system/resource"),
+      meta: { title: "资源管理" },
+    },
     ],
   },
 ];

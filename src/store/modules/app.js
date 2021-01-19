@@ -1,19 +1,26 @@
- import {theme,saveTheme,changeThemeColor,changeBgColor} from '../../utils/theme'
-
+import {
+  theme,
+  saveTheme,
+  changeThemeColor,
+  changeBgColor,
+} from "../../utils/theme";
+import { getCurrentUser } from "../../servers/core/user";
 const app = {
   state: {
     theme: {
       layout: theme && theme.layout ? theme.layout : 5, //整体布局 1-分栏;2-纵向;3-横向;4-综合;5-常规;
       preLayout: null, //自适应之前的布局
       color: theme && theme.color ? theme.color : "blue", //主题色 blue/red/orange/yellow/cyan/green/purple
-      bgColor:theme && theme.bgColor ? theme.bgColor : "default",//default/white/dark/theme
+      bgColor: theme && theme.bgColor ? theme.bgColor : "default", //default/white/dark/theme
       tab: theme && theme.tab ? theme.tab : 1, //页签 1-卡片;2-圆滑;
-      isTab: theme? theme.isTab :true, //页签 1-启用;0-不启用
+      isTab: theme ? theme.isTab : true, //页签 1-启用;0-不启用
     },
     sideCollapse: false, //侧边栏是否折叠状态
     tabs: [], //导航栏页签
     cachedViews: [], //缓存的页面
     themeVisible: false,
+    user: {}, //用户信息
+    menus: [], //菜单
   },
 
   mutations: {
@@ -48,14 +55,14 @@ const app = {
     setThemeColor: (state, color) => {
       const oldThemeColor = state.theme.color;
       state.theme.color = color;
-      changeThemeColor(color, oldThemeColor,state.theme.bgColor);
+      changeThemeColor(color, oldThemeColor, state.theme.bgColor);
       saveTheme(state.theme);
     },
     //切换背景色
     setBgColor: (state, bgColor) => {
-      const oldBgColor=state.theme.bgColor;
+      const oldBgColor = state.theme.bgColor;
       state.theme.bgColor = bgColor;
-      changeBgColor(bgColor,oldBgColor,state.theme.color);
+      changeBgColor(bgColor, oldBgColor, state.theme.color);
       saveTheme(state.theme);
     },
     //切换页签
@@ -65,8 +72,8 @@ const app = {
     },
     //切换主题项配置
     toggleThemeItem: (state, type) => {
-      console.log(type, state.theme[type])
-      state.theme[type] =state.theme[type]?false:true;
+      console.log(type, state.theme[type]);
+      state.theme[type] = state.theme[type] ? false : true;
       saveTheme(state.theme);
     },
     //添加页签
@@ -97,8 +104,20 @@ const app = {
         }
       }
     },
+    setCurrentUser: (state, user) => {
+      state.user = user;
+      state.menus = user.menus;
+    },
   },
-  actions: {},
+  actions: {
+    //获取当前用户信息
+    async currentUser({ commit }) {
+      const { code, data } = await getCurrentUser();
+      if (code == 0) {
+        commit("setCurrentUser", data);
+      }
+    },
+  },
 };
 
 export default app;

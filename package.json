@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "mock":"node ./src/mock/server"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -22,11 +23,15 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "cors": "^2.8.5",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "fs": "0.0.1-security",
     "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-router": "^10.0.0",
     "koa-static": "^5.0.0",
+    "koa2-cors": "^2.0.6",
     "mockjs": "^1.1.0",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",

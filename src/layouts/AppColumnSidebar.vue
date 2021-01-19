@@ -17,7 +17,7 @@
       :class="['app-siderbar-second', { 'is-collapse': sideCollapse }]"
     >
       <div class="title">后台管理系统后台管理系统fdfd</div>
-      <div class="second-menu"><app-menu  /></div>
+      <div class="second-menu"><app-menu   /></div>
       <div style="height:1500px"></div>
     </el-scrollbar>
   </div>
