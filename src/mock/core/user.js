@@ -29,7 +29,7 @@ user.get("/current", async (ctx) => {
               resource_code: "work",
               resource_type: 2,
               path: "/work",
-              icon: "",
+              icon: "ri-home-4-line",
             },
             {
               "id|10000-20000": 1000,

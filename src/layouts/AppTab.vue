@@ -1,5 +1,11 @@
 <template>
-  <div :class="['app-tab-wrapper', { 'is-layout-normal': themeLayout === 5 },{ 'is-layout-row': themeLayout === 3 }]">
+  <div
+    :class="[
+      'app-tab-wrapper',
+      { 'is-layout-normal': themeLayout === 5 },
+      { 'is-layout-row': themeLayout === 3 },
+    ]"
+  >
     <i
       v-if="themeLayout == 5"
       @click="toggleCollapse"
@@ -7,7 +13,7 @@
         { 'ri-menu-fold-line': !sideCollapse },
         { 'ri-menu-unfold-line': sideCollapse },
         'toggle-menu',
-        'app-color-hover'
+        'app-color-hover',
       ]"
     ></i>
     <div
@@ -18,20 +24,33 @@
         { 'app-tab-mellow': themeTab === 2 },
       ]"
     >
-      <el-tabs closable type="card">
-        <template v-for="i in 30">
-          <el-tab-pane :label="'菜单' + i" :key="i"></el-tab-pane>
-        </template>
+      <el-tabs
+        closable
+        type="card"
+        :value="activePath"
+        @tab-click="openTab"
+        @tab-remove="delTab"
+      >
+        <el-tab-pane
+          v-for="tab in tabs"
+          :label="tab.title"
+          :name="tab.fullPath"
+          :key="tab.fullPath"
+        ></el-tab-pane>
       </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "AppTab",
-  data() {
-    return {};
+  computed: {
+    ...mapState({
+      tabs: (state) => state.app.tabs,
+      activePath: (state) => state.app.activePath,
+    }),
   },
   props: {
     sideCollapse: Boolean,
@@ -42,6 +61,28 @@ export default {
   methods: {
     toggleCollapse() {
       this.$emit("toggleCollapse");
+    },
+    openTab(tab) {
+      this.$router.push(tab.name);
+    },
+    async delTab(name) {
+      const tabs = await this.$store.dispatch("delTab", name);
+      const lastTab = tabs.slice(-1)[0];
+      if (lastTab) {
+        this.$router.push(lastTab.fullPath);
+      } else {
+        this.$router.push("/work");
+      }
+    },
+  },
+  watch: {
+    $route(to) {
+      const tab = {
+        path: to.path,
+        fullPath: to.fullPath,
+        title: to.meta.title,
+      };
+      this.$store.dispatch("addTab", tab);
     },
   },
 };
@@ -58,13 +99,13 @@ export default {
   &.is-layout-normal {
     display: flex;
     align-items: center;
-    border-top:none;
+    border-top: none;
     .app-tab {
       width: calc(100% - 32px);
     }
   }
-  &.is-layout-row{
-    border-top:none;
+  &.is-layout-row {
+    border-top: none;
   }
   .app-tab {
     height: $app-tab-height;

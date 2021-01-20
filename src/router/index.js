@@ -27,7 +27,7 @@ export const routes = [
       path: "/system/user",
       name: "user",
       component: () => import("@/views/system/user"),
-      meta: { title: "用户管理" }
+      meta: { title: "用户管理" ,noCache:true}
     },
     {
       path: "/system/role",
@@ -47,10 +47,20 @@ export const routes = [
       component: () => import("@/views/system/resource"),
       meta: { title: "资源管理" },
     },
+    {
+      path: "/test",
+      name: "test",
+      component: () => import("@/views/test"),
+      meta: { title: "测试" },
+    },
     ],
   },
 ];
 //注册路由
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter);
 const router = new VueRouter({
   mode: "history",

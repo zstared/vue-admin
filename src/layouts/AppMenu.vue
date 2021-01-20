@@ -2,7 +2,7 @@
   <el-menu
     class="app-menu"
     :mode="mode"
-    default-active="2"
+    :default-active="activePath"
     :collapse="sideCollapse"
     :collapse-transition="false"
   >
@@ -28,6 +28,7 @@ export default {
   computed: {
     ...mapState({
       menus: (state) => state.app.menus,
+      activePath:(state)=>state.app.activePath
     }),
   },
 };

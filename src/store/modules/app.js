@@ -17,7 +17,7 @@ const app = {
     },
     sideCollapse: false, //侧边栏是否折叠状态
     tabs: [], //导航栏页签
-    cachedViews: [], //缓存的页面
+    activePath:window.location.href.path,//当前页面路径
     themeVisible: false,
     user: {}, //用户信息
     menus: [], //菜单
@@ -72,44 +72,50 @@ const app = {
     },
     //切换主题项配置
     toggleThemeItem: (state, type) => {
-      console.log(type, state.theme[type]);
       state.theme[type] = state.theme[type] ? false : true;
       saveTheme(state.theme);
     },
     //添加页签
     addTab: (state, tab) => {
+      state.activePath=tab.fullPath;
       if (state.tabs.some((t) => t.path === tab.path)) return;
       state.tabs.push({
-        name: tab.name,
-        path: tab.path,
-        query: tab.query,
-        title: tab.meta.title || "页签",
+         path:tab.path,
+         fullPath:tab.fullPath,
+         title:tab.title
       });
-      if (!tab.meta.noCache) {
-        state.cachedViews.push(tab.name);
-      }
     },
-    delTab: (state, tab) => {
+    //删除页签
+    delTab: (state, fullPath) => {
       for (const [i, v] of state.tabs.entries()) {
-        if (v.path == tab.path) {
+        if (v.fullPath === fullPath) {
+          if(i==0){
+             state.activePath==state.tabs[i].fullPath;
+          }
           state.tabs.splice(i, 1);
           break;
         }
       }
-      for (const i of state.cachedViews) {
-        if (i === tab.name) {
-          const index = state.cachedViews.indexOf(i);
-          state.cachedViews.splice(index, 1);
-          break;
-        }
-      }
     },
+    //设置当前用户
     setCurrentUser: (state, user) => {
       state.user = user;
       state.menus = user.menus;
     },
   },
   actions: {
+    addTab({ commit }, tab) {
+      commit("addTab", tab);
+    },
+    delTab({ state, commit }, fullPath) {
+      return new Promise((resolve) => {
+        commit("delTab", fullPath);
+        resolve([...state.tabs]);
+      });
+    },
+    clearTab({commit }) {
+      commit("CLEAR_TAB");
+    },
     //获取当前用户信息
     async currentUser({ commit }) {
       const { code, data } = await getCurrentUser();

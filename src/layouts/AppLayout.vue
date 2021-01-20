@@ -37,13 +37,7 @@
           { 'is-notab': !themeIsTab },
         ]"
       >
-        <el-scrollbar style="height:100%" class="app-content">
-          <transition name="fade" mode="out-in">
-            <keep-alive :include="[]">
-              <router-view></router-view>
-            </keep-alive>
-          </transition>
-        </el-scrollbar>
+        <app-content class="app-content" />
       </div>
     </div>
     <div v-else>
@@ -68,11 +62,7 @@
             { 'is-notab': !themeIsTab },
           ]"
         >
-          <el-scrollbar style="height:100%;" class="app-content">
-            <div v-for="i in 20" :key="i" style="height:300px">
-              第{{ i }}部分
-            </div>
-          </el-scrollbar>
+          <app-content class="app-content" />
         </div>
       </div>
     </div>
@@ -86,6 +76,7 @@ import AppColumnSidebar from "./AppColumnSidebar";
 import AppSidebar from "./AppSidebar";
 import AppHeader from "./AppHeader";
 import AppTab from "./AppTab";
+import AppContent from "./AppContent";
 import AppTheme from "./AppTheme";
 
 export default {
@@ -95,6 +86,7 @@ export default {
     AppSidebar, //侧边栏
     AppHeader,
     AppTab,
+    AppContent,
     AppTheme,
   },
   data() {
@@ -109,6 +101,11 @@ export default {
     window.addEventListener("resize", () => {
       this.media = this.getDeviceWidth();
     });
+    this.$store.dispatch("addTab", {
+      path: this.$route.path,
+      fullPath: this.$route.fullPath,
+      title: this.$route.meta.title,
+    });
     this.$store.dispatch("currentUser");
   },
   computed: {
@@ -117,7 +114,6 @@ export default {
       themeLayout: (state) => state.app.theme.layout,
       themeIsTab: (state) => state.app.theme.isTab,
       themeTab: (state) => state.app.theme.tab,
-      menus: (state) => state.app.menus,
     }),
   },
   methods: {
