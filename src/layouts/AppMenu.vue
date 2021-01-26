@@ -6,7 +6,9 @@
     :collapse="sideCollapse"
     :collapse-transition="false"
   >
-    <app-menu-item :menus="menus"></app-menu-item>
+    <app-menu-item
+      :menus="type === 'menu' ? menus : moduleMenus"
+    ></app-menu-item>
   </el-menu>
 </template>
 
@@ -24,12 +26,20 @@ export default {
       type: String,
       default: "vertical",
     },
+    type: {
+      type: String,
+      default: "menu", //menu  module
+    },
   },
   computed: {
     ...mapState({
       menus: (state) => state.app.menus,
-      activePath:(state)=>state.app.activePath
+      moduleMenus: (state) => state.app.moduleMenus,
+      activePath: (state) => state.app.activePath,
     }),
+  },
+  created() {
+    console.log(this.mode);
   },
 };
 </script>

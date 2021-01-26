@@ -25,7 +25,6 @@
       ]"
     >
       <el-tabs
-        closable
         type="card"
         :value="activePath"
         @tab-click="openTab"
@@ -36,6 +35,7 @@
           :label="tab.title"
           :name="tab.fullPath"
           :key="tab.fullPath"
+          :closable="tab.fullPath!=='/work'"
         ></el-tab-pane>
       </el-tabs>
     </div>
@@ -68,10 +68,12 @@ export default {
     async delTab(name) {
       const tabs = await this.$store.dispatch("delTab", name);
       const lastTab = tabs.slice(-1)[0];
-      if (lastTab) {
-        this.$router.push(lastTab.fullPath);
-      } else {
-        this.$router.push("/work");
+      if (name === this.$route.fullPath) {
+        if (lastTab) {
+          this.$router.push(lastTab.fullPath);
+        } else {
+          this.$router.push("/work");
+        }
       }
     },
   },

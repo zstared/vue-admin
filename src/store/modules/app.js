@@ -3,6 +3,7 @@ import {
   saveTheme,
   changeThemeColor,
   changeBgColor,
+  getActiveModule
 } from "../../utils/theme";
 import { getCurrentUser } from "../../servers/core/user";
 const app = {
@@ -16,11 +17,14 @@ const app = {
       isTab: theme ? theme.isTab : true, //页签 1-启用;0-不启用
     },
     sideCollapse: false, //侧边栏是否折叠状态
-    tabs: [], //导航栏页签
-    activePath:window.location.href.path,//当前页面路径
+    tabs: [{ path: '/work', fullPath: '/work', title: "工作台" }], //导航栏页签
+    activePath: window.location.href.path,//当前页面路径
     themeVisible: false,
     user: {}, //用户信息
     menus: [], //菜单
+    modules: [],//模块
+    moduleMenus: [],//模块下菜单
+    activeModule: '',
   },
 
   mutations: {
@@ -77,20 +81,20 @@ const app = {
     },
     //添加页签
     addTab: (state, tab) => {
-      state.activePath=tab.fullPath;
+      state.activePath = tab.fullPath;
+      console.log(getActiveModule(state.menus,tab.path))
+      state.activeModule=getActiveModule(state.menus,tab.path)
+      console.log(state.activeModule)
       if (state.tabs.some((t) => t.path === tab.path)) return;
-      state.tabs.push({
-         path:tab.path,
-         fullPath:tab.fullPath,
-         title:tab.title
-      });
+      state.tabs.push(tab)
+   
     },
     //删除页签
     delTab: (state, fullPath) => {
       for (const [i, v] of state.tabs.entries()) {
         if (v.fullPath === fullPath) {
-          if(i==0){
-             state.activePath==state.tabs[i].fullPath;
+          if (i == 0) {
+            state.activePath == state.tabs[i].fullPath;
           }
           state.tabs.splice(i, 1);
           break;
@@ -102,19 +106,34 @@ const app = {
       state.user = user;
       state.menus = user.menus;
     },
+    //设置模块菜单
+    setModuleMenus: (state, menus) => {
+      state.moduleMenus = menus;
+    },
+    //设置当前模块
+    setActiveModule: (state, module) => {
+      state.activeModule = module
+    }
   },
   actions: {
+    //添加页面标签
     addTab({ commit }, tab) {
       commit("addTab", tab);
     },
+    //删除页面标签
     delTab({ state, commit }, fullPath) {
       return new Promise((resolve) => {
         commit("delTab", fullPath);
         resolve([...state.tabs]);
       });
     },
-    clearTab({commit }) {
+    //清除页面标签
+    clearTab({ commit }) {
       commit("CLEAR_TAB");
+    },
+    //模块菜单
+    setModuleMenus({ commit }, menus) {
+      commit("setModuleMenus", menus);
     },
     //获取当前用户信息
     async currentUser({ commit }) {

@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <fragment>
     <template v-for="menu of menus">
       <el-submenu
         v-if="menu.children && menu.children.length > 0"
         :key="menu.id"
-        :index="menu.resource_code"
+        :index="menu.code"
       >
         <template slot="title">
           <i v-if="menu.icon" :class="menu.icon"></i>
@@ -31,18 +31,14 @@
         </el-menu-item>
       </router-link>
     </template>
-  </div>
+  </fragment>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 export default {
   name: "AppMenuItem",
   props: {
     menus: Array,
   },
-  methods:{
-	  ...mapActions([''])
-  }
 };
 </script>

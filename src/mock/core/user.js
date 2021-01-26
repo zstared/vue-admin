@@ -19,14 +19,14 @@ user.get("/current", async (ctx) => {
         {
           "id|10000-20000": 1000,
           name: "首页",
-          resource_code: "home",
+          code: "home",
           resource_type: 1,
           icon: "ri-home-4-line",
           children: [
             {
               "id|10000-20000": 1000,
               name: "工作台",
-              resource_code: "work",
+              code: "work",
               resource_type: 2,
               path: "/work",
               icon: "ri-home-4-line",
@@ -34,7 +34,7 @@ user.get("/current", async (ctx) => {
             {
               "id|10000-20000": 1000,
               name: "监控页",
-              resource_code: "monitor",
+              code: "monitor",
               resource_type: 2,
               path: "/monitor",
               icon: "ri-computer-line",
@@ -44,7 +44,7 @@ user.get("/current", async (ctx) => {
         {
           "id|10000-20000": 1000,
           name: "系统管理",
-          resource_code: "system",
+          code: "system",
           resource_type: 1,
           path: "",
           icon: "ri-settings-4-line",
@@ -52,7 +52,7 @@ user.get("/current", async (ctx) => {
             {
               "id|10000-20000": 1000,
               name: "用户管理",
-              resource_code: "user",
+              code: "user",
               resource_type: 2,
               path: "/system/user",
               icon: "ri-user-line",
@@ -60,7 +60,7 @@ user.get("/current", async (ctx) => {
             {
               "id|10000-20000": 1000,
               name: "角色管理",
-              resource_code: "role",
+              code: "role",
               resource_type: 2,
               path: "/system/role",
               icon: "ri-shield-user-line",
@@ -68,7 +68,7 @@ user.get("/current", async (ctx) => {
             {
               "id|10000-20000": 1000,
               name: "菜单管理",
-              resource_code: "menu",
+              code: "menu",
               resource_type: 2,
               path: "/system/menu",
               icon: "ri-menu-line",
@@ -76,7 +76,7 @@ user.get("/current", async (ctx) => {
             {
               "id|10000-20000": 1000,
               name: "资源管理",
-              resource_code: "resource",
+              code: "resource",
               resource_type: 2,
               path: "/system/resource",
               icon: "ri-menu-2-line",
@@ -90,7 +90,7 @@ user.get("/current", async (ctx) => {
 
 module.exports = user;
 
-// 'id', ['resource_name', 'name'], 'parent_id', 'path', 'sort_no', 'icon', 'resource_code','resource_type'],
+// 'id', ['resource_name', 'name'], 'parent_id', 'path', 'sort_no', 'icon', 'code','resource_type'],
 // user.post('/updatePassword',userController.updatePassword);
 // user.post('/create',userController.create);
 // user.post('/update',userController.update);

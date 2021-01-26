@@ -5,19 +5,25 @@
         <img :src="logoPng" />
       </div>
       <el-scrollbar class="menu-module">
-        <template v-for="i in 20">
-          <div :key="i" class="menu-module-item" @click="menuModuleClick(i)" :class="{'active':moduleActive===i}">
-            <i class="el-icon-user-solid module-icon"></i>
-            <span class="module-title">模块{{ i }}</span>
-          </div>
-        </template>
+        <div
+          v-for="menu of menus"
+          :key="menu.id"
+          class="menu-module-item"
+          @click="menuModuleClick(menu)"
+          :class="{ active: activeModule === menu.code }"
+        >
+          <i class="el-icon-user-solid module-icon"></i>
+          <span class="module-title">{{ menu.name }}</span>
+        </div>
       </el-scrollbar>
     </div>
     <el-scrollbar
       :class="['app-siderbar-second', { 'is-collapse': sideCollapse }]"
     >
-      <div class="title">后台管理系统后台管理系统fdfd</div>
-      <div class="second-menu"><app-menu   /></div>
+      <div class="title">后台管理系统</div>
+      <div class="second-menu">
+        <app-menu type="module"></app-menu>
+      </div>
       <div style="height:1500px"></div>
     </el-scrollbar>
   </div>
@@ -26,28 +32,33 @@
 <script>
 import { mapState } from "vuex";
 import logoPng from "../assets/logo.png";
-import AppMenu from './AppMenu'
+import AppMenu from "./AppMenu";
 export default {
   name: "AppColumnSidebar",
-  components:{
+  components: {
     AppMenu,
   },
   data() {
     return {
       logoPng,
-      moduleActive:1,
     };
   },
   computed: {
     ...mapState({
       sideCollapse: (state) => state.app.sideCollapse,
+      menus: (state) => state.app.menus,
+      activeModule: (state) => state.app.activeModule,
     }),
   },
-  methods:{
-     menuModuleClick(m){
-        this.moduleActive=m;
-     }
-  }
+  methods: {
+    menuModuleClick(menu) {
+      this.$store.commit("setActiveModule", menu.code);
+      if (menu.children && menu.children.length > 0) {
+        this.$store.dispatch("setModuleMenus", menu.children);
+        this.$router.push(menu.children[0].path);
+      }
+    },
+  },
 };
 </script>
 
@@ -106,7 +117,8 @@ export default {
       white-space: nowrap;
       height: $app-logo-height;
       line-height: $app-logo-height;
-      padding:0 10px;
+      padding: 0 10px;
+      text-align: center;
     }
     &.is-collapse {
       width: 0;
