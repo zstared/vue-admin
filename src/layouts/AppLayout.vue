@@ -4,6 +4,7 @@
     <app-sidebar
       v-else-if="themeLayout === 2 || themeLayout == 4"
       :sideCollapse="sideCollapse"
+      :themeLayout="themeLayout"
     />
     <el-drawer
       append-to-body
@@ -101,12 +102,12 @@ export default {
     window.addEventListener("resize", () => {
       this.media = this.getDeviceWidth();
     });
+    await this.$store.dispatch("currentUser");
     this.$store.dispatch("addTab", {
       path: this.$route.path,
       fullPath: this.$route.fullPath,
       title: this.$route.meta.title,
     });
-    this.$store.dispatch("currentUser");
   },
   computed: {
     ...mapState({

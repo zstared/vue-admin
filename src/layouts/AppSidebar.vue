@@ -8,16 +8,20 @@
   >
     <div v-if="themeLayout != 5" class="logo-wrapper">
       <img :src="logoPng" />
-      <div class="title">后台管理系统后台管理系统fdfd</div>
+      <div class="title">{{title}}</div>
     </div>
     <el-scrollbar class="app-menu-wrapper">
-      <app-menu :sideCollapse="sideCollapse"  />
+      <app-menu
+        :sideCollapse="sideCollapse"
+        :type="themeLayout === 4 ? 'module' : 'menu'"
+      />
       <div style="height:1500px"></div>
     </el-scrollbar>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import AppMenu from "./AppMenu";
 import logoPng from "../assets/logo.png";
 export default {
@@ -32,6 +36,11 @@ export default {
     sideCollapse: Boolean,
     themeLayout: Number,
   },
+  computed:{
+     ...mapState({
+        title:state=>state.app.title
+     })
+  }
 };
 </script>
 
@@ -56,7 +65,7 @@ export default {
     height: $app-logo-height;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     img {
       width: 34px;
@@ -77,9 +86,9 @@ export default {
       width: $app-sidebar-module-width;
     }
   }
-  &.is-layout-normal{
-    .app-menu-wrapper{
-        height: calc(100vh - #{$app-header-height});
+  &.is-layout-normal {
+    .app-menu-wrapper {
+      height: calc(100vh - #{$app-header-height});
     }
   }
 }

@@ -39,7 +39,7 @@ export default {
     }),
   },
   created() {
-    console.log(this.mode);
+    console.log(this.mode,this.type);
   },
 };
 </script>

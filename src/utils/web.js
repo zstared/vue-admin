@@ -20,7 +20,7 @@ export const fullScreen = (element) => {
  * 退出全屏
  * @param {*} element
  */
-export const exitFullscreen = () => {
+export const exitFullScreen = () => {
   if (document.exitFullscreen) {
     document.exitFullscreen();
   } else if (document.mozExitFullScreen) {
@@ -29,3 +29,14 @@ export const exitFullscreen = () => {
     document.webkitExitFullscreen();
   }
 };
+
+/**
+ * 检查当前是否全屏
+ * @param {*} element
+ */
+export const checkFullScreen = () => {
+  let isFull = document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
+  if (isFull === undefined) isFull = false;
+  console.log(isFull)
+  return isFull;
+}

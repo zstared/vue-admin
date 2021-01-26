@@ -16,8 +16,8 @@
   .layout {
     .left-col,
     .left-module,
-	.left,
-	.top,
+    .left,
+    .top,
     .top-header {
       border-color: $app-border-color-second;
     }
@@ -95,7 +95,8 @@
   //头部背景
   .app-header {
     background: $app-bg-color-light;
-    &.is-layout-row {
+    &.is-layout-row,
+    &.is-layout-normal {
       background: $app-bg-color-dark;
       color: $app-color-white;
       .el-dropdown {
@@ -112,7 +113,7 @@
   //菜单
   .el-menu,
   .el-menu--popup {
-	background-color: $app-bg-color-dark;
+    background-color: $app-bg-color-dark;
     .el-submenu,
     .el-submenu__title,
     .el-menu-item-group__title,
@@ -175,12 +176,16 @@
   //头部
   .app-header {
     background: $app-bg-color-light;
-    &.is-layout-row {
+    &.is-layout-row,
+    &.is-layout-normal {
       background: $app-bg-color-light;
       color: $app-font-color;
       .el-dropdown {
         color: $app-font-color;
       }
+    }
+    &.is-layout-normal {
+      border-bottom: 1px solid $app-border-color-second;
     }
   }
   //标题
@@ -220,7 +225,8 @@
   //头部背景
   .app-header {
     background: $app-bg-color-light;
-    &.is-layout-row {
+    &.is-layout-row,
+    &.is-layout-normal {
       @include background_color_dark("app_color");
       color: $app-color-white;
       .el-dropdown {
@@ -237,7 +243,7 @@
   //菜单
   .el-menu,
   .el-menu--popup {
-	@include background_color_dark("app_color");
+    @include background_color_dark("app_color");
     .el-submenu,
     .el-submenu__title,
     .el-menu-item-group__title,
@@ -304,12 +310,15 @@
   .app-header {
     background: $app-bg-color-dark;
     color: $app-color-white;
+    &.is-layout-normal {
+      border-bottom: 1px solid $app-border-color-dark-second;
+    }
   }
   .app-siderbar-second {
     background: $app-bg-color-dark;
   }
   .app-main {
-    background:$app-page-bg-dark;
+    background: $app-page-bg-dark;
   }
   //内容区
   .app-content {
@@ -324,11 +333,11 @@
     .app-tab {
       background: $app-bg-color-dark;
       .el-tabs__item {
-		border: 1px solid $app-border-color-dark;
-		&.is-active {
-			@include background_color_dark("app_color");
-			color:$app-color-white !important;
-		  }
+        border: 1px solid $app-border-color-dark;
+        &.is-active {
+          @include background_color_dark("app_color");
+          color: $app-color-white !important;
+        }
       }
     }
   }
@@ -379,15 +388,15 @@
     .bg-color {
       box-shadow: $app-box-shadow-dark;
       border-color: #000 !important;
-	}
-	.layout {
-		.left-col,
-		.left-module,
-		.left,
-		.top-header,
-		.top{
-		  border-color: $app-border-color-dark-second !important;
-		}
-	  }
+    }
+    .layout {
+      .left-col,
+      .left-module,
+      .left,
+      .top-header,
+      .top {
+        border-color: $app-border-color-dark-second !important;
+      }
+    }
   }
 }

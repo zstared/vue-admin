@@ -20,7 +20,7 @@
     <el-scrollbar
       :class="['app-siderbar-second', { 'is-collapse': sideCollapse }]"
     >
-      <div class="title">后台管理系统</div>
+      <div class="title">{{title}}</div>
       <div class="second-menu">
         <app-menu type="module"></app-menu>
       </div>
@@ -45,6 +45,7 @@ export default {
   },
   computed: {
     ...mapState({
+      title:state=>state.app.title,
       sideCollapse: (state) => state.app.sideCollapse,
       menus: (state) => state.app.menus,
       activeModule: (state) => state.app.activeModule,

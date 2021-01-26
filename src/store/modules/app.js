@@ -8,6 +8,7 @@ import {
 import { getCurrentUser } from "../../servers/core/user";
 const app = {
   state: {
+    title:"管理系统",
     theme: {
       layout: theme && theme.layout ? theme.layout : 5, //整体布局 1-分栏;2-纵向;3-横向;4-综合;5-常规;
       preLayout: null, //自适应之前的布局
@@ -82,9 +83,12 @@ const app = {
     //添加页签
     addTab: (state, tab) => {
       state.activePath = tab.fullPath;
-      console.log(getActiveModule(state.menus,tab.path))
-      state.activeModule=getActiveModule(state.menus,tab.path)
-      console.log(state.activeModule)
+      console.log(state.menus,tab.path)
+      const module=getActiveModule(state.menus,tab.path);
+      if(module){
+        state.activeModule=module.code;
+        state.moduleMenus=module.children;
+      }
       if (state.tabs.some((t) => t.path === tab.path)) return;
       state.tabs.push(tab)
    

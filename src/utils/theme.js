@@ -58,15 +58,6 @@ const matchMenu = (menus, menuPath) => {
 }
 //获取当前菜单模块
 export const getActiveModule = (menus, menuPath) => {
-  // const _activeModule=''
-  // menus.forEach((menu) => {
-  //   if (menu && menu.children) {
-  //     if (matchMenu(menu.children, menuPath)) {
-  //       _activeModule=menu.code;
-  //       return menu.code
-  //     }
-  //   }
-  // })
   const module = menus.find(menu => {
     if (menu && menu.children) {
       return matchMenu(menu.children, menuPath)
@@ -74,5 +65,5 @@ export const getActiveModule = (menus, menuPath) => {
       return false
     }
   });
-  return module && module.code ? module.code : ''
+  return module;
 }

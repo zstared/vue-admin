@@ -3,7 +3,8 @@
     <el-row
       :class="[
         'app-header',
-        { 'is-layout-row': themeLayout === 3 || themeLayout == 5 },
+        { 'is-layout-row': themeLayout === 3 },
+        { 'is-layout-normal': themeLayout === 5 },
       ]"
     >
       <el-col
@@ -27,16 +28,22 @@
             <el-breadcrumb-item>活动管理</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        <el-tabs v-if="themeLayout == 4">
-          <el-tab-pane label="模块一" name="first"></el-tab-pane>
-          <el-tab-pane label="模块二" name="second"></el-tab-pane>
-          <el-tab-pane label="模块三" name="third"></el-tab-pane>
-          <el-tab-pane label="模块四" name="fourth"></el-tab-pane>
+        <el-tabs
+          v-if="themeLayout == 4"
+          :value="activeModule"
+          @tab-click="menuModuleClick"
+        >
+          <el-tab-pane
+            v-for="menu of menus"
+            :key="menu.id"
+            :name="menu.code"
+            :label="menu.name"
+          />
         </el-tabs>
       </el-col>
       <el-col v-else :span="6" :xs="4" class="header-left">
         <img :src="logoPng" />
-        <div class="title hidden-xs-only">后台管理系统</div>
+        <div class="title hidden-xs-only">{{ title }}</div>
       </el-col>
       <el-col
         :span="themeLayout !== 3 && themeLayout !== 5 ? 12 : 18"
@@ -51,8 +58,18 @@
         <div class="app-options">
           <i class="app-option app-color-hover ri-search-line"></i>
           <i class="app-option app-color-hover ri-notification-line"></i>
-          <i class="app-option app-color-hover ri-fullscreen-line" @click="appOption('fullscreen')"></i>
-          <i class="app-option app-color-hover ri-github-fill" @click="appOption('github')"></i>
+          <i
+            :class="[
+              'app-option app-color-hover',
+              { 'ri-fullscreen-line': !isFullScreen },
+              { 'ri-fullscreen-exit-line': isFullScreen },
+            ]"
+            @click="appOption('fullscreen')"
+          ></i>
+          <i
+            class="app-option app-color-hover ri-github-fill"
+            @click="appOption('github')"
+          ></i>
           <i class="app-option app-color-hover ri-global-line"></i>
           <i
             class="app-option app-color-hover ri-t-shirt-line"
@@ -84,12 +101,12 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import AppMenu from "./AppMenu";
 import AppTab from "./AppTab";
 import ImgUserMale from "@/assets/user_male.svg";
 import logoPng from "../assets/logo.png";
-import { fullScreen } from "../utils/web";
+
 export default {
   name: "AppHeader",
   components: {
@@ -97,7 +114,7 @@ export default {
     AppTab,
   },
   data() {
-    return { ImgUserMale, arrowAnimation: false, logoPng };
+    return { ImgUserMale, arrowAnimation: false, logoPng, isFullScreen: false };
   },
   props: {
     sideCollapse: Boolean,
@@ -105,9 +122,33 @@ export default {
     themeTab: Number,
     themeIsTab: Boolean,
   },
+  computed: {
+    ...mapState({
+      title: (state) => state.app.title,
+      menus: (state) => state.app.menus,
+      activeModule: (state) => state.app.activeModule,
+    }),
+  },
+  created() {
+    document.addEventListener(
+      "fullscreenchange",
+      () => {
+        this.isFullScreen = !this.isFullScreen;
+      },
+      false
+    );
+  },
   methods: {
     toggleCollapse() {
       this.$emit("toggleCollapse");
+    },
+    menuModuleClick(menu) {
+      this.$store.commit("setActiveModule", menu.name);
+      const mod = this.menus.find((item) => item.code === menu.name);
+      if (mod.children && mod.children.length > 0) {
+        this.$store.dispatch("setModuleMenus", mod.children);
+        this.$router.push(mod.children[0].path);
+      }
     },
     //指向图标动画
     toggleArrowAnimation(flag) {
@@ -117,13 +158,23 @@ export default {
     appOption(type) {
       switch (type) {
         case "fullscreen":
-          fullScreen(document.documentElement);
+          this.toggleFullScreen();
+
           break;
         case "github":
-          window.open('https://github.com/zstared/vue-admin',"_blank")
+          window.open("https://github.com/zstared/vue-admin", "_blank");
           break;
         default:
           break;
+      }
+    },
+    toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
       }
     },
     ...mapMutations(["toggleThemeVisible"]),
@@ -134,19 +185,23 @@ export default {
 <style lang="scss" scoped>
 .app-header-wrapper {
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
   .app-header {
     height: $app-header-height;
     width: 100%;
     padding: 0 $app-padding;
+
     .header-left {
       display: flex;
       align-items: center;
       height: $app-header-height;
+
       .toggle-menu {
         cursor: pointer;
         font-size: 16px;
         margin-right: 16px;
       }
+
       .nav-wrapper {
         height: $app-header-height;
         display: flex;
@@ -158,6 +213,7 @@ export default {
         height: 34px;
         margin-right: 6px;
       }
+
       .title {
         font-size: $app-font-size-bigger;
         //max-width: calc(#{$app-sidebar-width} - 46px);
@@ -166,13 +222,16 @@ export default {
         white-space: nowrap;
       }
     }
+
     .header-right {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       height: $app-header-height;
+
       .app-options {
         margin-right: 15px;
+
         .app-option {
           margin-left: 15px;
           font-size: 18px;
@@ -184,12 +243,15 @@ export default {
         display: flex;
         align-items: center;
         cursor: pointer;
+
         .el-avatar {
           margin-right: 5px;
         }
+
         i {
           transition: $app-transition;
         }
+
         .app-dropdown-active {
           transform: rotate(180deg);
         }
