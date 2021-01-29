@@ -4,6 +4,7 @@ import ElementUI from "element-ui";
 // import "element-ui/lib/theme-chalk/index.css";
 import 'remixicon/fonts/remixicon.css'
 import "@/styles/common.scss";
+import i18n from './locales'
 
 Vue.use(ElementUI,{size:'small'});
 
@@ -16,7 +17,9 @@ Vue.use(Fragment.Plugin)
 
 Vue.config.productionTip = false;
 new Vue({
+  i18n,
   render: (h) => h(App),
   router,
-  store
+  store,
+
 }).$mount("#app");

@@ -67,3 +67,26 @@ export const getActiveModule = (menus, menuPath) => {
   });
   return module;
 }
+
+
+const matchBreadMenu = (menus, menuPath) => {
+  if (menus.children) {
+    let menu = menus.children.find(menu => {
+      return matchBreadMenu(menu, menuPath)
+    })
+    if (menu) return [{ code: menus.code, path: menus.path }].concat(menu);
+  } else {
+    if (menus.path == menuPath) {
+      return [menus]
+    }
+  }
+}
+
+//获取面包屑
+export const getBreadcrumbs = (menus, menuPath) => {
+  for (let i = 0; i < menus.length; i++) {
+    const breadcrumbs = matchBreadMenu(menus[i], menuPath);
+    if (breadcrumbs) return breadcrumbs
+  }
+  return []
+}

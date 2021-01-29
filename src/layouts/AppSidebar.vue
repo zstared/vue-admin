@@ -8,7 +8,7 @@
   >
     <div v-if="themeLayout != 5" class="logo-wrapper">
       <img :src="logoPng" />
-      <div class="title">{{title}}</div>
+      <div class="title">{{$t("title")}}</div>
     </div>
     <el-scrollbar class="app-menu-wrapper">
       <app-menu
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
 import AppMenu from "./AppMenu";
 import logoPng from "../assets/logo.png";
 export default {
@@ -36,11 +35,6 @@ export default {
     sideCollapse: Boolean,
     themeLayout: Number,
   },
-  computed:{
-     ...mapState({
-        title:state=>state.app.title
-     })
-  }
 };
 </script>
 
@@ -55,6 +49,9 @@ export default {
     width: $app-sidebar-module-width;
     .title {
       display: none;
+    }
+    .logo-wrapper{
+       justify-content: center;
     }
   }
   &.is-layout-normal {

@@ -24,8 +24,9 @@
         ></i>
         <div v-if="themeLayout !== 4" class="nav-wrapper">
           <el-breadcrumb separator=">" class="hidden-xs-only">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+            <el-breadcrumb-item v-for="bread of breadcrumbs" :key="bread.code">
+                 {{$t('menu.'+bread.code)}}
+            </el-breadcrumb-item>
           </el-breadcrumb>
         </div>
         <el-tabs
@@ -37,13 +38,13 @@
             v-for="menu of menus"
             :key="menu.id"
             :name="menu.code"
-            :label="menu.name"
+            :label="$t('menu.'+menu.code)"
           />
         </el-tabs>
       </el-col>
       <el-col v-else :span="6" :xs="4" class="header-left">
         <img :src="logoPng" />
-        <div class="title hidden-xs-only">{{ title }}</div>
+        <div class="title hidden-xs-only">{{$t('title')}}</div>
       </el-col>
       <el-col
         :span="themeLayout !== 3 && themeLayout !== 5 ? 12 : 18"
@@ -70,7 +71,14 @@
             class="app-option app-color-hover ri-github-fill"
             @click="appOption('github')"
           ></i>
-          <i class="app-option app-color-hover ri-global-line"></i>
+
+          <el-dropdown  @command="toggleLang">
+            <i class="app-option app-color-hover ri-global-line"></i>
+            <el-dropdown-menu slot="dropdown" >
+              <el-dropdown-item command="zh">中文简体</el-dropdown-item>
+              <el-dropdown-item command="en">English</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
           <i
             class="app-option app-color-hover ri-t-shirt-line"
             @click="toggleThemeVisible"
@@ -79,7 +87,7 @@
         <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
             <el-avatar :size="28" :src="ImgUserMale"></el-avatar>
-            <span class="hidden-xs-only">系统管理员</span>
+            <span class="hidden-xs-only">{{user.user_name}}</span>
             <i
               :class="{
                 'ri-arrow-down-s-line': true,
@@ -88,9 +96,9 @@
             ></i>
           </div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="ri-user-line">个人信息</el-dropdown-item>
+            <el-dropdown-item icon="ri-user-line">{{$t('user.info')}}</el-dropdown-item>
             <el-dropdown-item icon="ri-logout-circle-r-line"
-              >退出登录</el-dropdown-item
+              >{{$t('user.logout')}}</el-dropdown-item
             >
           </el-dropdown-menu>
         </el-dropdown>
@@ -124,21 +132,22 @@ export default {
   },
   computed: {
     ...mapState({
-      title: (state) => state.app.title,
       menus: (state) => state.app.menus,
       activeModule: (state) => state.app.activeModule,
+      breadcrumbs:state=>state.app.breadcrumbs,
+      user:state=>state.app.user
     }),
   },
   created() {
-    document.addEventListener(
-      "fullscreenchange",
-      () => {
-        this.isFullScreen = !this.isFullScreen;
-      },
-      false
-    );
+    document.addEventListener("fullscreenchange", () => {
+      this.isFullScreen = !this.isFullScreen;
+    });
   },
   methods: {
+    toggleLang(lang){
+        localStorage.setItem('lang',lang)
+        this.$i18n.locale=lang
+    },
     toggleCollapse() {
       this.$emit("toggleCollapse");
     },

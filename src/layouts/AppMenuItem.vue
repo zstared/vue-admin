@@ -8,7 +8,7 @@
       >
         <template slot="title">
           <i v-if="menu.icon" :class="menu.icon"></i>
-          <span slot="title">{{ menu.name }}</span>
+          <span slot="title">{{ $t(`menu.${menu.code}`) }}</span>
         </template>
         <template v-for="child of menu.children" style="overflow-y:auto">
           <app-menu-item
@@ -19,7 +19,7 @@
           <router-link v-else :to="child.path" :key="child.id">
             <el-menu-item :index="child.path">
               <i v-if="child.icon" :class="child.icon"></i>
-              <span slot="title">{{ child.name }}</span>
+              <span slot="title">{{ $t(`menu.${child.code}`) }}</span>
             </el-menu-item>
           </router-link>
         </template>
@@ -27,7 +27,7 @@
       <router-link v-else :to="menu.path" :key="menu.id">
         <el-menu-item :index="menu.path">
           <i v-if="menu.icon" :class="menu.icon"></i>
-          <span slot="title">{{ menu.name }}</span>
+         <span slot="title">{{ $t(`menu.${menu.code}`) }}</span>
         </el-menu-item>
       </router-link>
     </template>

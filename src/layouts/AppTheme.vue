@@ -8,10 +8,10 @@
       size="300"
     >
       <div slot="title">
-        <i class="ri-settings-3-line" style="margin-right:6px"></i>主题配置
+        <i class="ri-settings-3-line" style="margin-right:6px"></i>{{$t('theme.title')}}
       </div>
       <div class="theme-wrapper">
-        <el-divider content-position="left">整体布局</el-divider>
+        <el-divider content-position="left">{{$t('theme.layout')}}</el-divider>
         <div class="theme-layout-wrapper">
           <div
             :class="['layout layout-1', { active: themeLayout == 1 }]"
@@ -78,12 +78,12 @@
             </div>
           </div>
         </div>
-        <el-divider content-position="left">主题色</el-divider>
+        <el-divider content-position="left">{{$t('theme.color.title')}}</el-divider>
         <div class="theme-color-wrapper">
           <el-tooltip
             v-for="color of colors"
             :key="color.name"
-            :content="color.label"
+            :content="$t('theme.color.'+color.name)"
             placement="top"
           >
             <div
@@ -95,9 +95,9 @@
             </div>
           </el-tooltip>
         </div>
-        <el-divider content-position="left">背景色</el-divider>
+        <el-divider content-position="left">{{$t('theme.background.title')}}</el-divider>
         <div class="theme-bg-wrapper">
-          <el-tooltip content="混合色" placement="top">
+          <el-tooltip :content="$t('theme.background.mixing')" placement="top">
             <div class="bg-color default" @click="setBgColor('default')">
               <div class="left"></div>
               <div class="right"></div>
@@ -107,7 +107,7 @@
               ></i>
             </div>
           </el-tooltip>
-          <el-tooltip content="亮色" placement="top">
+          <el-tooltip :content="$t('theme.background.light')" placement="top">
             <div class="bg-color light" @click="setBgColor('light')">
               <i
                 v-if="bgColor === 'light'"
@@ -115,7 +115,7 @@
               ></i>
             </div>
           </el-tooltip>
-          <el-tooltip content="主题色" placement="top">
+          <el-tooltip :content="$t('theme.background.theme')" placement="top">
             <div class="bg-color theme" @click="setBgColor('theme')">
               <div class="left app-bg-color-dark"></div>
               <div class="right"></div>
@@ -125,25 +125,25 @@
               ></i>
             </div>
           </el-tooltip>
-          <el-tooltip content="暗色" placement="top">
+          <el-tooltip :content="$t('theme.background.dark')" placement="top">
             <div class="bg-color dark" @click="setBgColor('dark')">
               <i v-if="bgColor === 'dark'" class="ri-check-line  app-color"></i>
             </div>
           </el-tooltip>
         </div>
-        <el-divider content-position="left">其它设置</el-divider>
+        <el-divider content-position="left">{{$t('theme.other')}}</el-divider>
         <el-row class="theme-item" :gutter="10">
-          <el-col :span="12">页签</el-col>
+          <el-col :span="12">{{$t('theme.tab.title')}}</el-col>
           <el-col :span="12" class="right">
             <el-switch :value="themeIsTab" @change="toggleThemeItem('isTab')" />
           </el-col>
         </el-row>
         <el-row class="theme-item" :gutter="10">
-          <el-col :span="12">页签风格</el-col>
+          <el-col :span="12">{{$t('theme.tab.style')}}</el-col>
           <el-col :span="12" class="right">
             <el-select :disabled="!themeIsTab" :value="themeTab" @change="setThemeTab">
-              <el-option :value="1" label="卡片"></el-option>
-              <el-option :value="2" label="圆滑"></el-option>
+              <el-option :value="1" :label="$t('theme.tab.card')"></el-option>
+              <el-option :value="2" :label="$t('theme.tab.sleek')"></el-option>
             </el-select>
           </el-col>
         </el-row>

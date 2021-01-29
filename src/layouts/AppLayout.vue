@@ -106,7 +106,7 @@ export default {
     this.$store.dispatch("addTab", {
       path: this.$route.path,
       fullPath: this.$route.fullPath,
-      title: this.$route.meta.title,
+      name: this.$route.name,
     });
   },
   computed: {

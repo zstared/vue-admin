@@ -32,7 +32,7 @@
       >
         <el-tab-pane
           v-for="tab in tabs"
-          :label="tab.title"
+          :label="$t('menu.'+tab.name)"
           :name="tab.fullPath"
           :key="tab.fullPath"
           :closable="tab.fullPath!=='/work'"
@@ -82,7 +82,7 @@ export default {
       const tab = {
         path: to.path,
         fullPath: to.fullPath,
-        title: to.meta.title,
+        name: to.name
       };
       this.$store.dispatch("addTab", tab);
     },

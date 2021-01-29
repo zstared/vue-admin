@@ -3,12 +3,12 @@ import {
   saveTheme,
   changeThemeColor,
   changeBgColor,
-  getActiveModule
+  getActiveModule,
+  getBreadcrumbs
 } from "../../utils/theme";
 import { getCurrentUser } from "../../servers/core/user";
 const app = {
   state: {
-    title:"管理系统",
     theme: {
       layout: theme && theme.layout ? theme.layout : 5, //整体布局 1-分栏;2-纵向;3-横向;4-综合;5-常规;
       preLayout: null, //自适应之前的布局
@@ -18,14 +18,15 @@ const app = {
       isTab: theme ? theme.isTab : true, //页签 1-启用;0-不启用
     },
     sideCollapse: false, //侧边栏是否折叠状态
-    tabs: [{ path: '/work', fullPath: '/work', title: "工作台" }], //导航栏页签
+    tabs: [{ path: '/work', fullPath: '/work', name: "work" }], //导航栏页签
     activePath: window.location.href.path,//当前页面路径
     themeVisible: false,
     user: {}, //用户信息
     menus: [], //菜单
     modules: [],//模块
     moduleMenus: [],//模块下菜单
-    activeModule: '',
+    activeModule: '',//当前模块
+    breadcrumbs:[],//面包屑
   },
 
   mutations: {
@@ -83,12 +84,13 @@ const app = {
     //添加页签
     addTab: (state, tab) => {
       state.activePath = tab.fullPath;
-      console.log(state.menus,tab.path)
       const module=getActiveModule(state.menus,tab.path);
       if(module){
         state.activeModule=module.code;
         state.moduleMenus=module.children;
       }
+      const breadcrumbs=getBreadcrumbs(state.menus,tab.path);
+      state.breadcrumbs=breadcrumbs;
       if (state.tabs.some((t) => t.path === tab.path)) return;
       state.tabs.push(tab)
    
