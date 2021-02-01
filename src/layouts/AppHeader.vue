@@ -25,7 +25,7 @@
         <div v-if="themeLayout !== 4" class="nav-wrapper">
           <el-breadcrumb separator=">" class="hidden-xs-only">
             <el-breadcrumb-item v-for="bread of breadcrumbs" :key="bread.code">
-                 {{$t('menu.'+bread.code)}}
+              {{ $t("menu." + bread.code) }}
             </el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -38,13 +38,13 @@
             v-for="menu of menus"
             :key="menu.id"
             :name="menu.code"
-            :label="$t('menu.'+menu.code)"
+            :label="$t('menu.' + menu.code)"
           />
         </el-tabs>
       </el-col>
       <el-col v-else :span="6" :xs="4" class="header-left">
         <img :src="logoPng" />
-        <div class="title hidden-xs-only">{{$t('title')}}</div>
+        <div class="title hidden-xs-only">{{ $t("title") }}</div>
       </el-col>
       <el-col
         :span="themeLayout !== 3 && themeLayout !== 5 ? 12 : 18"
@@ -58,7 +58,14 @@
         />
         <div class="app-options">
           <i class="app-option app-color-hover ri-search-line"></i>
-          <i class="app-option app-color-hover ri-notification-line"></i>
+
+          <el-popover placement="bottom" width="300" trigger="click"  >
+            <message />
+            <el-badge :value="12" slot="reference">
+              <i class="app-option app-color-hover ri-notification-line"></i>
+            </el-badge>
+          </el-popover>
+
           <i
             :class="[
               'app-option app-color-hover',
@@ -72,9 +79,9 @@
             @click="appOption('github')"
           ></i>
 
-          <el-dropdown  @command="toggleLang">
+          <el-dropdown @command="toggleLang">
             <i class="app-option app-color-hover ri-global-line"></i>
-            <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="zh">中文简体</el-dropdown-item>
               <el-dropdown-item command="en">English</el-dropdown-item>
             </el-dropdown-menu>
@@ -87,7 +94,7 @@
         <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
             <el-avatar :size="28" :src="ImgUserMale"></el-avatar>
-            <span class="hidden-xs-only">{{user.user_name}}</span>
+            <span class="hidden-xs-only">{{ user.user_name }}</span>
             <i
               :class="{
                 'ri-arrow-down-s-line': true,
@@ -96,10 +103,12 @@
             ></i>
           </div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="ri-user-line">{{$t('user.info')}}</el-dropdown-item>
-            <el-dropdown-item icon="ri-logout-circle-r-line"
-              >{{$t('user.logout')}}</el-dropdown-item
-            >
+            <el-dropdown-item icon="ri-user-line">{{
+              $t("user.info")
+            }}</el-dropdown-item>
+            <el-dropdown-item icon="ri-logout-circle-r-line">{{
+              $t("user.logout")
+            }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
@@ -112,6 +121,7 @@
 import { mapMutations, mapState } from "vuex";
 import AppMenu from "./AppMenu";
 import AppTab from "./AppTab";
+import Message from './components/Message'
 import ImgUserMale from "@/assets/user_male.svg";
 import logoPng from "../assets/logo.png";
 
@@ -120,6 +130,7 @@ export default {
   components: {
     AppMenu,
     AppTab,
+    Message
   },
   data() {
     return { ImgUserMale, arrowAnimation: false, logoPng, isFullScreen: false };
@@ -134,8 +145,8 @@ export default {
     ...mapState({
       menus: (state) => state.app.menus,
       activeModule: (state) => state.app.activeModule,
-      breadcrumbs:state=>state.app.breadcrumbs,
-      user:state=>state.app.user
+      breadcrumbs: (state) => state.app.breadcrumbs,
+      user: (state) => state.app.user,
     }),
   },
   created() {
@@ -144,9 +155,9 @@ export default {
     });
   },
   methods: {
-    toggleLang(lang){
-        localStorage.setItem('lang',lang)
-        this.$i18n.locale=lang
+    toggleLang(lang) {
+      localStorage.setItem("lang", lang);
+      this.$i18n.locale = lang;
     },
     toggleCollapse() {
       this.$emit("toggleCollapse");

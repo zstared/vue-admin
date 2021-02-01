@@ -1,9 +1,10 @@
-<!DOCTYPE html><html lang="en" data-theme="blue"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>vue-admin</title><link id="ui_theme" rel="stylesheet" href="/theme/blue/index.css"><link href="/js/chunk-2d0e19c3.966a55b7.js" rel="prefetch"><link href="/js/chunk-2d0f1194.67489725.js" rel="prefetch"><link href="/css/app.bd1c7582.css" rel="preload" as="style"><link href="/css/chunk-vendors.056d0fcf.css" rel="preload" as="style"><link href="/js/app.af67383c.js" rel="preload" as="script"><link href="/js/chunk-vendors.1b7292d2.js" rel="preload" as="script"><link href="/css/chunk-vendors.056d0fcf.css" rel="stylesheet"><link href="/css/app.bd1c7582.css" rel="stylesheet"></head><body><div id="app"></div><script>try {
+<!DOCTYPE html><html lang="en" data-theme="blue"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>vue-admin</title><link id="ui_theme" rel="stylesheet" href="/theme/blue/index.css"><link href="/js/chunk-2d0b25c6.01a7d1b2.js" rel="prefetch"><link href="/js/chunk-2d0b30b7.44532e32.js" rel="prefetch"><link href="/js/chunk-2d0c19b7.26565558.js" rel="prefetch"><link href="/js/chunk-2d0d372e.b959f39b.js" rel="prefetch"><link href="/js/chunk-2d0f1194.67489725.js" rel="prefetch"><link href="/js/chunk-2d210a2f.9abea7eb.js" rel="prefetch"><link href="/js/chunk-2d215c82.6ad493f0.js" rel="prefetch"><link href="/js/chunk-2d22dbc3.416fad6d.js" rel="prefetch"><link href="/css/app.9e0d21b8.css" rel="preload" as="style"><link href="/css/chunk-vendors.056d0fcf.css" rel="preload" as="style"><link href="/js/app.03eb551f.js" rel="preload" as="script"><link href="/js/chunk-vendors.146c7618.js" rel="preload" as="script"><link href="/css/chunk-vendors.056d0fcf.css" rel="stylesheet"><link href="/css/app.9e0d21b8.css" rel="stylesheet"></head><body class="theme-bg-default"><div id="app"></div><script>try {
             const siteTheme = localStorage.getItem('site-theme')
             if (siteTheme) {
                 const theme = JSON.parse(siteTheme);
                 if (theme && theme.color) {
                     window.document.documentElement.setAttribute("data-theme", theme.color);
+                    if(theme.bgColor)window.document.body.setAttribute("class", "theme-bg-"+theme.bgColor);
 
                     document.getElementById('ui_theme').setAttribute('id','ui_theme_before')
                     const head = document.head || document.getElementsByTagName('head')[0];
@@ -11,13 +12,12 @@
                     link.rel="stylesheet";
                     link.type = 'text/css';
                     link.id="ui_theme"
-                    link.href="/theme/"+theme.color+"/index.css";
+                    link.href="/theme/"+theme.color+(theme.bgColor==="dark"?"-dark":"")+"/index.css";
                     head.appendChild(link);
-
                     setTimeout(()=>{
                         const link_before= document.getElementById('ui_theme_before');
                         head.removeChild(link_before);
                     },500)
                 }
             }
-        } catch (_) {}</script><script src="/js/chunk-vendors.1b7292d2.js"></script><script src="/js/app.af67383c.js"></script></body></html>
+        } catch (_) {}</script><script src="/js/chunk-vendors.146c7618.js"></script><script src="/js/app.03eb551f.js"></script></body></html>
