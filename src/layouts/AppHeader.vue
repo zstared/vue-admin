@@ -57,15 +57,12 @@
           mode="horizontal"
         />
         <div class="app-options">
-          <i class="app-option app-color-hover ri-search-line"></i>
+          <!-- <i class="app-option app-color-hover ri-search-line"></i> -->
 
-          <el-popover placement="bottom" width="300" trigger="click"  >
-            <message />
-            <el-badge :value="12" slot="reference">
-              <i class="app-option app-color-hover ri-notification-line"></i>
-            </el-badge>
-          </el-popover>
-
+          <i
+            class="app-option app-color-hover ri-github-fill"
+            @click="appOption('github')"
+          ></i>
           <i
             :class="[
               'app-option app-color-hover',
@@ -75,25 +72,22 @@
             @click="appOption('fullscreen')"
           ></i>
           <i
-            class="app-option app-color-hover ri-github-fill"
-            @click="appOption('github')"
-          ></i>
-
-          <el-dropdown @command="toggleLang">
-            <i class="app-option app-color-hover ri-global-line"></i>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="zh">中文简体</el-dropdown-item>
-              <el-dropdown-item command="en">English</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          <i
             class="app-option app-color-hover ri-t-shirt-line"
             @click="toggleThemeVisible"
           ></i>
+          <el-popover placement="bottom" width="300" trigger="click">
+            <message />
+            <el-badge :value="12" slot="reference">
+              <i class="app-option app-color-hover ri-notification-line"></i>
+            </el-badge>
+          </el-popover>
         </div>
         <el-dropdown @visible-change="toggleArrowAnimation">
           <div class="user-avatar">
-            <el-avatar :size="28" :src="ImgUserMale"></el-avatar>
+            <el-avatar
+              :size="32"
+              :src="`${publicPath}avatar/22.png`"
+            ></el-avatar>
             <span class="hidden-xs-only">{{ user.user_name }}</span>
             <i
               :class="{
@@ -106,9 +100,16 @@
             <el-dropdown-item icon="ri-user-line">{{
               $t("user.info")
             }}</el-dropdown-item>
-            <el-dropdown-item icon="ri-logout-circle-r-line">{{
+            <el-dropdown-item divided icon="ri-logout-circle-r-line">{{
               $t("user.logout")
             }}</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-dropdown @command="toggleLang">
+          <i class="app-option app-color-hover ri-translate"></i>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="zh">中文简体</el-dropdown-item>
+            <el-dropdown-item command="en">English</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
@@ -121,8 +122,7 @@
 import { mapMutations, mapState } from "vuex";
 import AppMenu from "./AppMenu";
 import AppTab from "./AppTab";
-import Message from './components/Message'
-import ImgUserMale from "@/assets/user_male.svg";
+import Message from "./components/Message";
 import logoPng from "../assets/logo.png";
 
 export default {
@@ -130,10 +130,15 @@ export default {
   components: {
     AppMenu,
     AppTab,
-    Message
+    Message,
   },
   data() {
-    return { ImgUserMale, arrowAnimation: false, logoPng, isFullScreen: false };
+    return {
+      arrowAnimation: false,
+      logoPng,
+      isFullScreen: false,
+      publicPath: process.env.BASE_URL,
+    };
   },
   props: {
     sideCollapse: Boolean,
@@ -248,6 +253,7 @@ export default {
       align-items: center;
       justify-content: flex-end;
       height: $app-header-height;
+      padding-right:15px;
 
       .app-options {
         margin-right: 15px;
@@ -263,6 +269,7 @@ export default {
         display: flex;
         align-items: center;
         cursor: pointer;
+        padding:0 15px;
 
         .el-avatar {
           margin-right: 5px;

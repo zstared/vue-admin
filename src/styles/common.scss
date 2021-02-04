@@ -20,6 +20,11 @@
 .app-bg-color-dark {
   @include background_color_dark("app_color");
 }
+.app-bg-color-light-hover {
+  &:hover {
+    @include background_color_light("app_color");
+  }
+}
 
 //****************************************************************
 //********************修改element ui组件样式**********************

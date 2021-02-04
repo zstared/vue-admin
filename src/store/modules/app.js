@@ -10,7 +10,7 @@ import { getCurrentUser } from "../../servers/core/user";
 const app = {
   state: {
     theme: {
-      layout: theme && theme.layout ? theme.layout : 5, //整体布局 1-分栏;2-纵向;3-横向;4-综合;5-常规;
+      layout: theme && theme.layout ? theme.layout : 1, //整体布局 1-分栏;2-纵向;3-横向;4-综合;5-常规;
       preLayout: null, //自适应之前的布局
       color: theme && theme.color ? theme.color : "blue", //主题色 blue/red/orange/yellow/cyan/green/purple
       bgColor: theme && theme.bgColor ? theme.bgColor : "default", //default/white/dark/theme
