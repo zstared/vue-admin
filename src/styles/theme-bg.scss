@@ -399,4 +399,15 @@
       }
     }
   }
+
+  .app-btn {
+    cursor: pointer;
+    
+    &:hover {
+      @include background_color_dark("app_color");
+    }
+  }
+  .app-border-color{
+    border-color:$app-border-color-dark-second;
+ }
 }

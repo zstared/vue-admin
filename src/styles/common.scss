@@ -25,6 +25,15 @@
     @include background_color_light("app_color");
   }
 }
+.app-btn {
+  cursor: pointer;
+  &:hover {
+    @include background_color_light("app_color");
+  }
+}
+.app-border-color{
+   border-color:$app-border-color-second;
+}
 
 //****************************************************************
 //********************修改element ui组件样式**********************
@@ -125,7 +134,8 @@
 .el-menu--popup {
   border: 0;
 }
-.el-submenu [class^="ri-"],.el-menu-item [class^="ri-"] {
+.el-submenu [class^="ri-"],
+.el-menu-item [class^="ri-"] {
   vertical-align: middle;
   margin-right: 5px;
   width: 24px;
@@ -135,11 +145,11 @@
 
 /*隐藏文字 图标*/
 .el-menu--collapse {
-    .el-submenu__title span,
-    .el-submenu__title .el-submenu__icon-arrow {
-      display: none;
-    }
-  &.el-menu--horizontal{
+  .el-submenu__title span,
+  .el-submenu__title .el-submenu__icon-arrow {
+    display: none;
+  }
+  &.el-menu--horizontal {
     .el-submenu__title span,
     .el-submenu__title .el-submenu__icon-arrow {
       display: inline-block;
@@ -149,7 +159,6 @@
       height: auto;
     }
   }
-
 }
 
 //顶栏菜单
@@ -204,18 +213,27 @@
   }
 }
 
-// .el-popover{
-//   padding:0;
-// }
-
-.el-tabs__header{
-  margin-bottom:0;
-  .el-tabs__nav-wrap::after{
-    height:1px;
+.el-tabs__header {
+  .el-tabs__nav-wrap::after {
+    height: 1px;
   }
 }
 
-
+.message-popover {
+  padding: 0;
+  .el-tabs__item,
+  .el-tabs__nav {
+    //padding: 0 16px;
+  }
+  .el-tabs__active-bar {
+   // width:32px !important;
+    //padding: 0 16px;
+  }
+  .el-tabs__nav-scroll{
+    display: flex;
+    justify-content: center;
+  }
+}
 
 //****************************************************************
 //********************通用样式**********************

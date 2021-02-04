@@ -75,7 +75,7 @@
             class="app-option app-color-hover ri-t-shirt-line"
             @click="toggleThemeVisible"
           ></i>
-          <el-popover placement="bottom" width="300" trigger="click">
+          <el-popover popper-class="message-popover" placement="bottom" width="300" trigger="click">
             <message />
             <el-badge :value="12" slot="reference">
               <i class="app-option app-color-hover ri-notification-line"></i>
