@@ -73,7 +73,7 @@
             <i v-if="themeLayout == 5" class="ri-check-line app-color"></i>
             <div class="top theme-bg-color"></div>
             <div class="bottom">
-              <div class="left theme-bg-color"></div>
+              <div class="left"></div>
               <div class="right"></div>
             </div>
           </div>
@@ -251,6 +251,7 @@ export default {
         border-right-width: 1px;
         display: flex;
         align-items: center;
+         border-right-style: solid;
         .left-module {
           width: 3px;
           height: 30px;

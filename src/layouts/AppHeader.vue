@@ -77,7 +77,7 @@
           ></i>
           <el-popover popper-class="message-popover" placement="bottom" width="300" trigger="click">
             <message />
-            <el-badge :value="12" slot="reference">
+            <el-badge :value="32" slot="reference">
               <i class="app-option app-color-hover ri-notification-line"></i>
             </el-badge>
           </el-popover>

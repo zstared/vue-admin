@@ -15,7 +15,6 @@
         :sideCollapse="sideCollapse"
         :type="themeLayout === 4 ? 'module' : 'menu'"
       />
-      <div style="height:1500px"></div>
     </el-scrollbar>
   </div>
 </template>

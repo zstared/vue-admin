@@ -76,6 +76,11 @@
   .app-sidebar-wrapper {
     background: $app-bg-color-dark;
     color: $app-color-white-light;
+    &.is-layout-normal {
+      background: $app-bg-color-light !important;
+      color: $app-font-color;
+      @include menu_bg_white;
+    }
   }
   //侧边栏模块
   .app-siderbar-first {
@@ -206,6 +211,11 @@
   .app-sidebar-wrapper {
     @include background_color_dark("app_color");
     color: $app-color-white-light;
+    &.is-layout-normal {
+      background: $app-bg-color-light !important;
+      color: $app-font-color;
+      @include menu_bg_white;
+    }
   }
   //侧边栏模块
   .app-siderbar-first {
@@ -402,12 +412,12 @@
 
   .app-btn {
     cursor: pointer;
-    
+
     &:hover {
       @include background_color_dark("app_color");
     }
   }
-  .app-border-color{
-    border-color:$app-border-color-dark-second;
- }
+  .app-border-color {
+    border-color: $app-border-color-dark-second;
+  }
 }
