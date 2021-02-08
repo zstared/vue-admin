@@ -49,11 +49,11 @@ const matchMenu = (menus, menuPath) => {
   if (menus.some(item => item.path == menuPath)) {
     return true
   }
-  menus.forEach((menu) => {
-    if (menu.children) {
-      return matchMenu(menu.children, menuPath)
+  for (let i = 0; i < menus.length; i++) {
+    if (menus[i].children) {
+      return matchMenu(menus[i].children, menuPath)
     }
-  })
+  }
   return false
 }
 //获取当前菜单模块
@@ -89,4 +89,27 @@ export const getBreadcrumbs = (menus, menuPath) => {
     if (breadcrumbs) return breadcrumbs
   }
   return []
+}
+
+//匹配菜单图标
+const matchMenuIcon = (menus, menuPath) => {
+  let matchMenu = menus.find(item => item.path == menuPath)
+  if (matchMenu) {
+    return matchMenu.icon;
+  }
+  for (let i = 0; i < menus.length; i++) {
+    if (menus[i].children) {
+      return matchMenuIcon(menus[i].children, menuPath)
+    }
+  }
+  return ''
+}
+//获取当前菜单图标
+export const getMenuIcon = (menus, menuPath) => {
+  for (let i = 0; i < menus.length; i++) {
+    if (menus[i].children) {
+      return matchMenuIcon(menus[i].children, menuPath)
+    }
+  }
+  return '';
 }

@@ -4,7 +4,8 @@ import {
   changeThemeColor,
   changeBgColor,
   getActiveModule,
-  getBreadcrumbs
+  getBreadcrumbs,
+  getMenuIcon
 } from "../../utils/theme";
 import { getCurrentUser } from "../../servers/core/user";
 const app = {
@@ -84,14 +85,20 @@ const app = {
     //添加页签
     addTab: (state, tab) => {
       state.activePath = tab.fullPath;
+      //获取当前模块
       const module=getActiveModule(state.menus,tab.path);
       if(module){
         state.activeModule=module.code;
         state.moduleMenus=module.children;
       }
+      //获取面包屑
       const breadcrumbs=getBreadcrumbs(state.menus,tab.path);
       state.breadcrumbs=breadcrumbs;
       if (state.tabs.some((t) => t.path === tab.path)) return;
+      //获取菜单图标
+      const icon=getMenuIcon(state.menus,tab.path);
+      console.log(icon)
+      tab.icon=icon;
       state.tabs.push(tab)
    
     },
